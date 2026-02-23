@@ -1,0 +1,7 @@
+# Dev tooling
+.claude/
+CLAUDE.md
+serve.mjs
+screenshot.mjs
+temporary screenshots/
+node_modules/

@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monday Night Trophy — Sea 2 Summit Motorsport</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red:      '#D01200',
+              redHot:   '#FF1A05',
+              navy:     '#1A2460',
+              navyDark: '#101840',
+              navyDeep: '#080D24',
+              ink:      '#06091A',
+              white:    '#F0F2FF',
+              silver:   '#9BA3C0',
+              dim:      '#5A6080',
+            }
+          },
+          fontFamily: {
+            display: ['Barlow Condensed', 'sans-serif'],
+            body:    ['Barlow', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { font-family: 'Barlow', sans-serif; }
+
+    /* ── Shared with index ── */
+    .nav-blur {
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+    }
+    .nav-scrolled {
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px -4px rgba(0,0,0,0.5);
+    }
+    .nav-link {
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: #D01200;
+      transition: width 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after { width: 100%; }
+    .nav-link:hover { color: #F0F2FF; }
+    .nav-link:focus-visible { outline: 2px solid #D01200; outline-offset: 4px; border-radius: 2px; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #D01200, #FF2A10);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
+      box-shadow: 0 4px 20px -4px rgba(208,18,0,0.5);
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px -4px rgba(208,18,0,0.65); }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #FF4422; outline-offset: 3px; }
+
+    .btn-outline {
+      background: transparent;
+      color: #F0F2FF;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid rgba(240,242,255,0.25);
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .btn-outline:hover { border-color: rgba(240,242,255,0.6); background: rgba(240,242,255,0.06); transform: translateY(-2px); }
+    .btn-outline:active { transform: translateY(0); }
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      color: #D01200;
+    }
+    .card {
+      background: linear-gradient(135deg, #10152E 0%, #0D1228 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .red-line {
+      display: inline-block;
+      width: 40px; height: 3px;
+      background: linear-gradient(90deg, #D01200, #FF4422);
+      vertical-align: middle;
+      margin-right: 12px;
+      border-radius: 2px;
+    }
+    .champion-badge {
+      background: linear-gradient(135deg, #C8960C, #E8B420);
+      color: #1a0c00;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+    }
+    #mobile-menu { transition: opacity 0.2s ease, transform 0.2s ease; }
+    #mobile-menu.hidden { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+    #mobile-menu:not(.hidden) { opacity: 1; transform: translateY(0); }
+
+    /* ── MNT-specific ── */
+
+    /* Checkered pattern (hero + accents) */
+    .checkered {
+      background-image:
+        linear-gradient(45deg, rgba(255,255,255,0.07) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.07) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.07) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.07) 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    }
+
+    /* Race calendar card */
+    .race-card {
+      background: linear-gradient(160deg, #0F1530 0%, #0A0D22 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease,
+                  border-color 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .race-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #D01200, #FF4422);
+      border-radius: 0 2px 2px 0;
+    }
+    .race-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(208,18,0,0.2);
+      border-color: rgba(208,18,0,0.2);
+    }
+    .race-card.completed::before {
+      background: linear-gradient(180deg, #3a4060, #2a3050);
+    }
+    .race-card.completed { opacity: 0.75; }
+    .race-card.next::before {
+      background: linear-gradient(180deg, #D01200, #FF4422);
+      width: 4px;
+    }
+    .race-card.next {
+      border-color: rgba(208,18,0,0.25);
+      box-shadow: 0 0 0 1px rgba(208,18,0,0.12), inset 0 0 40px rgba(208,18,0,0.04);
+    }
+
+    /* Standings table */
+    .standings-table thead tr th {
+      background: rgba(26,36,96,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      color: #5A6080;
+      padding: 12px 16px;
+    }
+    .standings-table tbody tr td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.9rem;
+      color: #9BA3C0;
+      transition: background 0.15s ease;
+    }
+    .standings-table tbody tr:hover td { background: rgba(255,255,255,0.03); }
+    .standings-table tbody tr.podium-1 td { color: #F0F2FF; }
+    .standings-table tbody tr.podium-2 td { color: #D4D8F0; }
+    .standings-table tbody tr.podium-3 td { color: #B0B8D8; }
+
+    /* POS badge */
+    .pos-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      min-width: 28px;
+      text-align: center;
+    }
+    .pos-1 { color: #E8B420; }
+    .pos-2 { color: #9BA3C0; }
+    .pos-3 { color: #C0824A; }
+
+    /* Twitch button */
+    .twitch-btn {
+      background: rgba(100,65,165,0.2);
+      border: 1px solid rgba(100,65,165,0.4);
+      color: #C4A8F5;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .twitch-btn:hover {
+      background: rgba(100,65,165,0.4);
+      border-color: rgba(100,65,165,0.7);
+      transform: translateY(-1px);
+    }
+    .twitch-btn:focus-visible { outline: 2px solid #6441A5; outline-offset: 3px; }
+
+    /* Status pill */
+    .status-done {
+      background: rgba(60,70,90,0.5);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #5A6080;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .status-next {
+      background: rgba(208,18,0,0.15);
+      border: 1px solid rgba(208,18,0,0.35);
+      color: #FF6B55;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .status-upcoming {
+      background: rgba(26,36,96,0.4);
+      border: 1px solid rgba(26,36,96,0.7);
+      color: #9BA3C0;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+
+    /* Info pill in race card */
+    .info-chip {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.75rem;
+      color: #9BA3C0;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    /* Grain */
+    .grain::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Spec grid */
+    .spec-item {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 10px;
+    }
+
+    /* Fade-in on scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.34,1.2,0.64,1);
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* Points delta */
+    .pts { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.05rem; color: #F0F2FF; }
+  </style>
+</head>
+<body class="bg-brand-ink text-brand-white" style="font-family:'Barlow',sans-serif;">
+
+<!-- ══════════════════════════════════ NAV ══════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 nav-blur"
+     style="background: rgba(6,9,26,0.82); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <a href="../index.html" class="flex items-center gap-3 group" aria-label="Sea 2 Summit Motorsport Home">
+      <img src="../brand_assets/logo-cropped.png" alt="S2S Logo"
+           class="h-10 w-auto drop-shadow-lg transition-transform duration-200 group-hover:scale-105" />
+    </a>
+
+    <div class="hidden md:flex items-center gap-8">
+      <a href="../index.html"              class="nav-link text-brand-silver text-sm font-medium">Home</a>
+      <a href="../monday-night-trophy/"  class="nav-link text-brand-silver text-sm font-medium">MNT</a>
+      <a href="../tcr-series/"           class="nav-link text-brand-silver text-sm font-medium">TCR</a>
+      <a href="../cup-series/"           class="nav-link text-brand-silver text-sm font-medium">Cup</a>
+      <a href="../index.html#team"       class="nav-link text-brand-silver text-sm font-medium">Team</a>
+      <a href="../index.html#hof"        class="nav-link text-brand-silver text-sm font-medium">Hall of Fame</a>
+      <a href="../index.html#sponsoren"  class="nav-link text-brand-silver text-sm font-medium">Sponsoren</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener"
+         class="hidden md:inline-flex items-center gap-2 btn-primary px-5 py-2 rounded text-sm">
+        Discord
+      </a>
+      <button id="menu-btn" aria-label="Menü öffnen" aria-expanded="false"
+              class="md:hidden flex flex-col gap-1.5 p-2 rounded
+                     focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-red">
+        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-transform duration-200 origin-center"></span>
+        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-opacity duration-200"></span>
+        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-transform duration-200 origin-center"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden"
+       style="background: rgba(6,9,26,0.96); border-top: 1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+      <a href="../index.html"              class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Home</a>
+      <a href="../monday-night-trophy/"  class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">MNT</a>
+      <a href="../tcr-series/"           class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">TCR</a>
+      <a href="../cup-series/"           class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Cup</a>
+      <a href="../index.html#team"       class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Team</a>
+      <a href="../index.html#hof"        class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Hall of Fame</a>
+      <a href="../index.html#sponsoren"  class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Sponsoren</a>
+      <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener" class="btn-primary px-5 py-3 rounded text-sm text-center mt-2" onclick="closeMobile()">Discord</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════ HERO ══════════════════════════════════════ -->
+<header class="relative overflow-hidden grain"
+  style="min-height: 480px; background:
+    radial-gradient(ellipse 80% 70% at 55% 60%, rgba(208,18,0,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 10% 30%, rgba(26,36,96,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, #06091A 40%, #0A0D22 100%);">
+
+  <!-- Checkered flag strip top -->
+  <div class="absolute top-0 left-0 right-0 h-1.5 checkered" style="background-color:#D01200;"></div>
+
+  <!-- Diagonal lines texture -->
+  <div class="absolute inset-0 pointer-events-none" style="
+    background: repeating-linear-gradient(-60deg, transparent, transparent 100px,
+      rgba(208,18,0,0.04) 100px, rgba(208,18,0,0.04) 101px);"></div>
+
+  <!-- Large watermark -->
+  <div class="absolute right-0 bottom-0 pointer-events-none select-none overflow-hidden"
+       style="font-family:'Barlow Condensed',sans-serif; font-weight:900;
+              font-size: clamp(5rem,18vw,16rem);
+              color:rgba(208,18,0,0.06); letter-spacing:-0.04em; line-height:0.85;
+              transform: translateX(5%) translateY(10%);">
+    MNT
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-16 flex flex-col md:flex-row items-center gap-10">
+
+    <!-- Left: Text -->
+    <div class="flex-1">
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 mb-5 text-brand-dim text-sm">
+        <a href="../index.html" class="hover:text-brand-silver transition-colors duration-150">Home</a>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="#5A6080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="text-brand-silver font-medium">Monday Night Trophy</span>
+      </div>
+
+      <div class="section-label mb-3">GT3 Series · Bi-Weekly · Montag</div>
+
+      <h1 class="font-display font-black leading-none mb-4"
+          style="font-size: clamp(2.8rem, 6vw, 5.5rem); letter-spacing: -0.03em; line-height: 0.9;">
+        <span class="block text-brand-white">Monday Night</span>
+        <span class="block" style="
+          background: linear-gradient(90deg, #D01200 0%, #FF4422 60%, #D01200 100%);
+          -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          Trophy
+        </span>
+      </h1>
+
+      <p class="text-brand-silver mb-8 max-w-lg" style="font-size:1.05rem; line-height:1.75; font-weight:300;">
+        Die härteste GT3-Liga im DACH-Raum — 8 Rennen, zwei Klassen, ein Champion.
+        Jeden zweiten Montag ab 20:00 Uhr live auf Twitch.
+      </p>
+
+      <div class="flex flex-wrap gap-3">
+        <a href="#calendar" class="btn-primary px-7 py-3 rounded-md text-sm">Zum Kalender</a>
+        <a href="#standings" class="btn-outline px-7 py-3 rounded-md text-sm">Aktuelle Tabelle</a>
+      </div>
+    </div>
+
+    <!-- Right: Logo + key facts -->
+    <div class="flex-shrink-0 flex flex-col items-center gap-8">
+      <!-- MNT Logo -->
+      <div class="relative">
+        <div class="absolute inset-0"
+             style="background: radial-gradient(circle, rgba(208,18,0,0.2) 0%, transparent 70%); filter: blur(25px);"></div>
+        <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sts-motorsport-dev-test/mnt_full-white.webp"
+             alt="Monday Night Trophy"
+             class="relative drop-shadow-2xl"
+             style="max-height: 180px; width: auto;" />
+      </div>
+
+      <!-- Key facts grid -->
+      <div class="grid grid-cols-3 gap-4 text-center">
+        <div>
+          <div class="font-display font-900 text-brand-red leading-none"
+               style="font-size:2.2rem; letter-spacing:-0.03em;">8</div>
+          <div class="text-brand-dim text-xs font-medium mt-1 tracking-wide uppercase">Rennen</div>
+        </div>
+        <div>
+          <div class="font-display font-900 text-brand-red leading-none"
+               style="font-size:2.2rem; letter-spacing:-0.03em;">2</div>
+          <div class="text-brand-dim text-xs font-medium mt-1 tracking-wide uppercase">Klassen</div>
+        </div>
+        <div>
+          <div class="font-display font-900 text-brand-red leading-none"
+               style="font-size:2.2rem; letter-spacing:-0.03em;">40'</div>
+          <div class="text-brand-dim text-xs font-medium mt-1 tracking-wide uppercase">Race</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════ FORMAT BAR ════════════════════════════════════ -->
+<div style="background: linear-gradient(135deg, #0D1228 0%, #0F1530 100%);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-7xl mx-auto px-6 py-5">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded flex-shrink-0 flex items-center justify-center mt-0.5"
+             style="background:rgba(208,18,0,0.12); border:1px solid rgba(208,18,0,0.25);">
+          <!-- Clock icon -->
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#D01200" stroke-width="1.2"/><path d="M8 4.5V8l2.5 2" stroke="#D01200" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-0.5">Sprint</div>
+          <div class="font-display font-700 text-brand-white text-lg leading-tight">20 min</div>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded flex-shrink-0 flex items-center justify-center mt-0.5"
+             style="background:rgba(208,18,0,0.12); border:1px solid rgba(208,18,0,0.25);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#D01200" stroke-width="1.2"/><path d="M8 4.5V8l2.5 2" stroke="#D01200" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-0.5">Qualifying</div>
+          <div class="font-display font-700 text-brand-white text-lg leading-tight">15 min</div>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded flex-shrink-0 flex items-center justify-center mt-0.5"
+             style="background:rgba(208,18,0,0.12); border:1px solid rgba(208,18,0,0.25);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#D01200" stroke-width="1.2"/><path d="M8 4.5V8l2.5 2" stroke="#D01200" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-0.5">Hauptrennen</div>
+          <div class="font-display font-700 text-brand-white text-lg leading-tight">40 min</div>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded flex-shrink-0 flex items-center justify-center mt-0.5"
+             style="background:rgba(208,18,0,0.12); border:1px solid rgba(208,18,0,0.25);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M13.2 2.8a3 3 0 00-4.1.3L7.8 4.5 6.2 5.9l-4 1 1-4 1.4-1.3 1.4-1.3a3 3 0 01.3 4.1" stroke="#D01200" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 6.5l-7 7" stroke="#D01200" stroke-width="1.3" stroke-linecap="round"/><circle cx="4" cy="12" r="1.2" stroke="#D01200" stroke-width="1.1"/></svg>
+        </div>
+        <div>
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-0.5">Setup</div>
+          <div class="font-display font-700 text-brand-white text-base leading-tight">BoP mit Bremsbalance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ RACE CALENDAR ══════════════════════════════════ -->
+<section id="calendar" class="relative py-24"
+  style="background: radial-gradient(ellipse 70% 50% at 75% 30%, rgba(26,36,96,0.2) 0%, transparent 60%),
+                      #06091A;">
+
+  <div class="absolute top-0 left-0 right-0 h-px"
+       style="background: linear-gradient(90deg, transparent, rgba(208,18,0,0.4), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-12">
+      <div class="section-label mb-3">Season 6 · 2026</div>
+      <h2 class="font-display font-black text-brand-white mb-3"
+          style="font-size: clamp(2.2rem,4.5vw,3.5rem); letter-spacing:-0.03em; line-height:0.95;">
+        Rennkalender
+      </h2>
+      <p class="text-brand-silver max-w-xl" style="line-height:1.7;">
+        8 Rennen, 8 Strecken. Rennstart jeweils <strong class="text-brand-white font-medium">20:00 Uhr</strong>,
+        montags — alle zwei Wochen.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-3">
+
+      <!-- Race 1 — UPCOMING -->
+      <div class="race-card rounded-xl pl-6 pr-5 py-4 fade-in">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+            <div class="text-center" style="min-width:48px;">
+              <div class="font-display font-900 text-brand-silver leading-none" style="font-size:1.6rem;">R1</div>
+              <div class="text-brand-dim text-xs tracking-wide">Rennen</div>
+            </div>
+            <span class="status-upcoming px-2 py-0.5 rounded-full">Geplant</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-display font-800 text-brand-white text-lg leading-tight mb-1.5"
+                 style="letter-spacing:-0.01em;">Mount Panorama Circuit</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="info-chip">16.03.2026 · 20:00</span>
+              <span class="info-chip">BMW Z4 GT3</span>
+              <span class="info-chip">🇦🇺 Australien</span>
+            </div>
+          </div>
+          <div class="flex-shrink-0 flex flex-col gap-1.5" style="min-width:200px;">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">STS Motorsport TV</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#0F1840; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">PRO</span>
+              </div>
+              <a href="https://www.twitch.tv/sea2summitmotorsport" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">merzi80</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#28A80C; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">AM</span>
+              </div>
+              <a href="https://www.twitch.tv/merzi80" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Race 2 — UPCOMING -->
+      <div class="race-card rounded-xl pl-6 pr-5 py-4 fade-in">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+            <div class="text-center" style="min-width:48px;">
+              <div class="font-display font-900 text-brand-silver leading-none" style="font-size:1.6rem;">R2</div>
+              <div class="text-brand-dim text-xs tracking-wide">Rennen</div>
+            </div>
+            <span class="status-upcoming px-2 py-0.5 rounded-full">Geplant</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-display font-800 text-brand-white text-lg leading-tight mb-1.5"
+                 style="letter-spacing:-0.01em;">Yas Marina Circuit</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="info-chip">30.03.2026 · 20:00</span>
+              <span class="info-chip">BMW Z4 GT3</span>
+              <span class="info-chip">🇦🇪 Abu Dhabi</span>
+            </div>
+          </div>
+          <div class="flex-shrink-0 flex flex-col gap-1.5" style="min-width:200px;">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">STS Motorsport TV</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#0F1840; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">PRO</span>
+              </div>
+              <a href="https://www.twitch.tv/sea2summitmotorsport" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">merzi80</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#28A80C; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">AM</span>
+              </div>
+              <a href="https://www.twitch.tv/merzi80" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Race 3 — UPCOMING -->
+      <div class="race-card rounded-xl pl-6 pr-5 py-4 fade-in">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+            <div class="text-center" style="min-width:48px;">
+              <div class="font-display font-900 text-brand-silver leading-none" style="font-size:1.6rem;">R3</div>
+              <div class="text-brand-dim text-xs tracking-wide">Rennen</div>
+            </div>
+            <span class="status-upcoming px-2 py-0.5 rounded-full">Geplant</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-display font-800 text-brand-white text-lg leading-tight mb-1.5"
+                 style="letter-spacing:-0.01em;">Alsace Village</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="info-chip">13.04.2026 · 20:00</span>
+              <span class="info-chip">BMW Z4 GT3</span>
+              <span class="info-chip">🇫🇷 Frankreich</span>
+            </div>
+          </div>
+          <div class="flex-shrink-0 flex flex-col gap-1.5" style="min-width:200px;">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">STS Motorsport TV</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#0F1840; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">PRO</span>
+              </div>
+              <a href="https://www.twitch.tv/sea2summitmotorsport" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">merzi80</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#28A80C; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">AM</span>
+              </div>
+              <a href="https://www.twitch.tv/merzi80" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Race 4 — UPCOMING -->
+      <div class="race-card rounded-xl pl-6 pr-5 py-4 fade-in">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+            <div class="text-center" style="min-width:48px;">
+              <div class="font-display font-900 text-brand-silver leading-none" style="font-size:1.6rem;">R4</div>
+              <div class="text-brand-dim text-xs tracking-wide">Rennen</div>
+            </div>
+            <span class="status-upcoming px-2 py-0.5 rounded-full">Geplant</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-display font-800 text-brand-white text-lg leading-tight mb-1.5"
+                 style="letter-spacing:-0.01em;">Laguna Seca Raceway</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="info-chip">27.04.2026 · 20:00</span>
+              <span class="info-chip">BMW Z4 GT3</span>
+              <span class="info-chip">🇺🇸 USA</span>
+            </div>
+          </div>
+          <div class="flex-shrink-0 flex flex-col gap-1.5" style="min-width:200px;">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">STS Motorsport TV</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#0F1840; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">PRO</span>
+              </div>
+              <a href="https://www.twitch.tv/sea2summitmotorsport" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">merzi80</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#28A80C; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">AM</span>
+              </div>
+              <a href="https://www.twitch.tv/merzi80" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Race 5 — UPCOMING -->
+      <div class="race-card rounded-xl pl-6 pr-5 py-4 fade-in">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+            <div class="text-center" style="min-width:48px;">
+              <div class="font-display font-900 text-brand-silver leading-none" style="font-size:1.6rem;">R5</div>
+              <div class="text-brand-dim text-xs tracking-wide">Rennen</div>
+            </div>
+            <span class="status-upcoming px-2 py-0.5 rounded-full">Geplant</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-display font-800 text-brand-white text-lg leading-tight mb-1.5"
+                 style="letter-spacing:-0.01em;">Deep Forest Raceway</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="info-chip">11.05.2026 · 20:00</span>
+              <span class="info-chip">Porsche 911 GT3 R (992)</span>
+              <span class="info-chip">🇨🇭 Schweiz</span>
+            </div>
+          </div>
+          <div class="flex-shrink-0 flex flex-col gap-1.5" style="min-width:200px;">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">STS Motorsport TV</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#0F1840; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">PRO</span>
+              </div>
+              <a href="https://www.twitch.tv/sea2summitmotorsport" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">merzi80</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#28A80C; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">AM</span>
+              </div>
+              <a href="https://www.twitch.tv/merzi80" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Race 6 — UPCOMING -->
+      <div class="race-card rounded-xl pl-6 pr-5 py-4 fade-in">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+            <div class="text-center" style="min-width:48px;">
+              <div class="font-display font-900 text-brand-silver leading-none" style="font-size:1.6rem;">R6</div>
+              <div class="text-brand-dim text-xs tracking-wide">Rennen</div>
+            </div>
+            <span class="status-upcoming px-2 py-0.5 rounded-full">Geplant</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-display font-800 text-brand-white text-lg leading-tight mb-1.5"
+                 style="letter-spacing:-0.01em;">Dragon Trail Gardens</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="info-chip">01.06.2026 · 20:00</span>
+              <span class="info-chip">Porsche 911 GT3 R (992)</span>
+              <span class="info-chip">🇭🇷 Kroatien</span>
+            </div>
+          </div>
+          <div class="flex-shrink-0 flex flex-col gap-1.5" style="min-width:200px;">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">STS Motorsport TV</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#0F1840; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">PRO</span>
+              </div>
+              <a href="https://www.twitch.tv/sea2summitmotorsport" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">merzi80</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#28A80C; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">AM</span>
+              </div>
+              <a href="https://www.twitch.tv/merzi80" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Race 7 — UPCOMING -->
+      <div class="race-card rounded-xl pl-6 pr-5 py-4 fade-in">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+            <div class="text-center" style="min-width:48px;">
+              <div class="font-display font-900 text-brand-silver leading-none" style="font-size:1.6rem;">R7</div>
+              <div class="text-brand-dim text-xs tracking-wide">Rennen</div>
+            </div>
+            <span class="status-upcoming px-2 py-0.5 rounded-full">Geplant</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-display font-800 text-brand-white text-lg leading-tight mb-1.5"
+                 style="letter-spacing:-0.01em;">Suzuka Circuit</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="info-chip">15.06.2026 · 20:00</span>
+              <span class="info-chip">Porsche 911 GT3 R (992)</span>
+              <span class="info-chip">🇯🇵 Japan</span>
+            </div>
+          </div>
+          <div class="flex-shrink-0 flex flex-col gap-1.5" style="min-width:200px;">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">STS Motorsport TV</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#0F1840; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">PRO</span>
+              </div>
+              <a href="https://www.twitch.tv/sea2summitmotorsport" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">merzi80</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#28A80C; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">AM</span>
+              </div>
+              <a href="https://www.twitch.tv/merzi80" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Race 8 — FINALE -->
+      <div class="race-card rounded-xl pl-6 pr-5 py-4 fade-in">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+            <div class="text-center" style="min-width:48px;">
+              <div class="font-display font-900 text-brand-silver leading-none" style="font-size:1.6rem;">R8</div>
+              <div class="text-brand-dim text-xs tracking-wide">Rennen</div>
+            </div>
+            <span class="status-upcoming px-2 py-0.5 rounded-full">Finale</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-display font-800 text-brand-white text-lg leading-tight mb-1.5"
+                 style="letter-spacing:-0.01em;">Watkins Glen International</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="info-chip">29.06.2026 · 20:00</span>
+              <span class="info-chip">Porsche 911 GT3 R (992)</span>
+              <span class="info-chip">🇺🇸 USA</span>
+            </div>
+          </div>
+          <div class="flex-shrink-0 flex flex-col gap-1.5" style="min-width:200px;">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">STS Motorsport TV</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#0F1840; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">PRO</span>
+              </div>
+              <a href="https://www.twitch.tv/sea2summitmotorsport" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-brand-silver text-xs">merzi80</span>
+                <span class="px-1.5 py-0.5 rounded font-display font-700"
+                      style="background:#28A80C; color:#fff; font-size:0.6rem; letter-spacing:0.1em; flex-shrink:0;">AM</span>
+              </div>
+              <a href="https://www.twitch.tv/merzi80" target="_blank" rel="noopener"
+                 class="twitch-btn px-2.5 py-1 rounded-md flex-shrink-0" style="font-size:0.65rem;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4A8F5"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /race list -->
+  </div>
+</section>
+
+<!-- ════════════════════════════════ STANDINGS ════════════════════════════════════ -->
+<section id="standings" class="relative py-24"
+  style="background: radial-gradient(ellipse 60% 40% at 20% 50%, rgba(208,18,0,0.07) 0%, transparent 60%),
+                      radial-gradient(ellipse 60% 40% at 80% 40%, rgba(26,36,96,0.2) 0%, transparent 60%),
+                      #06091A;">
+
+  <div class="absolute top-0 left-0 right-0 h-px"
+       style="background: linear-gradient(90deg, transparent, rgba(208,18,0,0.4), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-12">
+      <div class="section-label mb-3">Season 6 · Stand nach R1</div>
+      <h2 class="font-display font-black text-brand-white mb-3"
+          style="font-size: clamp(2.2rem,4.5vw,3.5rem); letter-spacing:-0.03em; line-height:0.95;">
+        Aktuelle Tabelle
+      </h2>
+      <p class="text-brand-silver max-w-xl" style="line-height:1.7;">
+        Aktuelle Meisterschaft nach 1 von 8 Rennen — getrennt in PRO und AM Klasse.
+      </p>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-2">
+
+      <!-- ── MNT PRO ── -->
+      <div class="card rounded-xl overflow-hidden fade-in">
+        <!-- Accent bar + header -->
+        <div class="h-1" style="background: linear-gradient(90deg, #0F1840, #1A2460);"></div>
+        <div class="px-6 py-5 border-b flex items-center justify-between"
+             style="border-color:rgba(255,255,255,0.06);">
+          <div>
+            <h3 class="font-display font-900 text-brand-white"
+                style="font-size:1.6rem; letter-spacing:-0.02em;">MNT PRO</h3>
+            <div class="text-brand-dim text-xs mt-0.5 font-medium tracking-wide uppercase">Profi-Klasse · BMW Z4 &amp; Porsche 911 GT3 R</div>
+          </div>
+          <div class="px-2.5 py-1 rounded text-xs"
+               style="background:#0F1840; border:1px solid #1A2460;
+                      color:#fff; font-family:'Barlow Condensed',sans-serif;
+                      font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">
+            PRO
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full standings-table">
+            <thead>
+              <tr>
+                <th class="text-left" style="width:52px;">POS</th>
+                <th class="text-left">Fahrer</th>
+                <th class="text-left hidden sm:table-cell">Team</th>
+                <th class="text-right">Punkte</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="podium-1">
+                <td><span class="pos-badge pos-1">1</span></td>
+                <td><span class="font-medium text-brand-white">bertz</span></td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts">142</span></td>
+              </tr>
+              <tr class="podium-2">
+                <td><span class="pos-badge pos-2">2</span></td>
+                <td><span class="font-medium">STS_Tao</span></td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#D4D8F0;">118</span></td>
+              </tr>
+              <tr class="podium-3">
+                <td><span class="pos-badge pos-3">3</span></td>
+                <td><span class="font-medium">AsHes</span></td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#B0B8D8;">97</span></td>
+              </tr>
+              <tr>
+                <td><span class="pos-badge" style="color:#5A6080;">4</span></td>
+                <td>Russell</td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#9BA3C0;">85</span></td>
+              </tr>
+              <tr>
+                <td><span class="pos-badge" style="color:#5A6080;">5</span></td>
+                <td>Gringo_386</td>
+                <td class="hidden sm:table-cell text-brand-dim">—</td>
+                <td class="text-right"><span class="pts" style="color:#9BA3C0;">72</span></td>
+              </tr>
+              <tr>
+                <td><span class="pos-badge" style="color:#5A6080;">6</span></td>
+                <td>Sven2406</td>
+                <td class="hidden sm:table-cell text-brand-dim">—</td>
+                <td class="text-right"><span class="pts" style="color:#9BA3C0;">61</span></td>
+              </tr>
+              <tr>
+                <td><span class="pos-badge" style="color:#5A6080;">7</span></td>
+                <td>David Lindemann</td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#9BA3C0;">48</span></td>
+              </tr>
+              <tr>
+                <td><span class="pos-badge" style="color:#5A6080;">8</span></td>
+                <td>Søren Witt</td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#9BA3C0;">34</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Points leader note -->
+        <div class="px-6 py-3 border-t"
+             style="border-color:rgba(255,255,255,0.04); background:rgba(26,36,96,0.1);">
+          <span class="text-brand-dim text-xs">Stand nach Rennen 3 von 8</span>
+        </div>
+      </div>
+
+      <!-- ── MNT AM ── -->
+      <div class="card rounded-xl overflow-hidden fade-in">
+        <div class="h-1" style="background: linear-gradient(90deg, #28A80C, #34C610);"></div>
+        <div class="px-6 py-5 border-b flex items-center justify-between"
+             style="border-color:rgba(255,255,255,0.06);">
+          <div>
+            <h3 class="font-display font-900 text-brand-white"
+                style="font-size:1.6rem; letter-spacing:-0.02em;">MNT AM</h3>
+            <div class="text-brand-dim text-xs mt-0.5 font-medium tracking-wide uppercase">Amateur-Klasse · BMW Z4 &amp; Porsche 911 GT3 R</div>
+          </div>
+          <div class="px-2.5 py-1 rounded text-xs"
+               style="background:#28A80C; border:1px solid #34C610;
+                      color:#fff; font-family:'Barlow Condensed',sans-serif;
+                      font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">
+            AM
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full standings-table">
+            <thead>
+              <tr>
+                <th class="text-left" style="width:52px;">POS</th>
+                <th class="text-left">Fahrer</th>
+                <th class="text-left hidden sm:table-cell">Team</th>
+                <th class="text-right">Punkte</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="podium-1">
+                <td><span class="pos-badge pos-1">1</span></td>
+                <td><span class="font-medium text-brand-white">Philipp Spielbusch</span></td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts">135</span></td>
+              </tr>
+              <tr class="podium-2">
+                <td><span class="pos-badge pos-2">2</span></td>
+                <td><span class="font-medium">Maik Schmitz</span></td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#D4D8F0;">121</span></td>
+              </tr>
+              <tr class="podium-3">
+                <td><span class="pos-badge pos-3">3</span></td>
+                <td><span class="font-medium">Omicron</span></td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#B0B8D8;">98</span></td>
+              </tr>
+              <tr>
+                <td><span class="pos-badge" style="color:#5A6080;">4</span></td>
+                <td>AnderTheker</td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#9BA3C0;">84</span></td>
+              </tr>
+              <tr>
+                <td><span class="pos-badge" style="color:#5A6080;">5</span></td>
+                <td>Sascha Kost</td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#9BA3C0;">76</span></td>
+              </tr>
+              <tr>
+                <td><span class="pos-badge" style="color:#5A6080;">6</span></td>
+                <td>Andreas Brüllhardt</td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#9BA3C0;">62</span></td>
+              </tr>
+              <tr>
+                <td><span class="pos-badge" style="color:#5A6080;">7</span></td>
+                <td>Matrikas</td>
+                <td class="hidden sm:table-cell text-brand-dim">S2S</td>
+                <td class="text-right"><span class="pts" style="color:#9BA3C0;">44</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-6 py-3 border-t"
+             style="border-color:rgba(255,255,255,0.04); background:rgba(26,36,96,0.1);">
+          <span class="text-brand-dim text-xs">Stand nach Rennen 3 von 8</span>
+        </div>
+      </div>
+
+    </div><!-- /grid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ FOOTER ════════════════════════════════════ -->
+<footer class="relative py-12"
+  style="background: #040614; border-top: 1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 mb-10">
+      <div class="text-center md:text-left">
+        <a href="../index.html">
+          <img src="../brand_assets/logo-cropped.png" alt="S2S" class="h-10 w-auto mb-3 mx-auto md:mx-0" />
+        </a>
+        <p class="text-brand-dim text-sm max-w-xs" style="line-height:1.6;">
+          Sim-Racing-Team aus Deutschland, Österreich &amp; der Schweiz.
+        </p>
+      </div>
+      <div class="flex flex-wrap justify-center md:justify-end gap-6">
+        <a href="../index.html"              class="nav-link text-brand-silver text-sm">Home</a>
+        <a href="../monday-night-trophy/"  class="nav-link text-brand-silver text-sm">MNT</a>
+        <a href="../tcr-series/"           class="nav-link text-brand-silver text-sm">TCR</a>
+        <a href="../cup-series/"           class="nav-link text-brand-silver text-sm">Cup</a>
+        <a href="../index.html#team"       class="nav-link text-brand-silver text-sm">Team</a>
+        <a href="../index.html#hof"        class="nav-link text-brand-silver text-sm">Hall of Fame</a>
+        <a href="../index.html#sponsoren"  class="nav-link text-brand-silver text-sm">Sponsoren</a>
+      </div>
+    </div>
+    <div class="pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3"
+         style="border-color:rgba(255,255,255,0.06);">
+      <div class="text-brand-dim text-xs">© <span id="year"></span> Sea 2 Summit Motorsport.</div>
+      <a href="../index.html#ligen" class="text-brand-dim text-xs hover:text-brand-silver transition-colors">
+        ← Alle Ligen
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('nav-scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const bars = menuBtn.querySelectorAll('.menu-bar');
+  let open = false;
+  menuBtn.addEventListener('click', () => {
+    open = !open;
+    menuBtn.setAttribute('aria-expanded', open);
+    mobileMenu.classList.toggle('hidden', !open);
+    bars[0].style.transform = open ? 'rotate(45deg) translate(4px, 4px)' : '';
+    bars[1].style.opacity   = open ? '0' : '';
+    bars[2].style.transform = open ? 'rotate(-45deg) translate(4px, -4px)' : '';
+  });
+  function closeMobile() {
+    open = false;
+    menuBtn.setAttribute('aria-expanded', false);
+    mobileMenu.classList.add('hidden');
+    bars[0].style.transform = bars[2].style.transform = '';
+    bars[1].style.opacity = '';
+  }
+
+  // Fade-in on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

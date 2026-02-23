@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sea 2 Summit Motorsport</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red:     '#D01200',
+              redHot:  '#FF1A05',
+              navy:    '#1A2460',
+              navyDark:'#101840',
+              navyDeep:'#080D24',
+              ink:     '#06091A',
+              white:   '#F0F2FF',
+              silver:  '#9BA3C0',
+              dim:     '#5A6080',
+            }
+          },
+          fontFamily: {
+            display: ['Barlow Condensed', 'sans-serif'],
+            body:    ['Barlow', 'sans-serif'],
+          },
+          letterSpacing: {
+            tightest: '-0.04em',
+            tighter:  '-0.03em',
+            tight:    '-0.02em',
+          },
+          boxShadow: {
+            'red-glow':  '0 0 40px -8px rgba(208,18,0,0.45), 0 2px 8px -2px rgba(0,0,0,0.6)',
+            'navy-glow': '0 0 40px -8px rgba(26,36,96,0.6), 0 2px 8px -2px rgba(0,0,0,0.6)',
+            'card':      '0 4px 24px -4px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3)',
+            'card-hover':'0 12px 40px -8px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.4)',
+          },
+          backgroundImage: {
+            'noise': "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E\")",
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { font-family: 'Barlow', sans-serif; }
+
+    /* Grain overlay */
+    .grain::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Red stripe accent */
+    .stripe {
+      background: repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 10px,
+        rgba(208,18,0,0.06) 10px,
+        rgba(208,18,0,0.06) 20px
+      );
+    }
+
+    /* Nav blur */
+    .nav-blur {
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+    }
+
+    /* Scroll-linked nav shadow */
+    .nav-scrolled {
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px -4px rgba(0,0,0,0.5);
+    }
+
+    /* Card base */
+    .card {
+      background: linear-gradient(135deg, #10152E 0%, #0D1228 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(208,18,0,0.2);
+    }
+    .card.league-tcr:hover {
+      box-shadow: 0 16px 48px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(42,143,189,0.3);
+    }
+    .card.league-cup:hover {
+      box-shadow: 0 16px 48px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(46,173,107,0.3);
+    }
+
+    /* League card accent bar */
+    .league-card .accent-bar {
+      height: 3px;
+      background: linear-gradient(90deg, #D01200, #FF4422);
+    }
+
+    /* Table striping */
+    .hof-table tr:nth-child(even) td { background: rgba(26,36,96,0.15); }
+    .hof-table tr:hover td { background: rgba(255,255,255,0.04); }
+
+    /* Sponsor card */
+    .sponsor-card {
+      background: linear-gradient(135deg, #10152E 0%, #0D1228 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .sponsor-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1);
+    }
+
+    /* Member card */
+    .member-card {
+      background: linear-gradient(160deg, #10152E 0%, #0D1228 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
+    }
+    .member-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px -6px rgba(0,0,0,0.6), 0 0 0 1px rgba(26,36,96,0.5);
+    }
+
+    /* Portrait card */
+    .portrait-card {
+      display: flex;
+      flex-direction: row;
+      background: linear-gradient(160deg, #10152E 0%, #0D1228 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .portrait-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(208,18,0,0.15);
+    }
+    .portrait-card > div:first-child {
+      width: 6.5rem;
+      flex-shrink: 0;
+    }
+    .portrait-card > div:last-child {
+      flex: 1;
+      min-width: 0;
+    }
+    .portrait-card .portrait-img {
+      transition: transform 0.4s cubic-bezier(0.34,1.2,0.64,1);
+      object-position: top;
+    }
+    .portrait-card:hover .portrait-img {
+      transform: scale(1.05);
+    }
+    @media (min-width: 640px) {
+      .portrait-card {
+        flex-direction: column;
+      }
+      .portrait-card > div:first-child {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+      }
+      .portrait-card > div:last-child {
+        flex: initial;
+      }
+    }
+    .fun-fact {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    /* Nav links */
+    .nav-link {
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: #D01200;
+      transition: width 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after { width: 100%; }
+    .nav-link:hover { color: #F0F2FF; }
+    .nav-link:focus-visible { outline: 2px solid #D01200; outline-offset: 4px; border-radius: 2px; }
+
+    /* CTA button */
+    .btn-primary {
+      background: linear-gradient(135deg, #D01200, #FF2A10);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
+      box-shadow: 0 4px 20px -4px rgba(208,18,0,0.5);
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px -4px rgba(208,18,0,0.65); }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #FF4422; outline-offset: 3px; }
+
+    .btn-outline {
+      background: transparent;
+      color: #F0F2FF;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid rgba(240,242,255,0.25);
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .btn-outline:hover { border-color: rgba(240,242,255,0.6); background: rgba(240,242,255,0.06); transform: translateY(-2px); }
+    .btn-outline:active { transform: translateY(0); }
+    .btn-outline:focus-visible { outline: 2px solid #F0F2FF; outline-offset: 3px; }
+
+    /* Platform badges */
+    .platform-badge {
+      background: rgba(26,36,96,0.5);
+      border: 1px solid rgba(26,36,96,0.8);
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .platform-badge:hover { background: rgba(26,36,96,0.8); border-color: rgba(26,36,96,1); }
+
+    /* Section divider */
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      color: #D01200;
+    }
+
+    /* Checkered flag pattern */
+    .checkered {
+      background-image:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+
+    /* Mobile menu */
+    #mobile-menu { transition: opacity 0.2s ease, transform 0.2s ease; }
+    #mobile-menu.hidden { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+    #mobile-menu:not(.hidden) { opacity: 1; transform: translateY(0); }
+
+    /* Role tag */
+    .role-tag {
+      background: rgba(26,36,96,0.4);
+      border: 1px solid rgba(26,36,96,0.7);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9BA3C0;
+    }
+    .role-tag.founder {
+      background: rgba(208,18,0,0.12);
+      border-color: rgba(208,18,0,0.3);
+      color: #FF6B55;
+    }
+
+    /* HOF badge */
+    .champion-badge {
+      background: linear-gradient(135deg, #C8960C, #E8B420);
+      color: #1a0c00;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* Scroll indicator */
+    @keyframes bounce-down {
+      0%, 100% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+    .scroll-indicator { animation: bounce-down 1.8s ease-in-out infinite; }
+
+    /* Red line decoration */
+    .red-line {
+      display: inline-block;
+      width: 40px; height: 3px;
+      background: linear-gradient(90deg, #D01200, #FF4422);
+      vertical-align: middle;
+      margin-right: 12px;
+      border-radius: 2px;
+    }
+
+    /* Spec grid */
+    .spec-item {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body class="bg-brand-ink text-brand-white" style="font-family:'Barlow',sans-serif;">
+
+<!-- ═══════════════════════════════════ NAV ═══════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 nav-blur"
+     style="background: rgba(6,9,26,0.82); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <!-- Logo -->
+    <a href="#home" class="flex items-center gap-3 group" aria-label="Sea 2 Summit Motorsport Home">
+      <img src="brand_assets/logo-cropped.png" alt="S2S Logo" class="h-10 w-auto drop-shadow-lg
+           transition-transform duration-200 group-hover:scale-105" />
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#home"     class="nav-link text-brand-silver text-sm font-body font-medium">Home</a>
+      <a href="monday-night-trophy/"  class="nav-link text-brand-silver text-sm font-body font-medium">MNT</a>
+      <a href="tcr-series/"           class="nav-link text-brand-silver text-sm font-body font-medium">TCR</a>
+      <a href="cup-series/"           class="nav-link text-brand-silver text-sm font-body font-medium">Cup</a>
+      <a href="#team"     class="nav-link text-brand-silver text-sm font-body font-medium">Team</a>
+      <a href="#hof"      class="nav-link text-brand-silver text-sm font-body font-medium">Hall of Fame</a>
+      <a href="#sponsoren" class="nav-link text-brand-silver text-sm font-body font-medium">Sponsoren</a>
+    </div>
+
+    <!-- CTA + hamburger -->
+    <div class="flex items-center gap-4">
+      <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener"
+         class="hidden md:inline-flex items-center gap-2 btn-primary px-5 py-2 rounded text-sm">
+        Discord
+      </a>
+      <button id="menu-btn" aria-label="Menü öffnen" aria-expanded="false"
+              class="md:hidden flex flex-col gap-1.5 p-2 rounded
+                     focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-red">
+        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-transform duration-200 origin-center"></span>
+        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-opacity duration-200"></span>
+        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-transform duration-200 origin-center"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden"
+       style="background: rgba(6,9,26,0.96); border-top: 1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+      <a href="#home"      class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Home</a>
+      <a href="monday-night-trophy/"  class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">MNT</a>
+      <a href="tcr-series/"           class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">TCR</a>
+      <a href="cup-series/"           class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Cup</a>
+      <a href="#team"      class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Team</a>
+      <a href="#hof"       class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Hall of Fame</a>
+      <a href="#sponsoren" class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Sponsoren</a>
+      <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener" class="btn-primary px-5 py-3 rounded text-sm text-center mt-2" onclick="closeMobile()">
+        Discord
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════ HERO ════════════════════════════════════ -->
+<section id="home" class="relative min-h-screen flex flex-col justify-center overflow-hidden grain"
+  style="background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(26,36,96,0.45) 0%, transparent 70%),
+                      radial-gradient(ellipse 60% 50% at 10% 80%, rgba(208,18,0,0.18) 0%, transparent 60%),
+                      radial-gradient(ellipse 100% 80% at 50% 50%, #06091A 40%, #0A0D22 100%);">
+
+  <!-- Decorative checkered strip top -->
+  <div class="absolute top-0 left-0 right-0 h-1 checkered" style="background-color: #D01200;"></div>
+
+  <!-- Background accent lines -->
+  <div class="absolute inset-0 pointer-events-none" style="
+    background: repeating-linear-gradient(-60deg, transparent, transparent 120px, rgba(26,36,96,0.08) 120px, rgba(26,36,96,0.08) 121px);
+  "></div>
+
+  <!-- Large background text decoration -->
+  <div class="absolute right-0 bottom-0 pointer-events-none select-none overflow-hidden"
+       style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(8rem,22vw,22rem);
+              color:rgba(26,36,96,0.12); letter-spacing:-0.04em; line-height:0.85;
+              transform: translateX(8%);">
+    S2S
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-20 flex flex-col md:flex-row items-center gap-12">
+    <!-- Left: Text -->
+    <div class="flex-1 max-w-2xl">
+      <!-- Label -->
+      <div class="flex items-center gap-3 mb-6">
+        <span class="section-label">Sim Racing Team</span>
+        <span class="h-px flex-1 max-w-16" style="background: rgba(208,18,0,0.4);"></span>
+        <span class="section-label">DACH</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="font-display font-black leading-none mb-6"
+          style="font-size: clamp(3.2rem, 7vw, 6rem); letter-spacing: -0.03em; line-height: 0.9;">
+        <span class="block text-brand-white">SEA 2 SUMMIT</span>
+        <span class="block" style="
+          background: linear-gradient(90deg, #D01200 0%, #FF4422 50%, #D01200 100%);
+          -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          Motorsport
+        </span>
+      </h1>
+
+      <!-- Body -->
+      <p class="text-brand-silver mb-8 max-w-lg"
+         style="font-size: 1.1rem; line-height: 1.75; font-weight: 300;">
+        Das Sim-Racing-Team aus <strong class="text-brand-white font-medium">Deutschland, Österreich &amp; der Schweiz</strong> —
+        kompetitiv, leidenschaftlich, gemeinschaftlich.
+      </p>
+
+      <!-- Platform badges -->
+      <div class="flex flex-wrap gap-2 mb-10">
+        <span class="platform-badge px-3 py-1 rounded text-xs font-display font-700 tracking-wide">Gran Turismo 7</span>
+        <span class="platform-badge px-3 py-1 rounded text-xs font-display font-700 tracking-wide">Assetto Corsa Competizione</span>
+        <span class="platform-badge px-3 py-1 rounded text-xs font-display font-700 tracking-wide">iRacing</span>
+      </div>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-4">
+        <a href="#ligen" class="btn-primary px-8 py-3.5 rounded-md text-base">
+          Unsere Ligen →
+        </a>
+        <a href="#team" class="btn-outline px-8 py-3.5 rounded-md text-base">
+          Das Team
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Logo + stats -->
+    <div class="flex-shrink-0 flex flex-col items-center gap-8">
+      <div class="relative">
+        <div class="absolute inset-0 rounded-full"
+             style="background: radial-gradient(circle, rgba(208,18,0,0.2) 0%, transparent 70%); filter: blur(30px);"></div>
+        <img src="brand_assets/logo-cropped.png" alt="Sea 2 Summit Motorsport"
+             class="relative w-48 md:w-64 drop-shadow-2xl" />
+      </div>
+
+      <!-- Stats row -->
+      <div class="flex gap-6">
+        <div class="text-center">
+          <div class="font-display font-900 text-brand-red leading-none"
+               style="font-size: 2.5rem; letter-spacing:-0.03em;">13</div>
+          <div class="text-brand-silver text-xs font-medium mt-1 tracking-wide">Mitglieder</div>
+        </div>
+        <div class="w-px" style="background: rgba(255,255,255,0.1);"></div>
+        <div class="text-center">
+          <div class="font-display font-900 text-brand-red leading-none"
+               style="font-size: 2.5rem; letter-spacing:-0.03em;">3</div>
+          <div class="text-brand-silver text-xs font-medium mt-1 tracking-wide">Ligen</div>
+        </div>
+        <div class="w-px" style="background: rgba(255,255,255,0.1);"></div>
+        <div class="text-center">
+          <div class="font-display font-900 text-brand-red leading-none"
+               style="font-size: 2.5rem; letter-spacing:-0.03em;">3</div>
+          <div class="text-brand-silver text-xs font-medium mt-1 tracking-wide">Plattformen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 scroll-indicator">
+    <span class="text-brand-dim text-xs font-display tracking-widest uppercase">Scroll</span>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 7l6 6 6-6" stroke="#5A6080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ LIGEN ═══════════════════════════════════ -->
+<section id="ligen" class="relative py-24 overflow-hidden"
+  style="background: radial-gradient(ellipse 80% 60% at 80% 20%, rgba(26,36,96,0.3) 0%, transparent 70%),
+                      #06091A;">
+
+  <!-- Section stripe -->
+  <div class="absolute top-0 left-0 right-0 h-px"
+       style="background: linear-gradient(90deg, transparent, rgba(208,18,0,0.5), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Heading -->
+    <div class="mb-16">
+      <div class="section-label mb-3">Wettbewerb</div>
+      <h2 class="font-display font-black text-brand-white mb-4"
+          style="font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 0.95;">
+        Unsere Ligen
+      </h2>
+      <p class="text-brand-silver max-w-xl" style="line-height: 1.7;">
+        Drei Serien, ein Team. Von GT3-Boliden bis TCR-Tourenwagen —
+        wir bieten kompetitives Sim Racing auf höchstem Niveau.
+      </p>
+    </div>
+
+    <!-- League Cards -->
+    <div class="grid gap-6 md:grid-cols-3">
+
+      <!-- MNT Card -->
+      <article class="card league-card rounded-xl overflow-hidden flex flex-col"
+               style="background: linear-gradient(160deg, #0F1530 0%, #0A0D22 100%);">
+        <div class="accent-bar"></div>
+
+        <!-- Card header -->
+        <div class="p-6 pb-4 border-b" style="border-color: rgba(255,255,255,0.06);">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sts-motorsport-dev-test/mnt_full-white.webp"
+                 alt="Monday Night Trophy" class="h-12 w-auto object-contain" />
+            <span class="flex-shrink-0 px-2 py-1 rounded text-xs font-display font-700 tracking-wider"
+                  style="background:rgba(208,18,0,0.15); border:1px solid rgba(208,18,0,0.3); color:#FF6B55;">
+              GT3
+            </span>
+          </div>
+          <h3 class="font-display font-800 text-brand-white leading-tight mb-1"
+              style="font-size: 1.5rem; letter-spacing:-0.02em;">Monday Night Trophy</h3>
+          <p class="text-brand-silver text-sm" style="line-height:1.6;">
+            GT3-Racing mit ausgelosten Fahrzeugen im Cup-Format — zweiwöchentlich, montags. Mit Broadcast, Stewarding & Preisen.
+          </p>
+        </div>
+
+        <!-- Specs -->
+        <div class="p-6 flex-1 flex flex-col gap-0">
+          <div class="grid grid-cols-2 gap-x-4 gap-y-3">
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Rennen</div>
+              <div class="font-display font-700 text-brand-white text-lg">8</div>
+            </div>
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Rhythmus</div>
+              <div class="font-display font-700 text-brand-white text-lg">14-tägig</div>
+            </div>
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Start</div>
+              <div class="font-display font-700 text-brand-white text-lg">19:45 Uhr</div>
+            </div>
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Tag</div>
+              <div class="font-display font-700 text-brand-white text-lg">Montag</div>
+            </div>
+          </div>
+
+          <div class="mt-4 p-3 rounded-lg" style="background:rgba(26,36,96,0.3); border:1px solid rgba(26,36,96,0.5);">
+            <div class="text-brand-dim text-xs font-medium mb-2 tracking-wide uppercase">Fahrzeuge</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded text-xs text-brand-silver"
+                    style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);">BMW Z4 GT3 '11</span>
+              <span class="px-2 py-0.5 rounded text-xs text-brand-silver"
+                    style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);">Porsche 911 GT3 R (992) '22</span>
+            </div>
+            <div class="mt-2 text-xs text-brand-dim">Setup: Full BoP + Brembsbalance</div>
+          </div>
+
+          <div class="mt-auto pt-4">
+            <a href="monday-night-trophy/"
+               class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-display font-700 tracking-wide uppercase
+                      transition-colors duration-200"
+               style="background:rgba(208,18,0,0.1); border:1px solid rgba(208,18,0,0.25); color:#FF6B55;
+                      letter-spacing:0.06em;"
+               onmouseover="this.style.background='rgba(208,18,0,0.2)'; this.style.borderColor='rgba(208,18,0,0.45)';"
+               onmouseout="this.style.background='rgba(208,18,0,0.1)'; this.style.borderColor='rgba(208,18,0,0.25)';">
+              Zur Liga &rarr;
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- TCR Card -->
+      <article class="card league-card league-tcr rounded-xl overflow-hidden flex flex-col"
+               style="background: linear-gradient(160deg, #0F1530 0%, #0A0D22 100%);">
+        <div class="accent-bar" style="background: linear-gradient(90deg, #2A8FBD, #5BC0EB);"></div>
+        <div class="p-6 pb-4 border-b" style="border-color: rgba(255,255,255,0.06);">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/sts-tcr-series-white-r.webp"
+                 alt="TCR Series" class="h-12 w-auto max-w-[60%] object-contain" />
+            <span class="flex-shrink-0 px-2 py-1 rounded text-xs font-display font-700 tracking-wider"
+                  style="background:rgba(42,143,189,0.15); border:1px solid rgba(42,143,189,0.3); color:#5BC0EB;">
+              TCR
+            </span>
+          </div>
+          <h3 class="font-display font-800 text-brand-white leading-tight mb-1"
+              style="font-size: 1.5rem; letter-spacing:-0.02em;">TCR Series</h3>
+          <p class="text-brand-silver text-sm" style="line-height:1.6;">
+            Tourenwagen-Action mit vorgegebenem Tuning — monatlich, donnerstags. Mit Broadcast, Stewarding & Preisen. 
+          </p>
+        </div>
+
+        <div class="p-6 flex-1 flex flex-col gap-0">
+          <div class="grid grid-cols-2 gap-x-4 gap-y-3">
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Rennen</div>
+              <div class="font-display font-700 text-brand-white text-lg">11</div>
+            </div>
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Rhythmus</div>
+              <div class="font-display font-700 text-brand-white text-lg">Monatlich</div>
+            </div>
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Start</div>
+              <div class="font-display font-700 text-brand-white text-lg">19:45 Uhr</div>
+            </div>
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Tag</div>
+              <div class="font-display font-700 text-brand-white text-lg">Donnerstag</div>
+            </div>
+          </div>
+
+          <div class="mt-4 p-3 rounded-lg" style="background:rgba(26,36,96,0.3); border:1px solid rgba(26,36,96,0.5);">
+            <div class="text-brand-dim text-xs font-medium mb-2 tracking-wide uppercase">Fahrzeuge</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded text-xs text-brand-silver"
+                    style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);">Straßenfahrzeuge lt. Liste im Reglement</span>
+            </div>
+            <div class="mt-2 text-xs text-brand-dim">Setup: Tuning lt. Reglement</div>
+          </div>
+
+          <div class="mt-auto pt-4">
+            <a href="tcr-series/"
+               class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-display font-700 tracking-wide uppercase
+                      transition-colors duration-200"
+               style="background:rgba(42,143,189,0.1); border:1px solid rgba(42,143,189,0.25); color:#5BC0EB;
+                      letter-spacing:0.06em;"
+               onmouseover="this.style.background='rgba(42,143,189,0.2)'; this.style.borderColor='rgba(42,143,189,0.45)';"
+               onmouseout="this.style.background='rgba(42,143,189,0.1)'; this.style.borderColor='rgba(42,143,189,0.25)';">
+              Zur Liga &rarr;
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- STS Cup Card -->
+      <article class="card league-card league-cup rounded-xl overflow-hidden flex flex-col"
+               style="background: linear-gradient(160deg, #0F1530 0%, #0A0D22 100%);">
+        <div class="accent-bar" style="background: linear-gradient(90deg, #2EAD6B, #5CE0A0);"></div>
+        <div class="p-6 pb-4 border-b" style="border-color: rgba(255,255,255,0.06);">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sts-motorsport-dev-test/7470c4cf-1f84-4c36-85a9-d4a824590d32_removalai_preview.webp"
+                 alt="STS Cup" class="h-12 w-auto max-w-[60%] object-contain" />
+            <span class="flex-shrink-0 px-2 py-1 rounded text-xs font-display font-700 tracking-wider"
+                  style="background:rgba(46,173,107,0.15); border:1px solid rgba(46,173,107,0.3); color:#5CE0A0;">
+              CUP
+            </span>
+          </div>
+          <h3 class="font-display font-800 text-brand-white leading-tight mb-1"
+              style="font-size: 1.5rem; letter-spacing:-0.02em;">Cup Series</h3>
+          <p class="text-brand-silver text-sm" style="line-height:1.6;">
+            Unkompliziertes Sim‑Racing als Alternative zum GT‑Sport. Einsteigen und losfahren. Mit Broadcast & Stewarding.
+          </p>
+        </div>
+
+        <div class="p-6 flex-1 flex flex-col gap-0">
+          <div class="grid grid-cols-2 gap-x-4 gap-y-3">
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Rennen</div>
+              <div class="font-display font-700 text-brand-white text-lg">11</div>
+            </div>
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Rhythmus</div>
+              <div class="font-display font-700 text-brand-white text-lg">Monatlich</div>
+            </div>
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Start</div>
+              <div class="font-display font-700 text-brand-white text-lg">19:30</div>
+            </div>
+            <div class="spec-item">
+              <div class="text-brand-dim text-xs font-medium mb-0.5 tracking-wide uppercase">Tag</div>
+              <div class="font-display font-700 text-brand-white text-lg">Dienstag</div>
+            </div>
+          </div>
+
+          <div class="mt-4 p-3 rounded-lg" style="background:rgba(26,36,96,0.3); border:1px solid rgba(26,36,96,0.5);">
+            <div class="text-brand-dim text-xs font-medium mb-2 tracking-wide uppercase">Fahrzeuge</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded text-xs text-brand-silver"
+                    style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);">KTM X-Bow</span>
+              <span class="px-2 py-0.5 rounded text-xs text-brand-silver"
+                    style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);">Radical SR3 SL</span>
+            </div>
+            <div class="mt-2 text-xs text-brand-dim">Setup: Full BoP + Einheitsreifen</div>
+          </div>
+
+          <div class="mt-auto pt-4">
+            <a href="cup-series/"
+               class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-display font-700 tracking-wide uppercase
+                      transition-colors duration-200"
+               style="background:rgba(46,173,107,0.1); border:1px solid rgba(46,173,107,0.25); color:#5CE0A0;
+                      letter-spacing:0.06em;"
+               onmouseover="this.style.background='rgba(46,173,107,0.2)'; this.style.borderColor='rgba(46,173,107,0.45)';"
+               onmouseout="this.style.background='rgba(46,173,107,0.1)'; this.style.borderColor='rgba(46,173,107,0.25)';">
+              Zur Liga &rarr;
+            </a>
+          </div>
+
+        </div>
+      </article>
+
+    </div><!-- /grid -->
+
+    <!-- Endurance Division banner -->
+    <div class="mt-8 rounded-xl overflow-hidden relative"
+         style="background: linear-gradient(135deg, #0F1530 0%, #0A0D22 100%);
+                border: 1px solid rgba(208,18,0,0.2);">
+      <div class="absolute inset-0 stripe"></div>
+      <div class="relative flex flex-col sm:flex-row items-center gap-6 p-6 sm:p-8">
+        <img src="brand_assets/STS-Endu-Gustl-Groß-Print.png"
+             alt="Endurance Division" class="h-16 sm:h-20 w-auto object-contain drop-shadow-lg" />
+        <div class="flex-1 text-center sm:text-left">
+          <div class="section-label mb-1">Coming Soon</div>
+          <h3 class="font-display font-800 text-brand-white text-2xl" style="letter-spacing:-0.02em;">
+            Endurance Division
+          </h3>
+          <p class="text-brand-silver text-sm mt-1" style="line-height:1.6;">
+            Langstreckenrennen für Ausdauer-Enthusiasten — die nächste Herausforderung für das S2S-Team.
+          </p>
+        </div>
+        <a href="#team" class="btn-primary px-6 py-3 rounded-md text-sm flex-shrink-0">Mehr erfahren</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ TEAM ════════════════════════════════════ -->
+<section id="team" class="relative py-24"
+  style="background: radial-gradient(ellipse 70% 50% at 20% 60%, rgba(208,18,0,0.08) 0%, transparent 60%),
+                      radial-gradient(ellipse 60% 40% at 80% 20%, rgba(26,36,96,0.2) 0%, transparent 60%),
+                      #06091A;">
+
+  <div class="absolute top-0 left-0 right-0 h-px"
+       style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-16">
+      <div class="section-label mb-3">Unser Team</div>
+      <h2 class="font-display font-black text-brand-white mb-4"
+          style="font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 0.95;">
+        Die Fahrer &amp; Crew
+      </h2>
+      <p class="text-brand-silver max-w-xl" style="line-height: 1.7;">
+        13 Enthusiasten aus der DACH-Region, vereint durch die Leidenschaft für den digitalen Motorsport.
+      </p>
+    </div>
+
+    <!-- Founders -->
+    <div class="mb-12">
+      <h3 class="font-display font-700 text-brand-silver text-sm tracking-widest uppercase mb-6">
+        <span class="red-line"></span>Gründer &amp; Teamleitung
+      </h3>
+      <div class="grid gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+        <!-- Søren Witt -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="img/witt-profile-2.webp" alt="Søren Witt"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+            <div class="absolute top-3 right-3 hidden sm:block">
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white text-lg" style="letter-spacing:-0.01em;">Søren Witt</h4>
+              <span class="text-brand-dim text-xs">🇦🇹</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="role-tag px-2 py-0.5 rounded">Web Admin</span>
+              <span class="role-tag px-2 py-0.5 rounded">Schatzmeister</span>
+              <span class="role-tag px-2 py-0.5 rounded">iRacing Lead</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.6;">Lieblingsstrecke: Nordschleife — „Jede Runde ein neues Abenteuer."</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- David Lindemann -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/taxi-24.webp" alt="David Lindemann"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+            <div class="absolute top-3 right-3 hidden sm:block">
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white text-lg" style="letter-spacing:-0.01em;">David Lindemann</h4>
+              <span class="text-brand-dim text-xs">🇩🇪</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="role-tag px-2 py-0.5 rounded">Ligaleitung MNT, TCR, CUP</span>
+              <span class="role-tag px-2 py-0.5 rounded">Streamer</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.6;">Lieblingswagen: Mazda RX-Vision GT3 — Streamt jedes Rennen live.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- League staff -->
+    <div class="mb-12">
+      <h3 class="font-display font-700 text-brand-silver text-sm tracking-widest uppercase mb-6">
+        <span class="red-line"></span>Ligaleitung &amp; Organisation
+      </h3>
+      <div class="grid gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+        <!-- Marco Z. -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/boomax_2025.webp" alt="Marco Z."
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">Marco Z.</h4>
+              <span class="text-brand-dim text-xs">🇩🇪</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">TCR Ligaleitung</span>
+              <span class="role-tag px-1.5 py-0.5 rounded">Cup Ligaleitung</span>
+              <span class="role-tag px-1.5 py-0.5 rounded">Lackierer</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingsstrecke: Monza — Der ruhigste Steward im Grid.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- bertz -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/bertz-1.webp" alt="bertz"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">bertz</h4>
+              <span class="text-brand-dim text-xs">🇩🇪</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">MNT Ligaleitung</span>
+              <span class="role-tag px-1.5 py-0.5 rounded">Endurance Lead</span>
+              <span class="role-tag px-1.5 py-0.5 rounded">Lackierer</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingsstrecke: Brands Hatch — Meister der Konstanz.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AsHes -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/ashyyy.webp" alt="AsHes"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">AsHes</h4>
+              <span class="text-brand-dim text-xs">🇩🇪</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">MNT Ligaleitung</span>
+              <span class="role-tag px-1.5 py-0.5 rounded">Endurance Lead</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingswagen: BMW M4 GT3 — Ausdauer ist alles.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Russell -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/russell.webp" alt="Russell"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">Russell</h4>
+              <span class="text-brand-dim text-xs">🇦🇹</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">MNT Ligaleitung</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingsstrecke: Suzuka — „Bremspunkte sind nur Vorschläge."</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Philipp Spielbusch -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/pille-24.webp" alt="Philipp Spielbusch"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">Philipp Spielbusch</h4>
+              <span class="text-brand-dim text-xs">🇩🇪</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">Pressesprecher & Socials</span>
+              <span class="role-tag px-1.5 py-0.5 rounded">Sponsor</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingswagen: Audi R8 LMS — Nachtrennen-Enthusiast.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maik Schmitz -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/maik-24.webp" alt="Maik Schmitz"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">Maik Schmitz</h4>
+              <span class="text-brand-dim text-xs">🇩🇪</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">iRacing Lead</span>
+              <span class="role-tag px-1.5 py-0.5 rounded">Sponsor</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingsstrecke: Silverstone — „Regen ist kein Problem, sondern eine Chance."</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Andreas Brüllhardt -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/fussi.webp" alt="Andreas Brüllhardt"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">Andreas Brüllhardt</h4>
+              <span class="text-brand-dim text-xs">🇨🇭</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">ACC Lead</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingswagen: McLaren 720S GT3 — Der Spätstarter mit dem schnellsten Finish.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Members -->
+    <div>
+      <h3 class="font-display font-700 text-brand-silver text-sm tracking-widest uppercase mb-6">
+        <span class="red-line"></span>Mitglieder
+      </h3>
+      <div class="grid gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+        <!-- Sascha Kost -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/sadoko.webp" alt="Sascha Kost"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">Sascha Kost</h4>
+              <span class="text-brand-dim text-xs">🇩🇪</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">Fahrer</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingsstrecke: Imola — Konstanz schlägt Pace.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Matrikas -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/matrikas-2.webp" alt="Matrikas"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">Matrikas</h4>
+              <span class="text-brand-dim text-xs">🇨🇭</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">Fahrer</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingswagen: Lamborghini Huracán GT3 — Lebt für die letzte Runde.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Omicron -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/omicro.webp" alt="Omicron"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">Omicron</h4>
+              <span class="text-brand-dim text-xs">🇩🇪</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">Fahrer</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingsstrecke: Watkins Glen — Der Qualifying-König.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AnderTheker -->
+        <div class="portrait-card rounded-xl overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/andertheker.webp" alt="AnderTheker"
+                 class="portrait-img w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-display font-800 text-brand-white" style="font-size:1.05rem; letter-spacing:-0.01em;">AnderTheker</h4>
+              <span class="text-brand-dim text-xs">🇩🇪</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="role-tag px-1.5 py-0.5 rounded">Fahrer</span>
+            </div>
+            <div class="fun-fact flex items-start gap-2">
+              <span class="text-brand-red text-xs mt-0.5">&#9829;</span>
+              <span class="text-brand-silver text-xs" style="line-height:1.5;">Lieblingsstrecke: Zandvoort — Der Name ist Programm.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════ HALL OF FAME ═══════════════════════════════════ -->
+<section id="hof" class="relative py-24"
+  style="background: radial-gradient(ellipse 70% 50% at 70% 30%, rgba(26,36,96,0.25) 0%, transparent 60%),
+                      #06091A;">
+
+  <div class="absolute top-0 left-0 right-0 h-px"
+       style="background: linear-gradient(90deg, transparent, rgba(208,18,0,0.4), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-16">
+      <div class="section-label mb-3">Champions</div>
+      <h2 class="font-display font-black text-brand-white mb-4"
+          style="font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 0.95;">
+        Hall of Fame
+      </h2>
+      <p class="text-brand-silver max-w-xl" style="line-height: 1.7;">
+        Die Meister der S2S-Ligen — Saison für Saison erkämpft.
+      </p>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-2">
+
+      <!-- MNT HOF -->
+      <div class="card rounded-xl overflow-hidden">
+        <div class="h-1" style="background: linear-gradient(90deg, #D01200, #FF4422);"></div>
+        <div class="p-6 border-b flex items-center gap-4" style="border-color:rgba(255,255,255,0.06);">
+          <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sts-motorsport-dev-test/mnt_full-white.webp"
+               alt="MNT" class="h-10 w-auto object-contain" />
+          <div>
+            <h3 class="font-display font-800 text-brand-white text-xl" style="letter-spacing:-0.02em;">Monday Night Trophy</h3>
+            <div class="text-brand-dim text-xs mt-0.5">GT3 Championship</div>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full hof-table">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                <th class="px-6 py-3 text-left text-brand-dim text-xs font-display font-700 tracking-widest uppercase">Saison</th>
+                <th class="px-6 py-3 text-left text-brand-dim text-xs font-display font-700 tracking-widest uppercase">Champion</th>
+                <th class="px-6 py-3 text-left text-brand-dim text-xs font-display font-700 tracking-widest uppercase">Team</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y" style="--tw-divide-opacity:1; border-color:rgba(255,255,255,0.04);">
+              <tr>
+                <td class="px-6 py-3.5">
+                  <span class="font-display font-700 text-brand-red text-sm">Season 5</span>
+                </td>
+                <td class="px-6 py-3.5">
+                  <div class="flex items-center gap-2">
+                    <span class="champion-badge px-1.5 py-0.5 rounded text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M6 2h12v6a6 6 0 1 1-12 0V2z" fill="#1a0c00"/><path d="M4 2H2v4a4 4 0 0 0 4 4V8a2 2 0 0 1-2-2V2zM20 2h2v4a4 4 0 0 1-4 4V8a2 2 0 0 0 2-2V2z" fill="#1a0c00"/><path d="M9 16h6v2H9zM7 18h10v2H7z" fill="#1a0c00"/></svg></span>
+                    <span class="font-body font-600 text-brand-white text-sm">bertz</span>
+                  </div>
+                </td>
+                <td class="px-6 py-3.5 text-brand-silver text-sm">SEA 2 SUMMIT Motorsport</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5"><span class="font-display font-700 text-brand-red text-sm">Season 4</span></td>
+                <td class="px-6 py-3.5">
+                  <div class="flex items-center gap-2">
+                    <span class="champion-badge px-1.5 py-0.5 rounded text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M6 2h12v6a6 6 0 1 1-12 0V2z" fill="#1a0c00"/><path d="M4 2H2v4a4 4 0 0 0 4 4V8a2 2 0 0 1-2-2V2zM20 2h2v4a4 4 0 0 1-4 4V8a2 2 0 0 0 2-2V2z" fill="#1a0c00"/><path d="M9 16h6v2H9zM7 18h10v2H7z" fill="#1a0c00"/></svg></span>
+                    <span class="font-body font-600 text-brand-white text-sm">bertz</span>
+                  </div>
+                </td>
+                <td class="px-6 py-3.5 text-brand-silver text-sm">friends with pace</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5"><span class="font-display font-700 text-brand-red text-sm">Season 3</span></td>
+                <td class="px-6 py-3.5">
+                  <div class="flex items-center gap-2">
+                    <span class="champion-badge px-1.5 py-0.5 rounded text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M6 2h12v6a6 6 0 1 1-12 0V2z" fill="#1a0c00"/><path d="M4 2H2v4a4 4 0 0 0 4 4V8a2 2 0 0 1-2-2V2zM20 2h2v4a4 4 0 0 1-4 4V8a2 2 0 0 0 2-2V2z" fill="#1a0c00"/><path d="M9 16h6v2H9zM7 18h10v2H7z" fill="#1a0c00"/></svg></span>
+                    <span class="font-body font-600 text-brand-white text-sm">STS_Tao</span>
+                  </div>
+                </td>
+                <td class="px-6 py-3.5 text-brand-silver text-sm">SEA 2 SUMMIT Motorsport</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5"><span class="font-display font-700 text-brand-red text-sm">Season 2</span></td>
+                <td class="px-6 py-3.5">
+                  <div class="flex items-center gap-2">
+                    <span class="champion-badge px-1.5 py-0.5 rounded text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M6 2h12v6a6 6 0 1 1-12 0V2z" fill="#1a0c00"/><path d="M4 2H2v4a4 4 0 0 0 4 4V8a2 2 0 0 1-2-2V2zM20 2h2v4a4 4 0 0 1-4 4V8a2 2 0 0 0 2-2V2z" fill="#1a0c00"/><path d="M9 16h6v2H9zM7 18h10v2H7z" fill="#1a0c00"/></svg></span>
+                    <span class="font-body font-600 text-brand-white text-sm">Gringo_386</span>
+                  </div>
+                </td>
+                <td class="px-6 py-3.5 text-brand-silver text-sm">SEA 2 SUMMIT Motorsport</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5"><span class="font-display font-700 text-brand-red text-sm">Season 1</span></td>
+                <td class="px-6 py-3.5">
+                  <div class="flex items-center gap-2">
+                    <span class="champion-badge px-1.5 py-0.5 rounded text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M6 2h12v6a6 6 0 1 1-12 0V2z" fill="#1a0c00"/><path d="M4 2H2v4a4 4 0 0 0 4 4V8a2 2 0 0 1-2-2V2zM20 2h2v4a4 4 0 0 1-4 4V8a2 2 0 0 0 2-2V2z" fill="#1a0c00"/><path d="M9 16h6v2H9zM7 18h10v2H7z" fill="#1a0c00"/></svg></span>
+                    <span class="font-body font-600 text-brand-white text-sm">Sven2406</span>
+                  </div>
+                </td>
+                <td class="px-6 py-3.5 text-brand-silver text-sm">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TCR HOF -->
+      <div class="card league-tcr rounded-xl overflow-hidden">
+        <div class="h-1" style="background: linear-gradient(90deg, #2A8FBD, #5BC0EB);"></div>
+        <div class="p-6 border-b flex items-center gap-4" style="border-color:rgba(255,255,255,0.06);">
+          <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/sts-tcr-series-white-r.webp"
+               alt="TCR Series" class="h-10 w-auto max-w-[50%] object-contain" />
+          <div>
+            <h3 class="font-display font-800 text-brand-white text-xl" style="letter-spacing:-0.02em;">TCR Series</h3>
+            <div class="text-brand-dim text-xs mt-0.5">Tourenwagen Championship</div>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full hof-table">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                <th class="px-6 py-3 text-left text-brand-dim text-xs font-display font-700 tracking-widest uppercase">Saison</th>
+                <th class="px-6 py-3 text-left text-brand-dim text-xs font-display font-700 tracking-widest uppercase">Champion</th>
+                <th class="px-6 py-3 text-left text-brand-dim text-xs font-display font-700 tracking-widest uppercase">Team</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y" style="border-color:rgba(255,255,255,0.04);">
+               <tr>
+                <td class="px-6 py-3.5"><span class="font-display font-700 text-sm" style="color:#5BC0EB;">Jahressieger 2025</span></td>
+                <td class="px-6 py-3.5">
+                  <div class="flex items-center gap-2">
+                    <span class="champion-badge px-1.5 py-0.5 rounded text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M6 2h12v6a6 6 0 1 1-12 0V2z" fill="#1a0c00"/><path d="M4 2H2v4a4 4 0 0 0 4 4V8a2 2 0 0 1-2-2V2zM20 2h2v4a4 4 0 0 1-4 4V8a2 2 0 0 0 2-2V2z" fill="#1a0c00"/><path d="M9 16h6v2H9zM7 18h10v2H7z" fill="#1a0c00"/></svg></span>
+                    <span class="font-body font-600 text-brand-white text-sm">G-Professional</span>
+                  </div>
+                </td>
+                <td class="px-6 py-3.5 text-brand-silver text-sm">-</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5"><span class="font-display font-700 text-sm" style="color:#5BC0EB;">Season 2</span></td>
+                <td class="px-6 py-3.5">
+                  <div class="flex items-center gap-2">
+                    <span class="champion-badge px-1.5 py-0.5 rounded text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M6 2h12v6a6 6 0 1 1-12 0V2z" fill="#1a0c00"/><path d="M4 2H2v4a4 4 0 0 0 4 4V8a2 2 0 0 1-2-2V2zM20 2h2v4a4 4 0 0 1-4 4V8a2 2 0 0 0 2-2V2z" fill="#1a0c00"/><path d="M9 16h6v2H9zM7 18h10v2H7z" fill="#1a0c00"/></svg></span>
+                    <span class="font-body font-600 text-brand-white text-sm">ifm_ineverfeltso</span>
+                  </div>
+                </td>
+                <td class="px-6 py-3.5 text-brand-silver text-sm">ifm</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5"><span class="font-display font-700 text-sm" style="color:#5BC0EB;">Season 1</span></td>
+                <td class="px-6 py-3.5">
+                  <div class="flex items-center gap-2">
+                    <span class="champion-badge px-1.5 py-0.5 rounded text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M6 2h12v6a6 6 0 1 1-12 0V2z" fill="#1a0c00"/><path d="M4 2H2v4a4 4 0 0 0 4 4V8a2 2 0 0 1-2-2V2zM20 2h2v4a4 4 0 0 1-4 4V8a2 2 0 0 0 2-2V2z" fill="#1a0c00"/><path d="M9 16h6v2H9zM7 18h10v2H7z" fill="#1a0c00"/></svg></span>
+                    <span class="font-body font-600 text-brand-white text-sm">G-Professional</span>
+                  </div>
+                </td>
+                <td class="px-6 py-3.5 text-brand-silver text-sm">—</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5"><span class="font-display font-700 text-sm" style="color:#5BC0EB;">Pre-Season</span></td>
+                <td class="px-6 py-3.5">
+                  <div class="flex items-center gap-2">
+                    <span class="champion-badge px-1.5 py-0.5 rounded text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M6 2h12v6a6 6 0 1 1-12 0V2z" fill="#1a0c00"/><path d="M4 2H2v4a4 4 0 0 0 4 4V8a2 2 0 0 1-2-2V2zM20 2h2v4a4 4 0 0 1-4 4V8a2 2 0 0 0 2-2V2z" fill="#1a0c00"/><path d="M9 16h6v2H9zM7 18h10v2H7z" fill="#1a0c00"/></svg></span>
+                    <span class="font-body font-600 text-brand-white text-sm">STS_Tao</span>
+                  </div>
+                </td>
+                <td class="px-6 py-3.5 text-brand-silver text-sm">SEA 2 SUMMIT Motorsport</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ SPONSOREN ════════════════════════════════════ -->
+<section id="sponsoren" class="relative py-24"
+  style="background: radial-gradient(ellipse 60% 40% at 30% 50%, rgba(26,36,96,0.2) 0%, transparent 60%),
+                      #06091A;">
+
+  <div class="absolute top-0 left-0 right-0 h-px"
+       style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-16">
+      <div class="section-label mb-3">Partner</div>
+      <h2 class="font-display font-black text-brand-white mb-4"
+          style="font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 0.95;">
+        Unsere Sponsoren
+      </h2>
+      <p class="text-brand-silver max-w-xl" style="line-height: 1.7;">
+        Ohne unsere Partner wäre Sea 2 Summit Motorsport nicht möglich. Herzlichen Dank für eure Unterstützung.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+      <!-- Malerbetrieb Schmitz -->
+      <div class="sponsor-card rounded-xl p-7 flex flex-col gap-4">
+        <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sts-motorsport-dev-test/schmitz-white.webp"
+             alt="Malerbetrieb Schmitz" class="h-14 w-auto object-contain self-start" />
+        <p class="text-brand-silver text-sm" style="line-height:1.7;">
+          Handwerkliche Präzision seit Jahrzehnten — Malerarbeiten mit höchstem Qualitätsanspruch.
+        </p>
+        <div class="mt-auto pt-3 border-t" style="border-color:rgba(255,255,255,0.06);">
+          <a href="#" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 text-brand-silver text-sm font-medium hover:text-brand-white transition-colors"
+             style="font-family:'Barlow Condensed',sans-serif; letter-spacing:0.04em;">
+            Website besuchen
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- PSC -->
+      <div class="sponsor-card rounded-xl p-7 flex flex-col gap-4">
+        <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sts-motorsport-dev-test/psc-white-1.webp"
+             alt="PSC" class="h-14 w-auto object-contain self-start" />
+        <p class="text-brand-silver text-sm" style="line-height:1.7;">
+          Der IT-Experte des Vertrauens — professionelle IT-Lösungen für Unternehmen und Privatpersonen.
+        </p>
+        <div class="mt-auto pt-3 border-t" style="border-color:rgba(255,255,255,0.06);">
+          <a href="#" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 text-brand-silver text-sm font-medium hover:text-brand-white transition-colors"
+             style="font-family:'Barlow Condensed',sans-serif; letter-spacing:0.04em;">
+            Website besuchen
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+            <!-- Hassel -->
+      <div class="sponsor-card rounded-xl p-7 flex flex-col gap-4">
+        <img src="https://bear-images.sfo2.cdn.digitaloceanspaces.com/sea2summit-motorsport/hassel-neu-min-1.webp"
+             alt="PSC" class="h-14 w-auto object-contain self-start" />
+        <p class="text-brand-silver text-sm" style="line-height:1.7;">
+          Die beste Tankstelle im Saarland — Sprit fürs Auto, Fleischi für den Besitzer.
+        </p>
+        <div class="mt-auto pt-3 border-t" style="border-color:rgba(255,255,255,0.06);">
+          <a href="#" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 text-brand-silver text-sm font-medium hover:text-brand-white transition-colors"
+             style="font-family:'Barlow Condensed',sans-serif; letter-spacing:0.04em;">
+            Website besuchen
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sponsor CTA -->
+    <div class="mt-12 p-8 rounded-xl text-center"
+         style="background: linear-gradient(135deg, #0F1530 0%, #0A0D22 100%);
+                border: 1px dashed rgba(255,255,255,0.12);">
+      <div class="section-label mb-2">Sponsoring</div>
+      <h3 class="font-display font-800 text-brand-white text-2xl mb-3" style="letter-spacing:-0.02em;">
+        Werde Teil von SEA 2 SUMMIT Motorsport
+      </h3>
+      <p class="text-brand-silver text-sm max-w-md mx-auto mb-6" style="line-height:1.7;">
+        Interesse an einer Partnerschaft? Wir freuen uns über neue Sponsoren, die unsere Leidenschaft teilen.
+      </p>
+      <a href="mailto:info@sea2summit-motorsport.com"
+         class="btn-primary inline-flex items-center gap-2 px-7 py-3.5 rounded-md text-sm">
+        Kontakt aufnehmen
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ FOOTER ═════════════════════════════════════ -->
+<footer class="relative py-12"
+  style="background: #040614; border-top: 1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 mb-10">
+
+      <!-- Brand -->
+      <div class="text-center md:text-left">
+        <img src="brand_assets/STS-Schriftzug-25-Small.png"
+             alt="Sea 2 Summit Motorsport" class="h-10 w-auto mb-3 mx-auto md:mx-0" />
+        <p class="text-brand-dim text-sm max-w-xs" style="line-height:1.6;">
+          Sim-Racing-Team aus Deutschland, Österreich &amp; der Schweiz.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div class="flex flex-wrap justify-center md:justify-end gap-6">
+        <a href="#home"      class="nav-link text-brand-silver text-sm">Home</a>
+        <a href="monday-night-trophy/"  class="nav-link text-brand-silver text-sm">MNT</a>
+        <a href="tcr-series/"           class="nav-link text-brand-silver text-sm">TCR</a>
+        <a href="cup-series/"           class="nav-link text-brand-silver text-sm">Cup</a>
+        <a href="#team"      class="nav-link text-brand-silver text-sm">Team</a>
+        <a href="#hof"       class="nav-link text-brand-silver text-sm">Hall of Fame</a>
+        <a href="#sponsoren" class="nav-link text-brand-silver text-sm">Sponsoren</a>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3"
+         style="border-color:rgba(255,255,255,0.06);">
+      <div class="text-brand-dim text-xs">
+        © <span id="year"></span> Sea 2 Summit Motorsport. Alle Rechte vorbehalten.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav scroll shadow
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('nav-scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const bars = menuBtn.querySelectorAll('.menu-bar');
+  let open = false;
+
+  menuBtn.addEventListener('click', () => {
+    open = !open;
+    menuBtn.setAttribute('aria-expanded', open);
+    mobileMenu.classList.toggle('hidden', !open);
+    // Animate bars to X
+    if (open) {
+      bars[0].style.transform = 'rotate(45deg) translate(4px, 4px)';
+      bars[1].style.opacity  = '0';
+      bars[2].style.transform = 'rotate(-45deg) translate(4px, -4px)';
+    } else {
+      bars[0].style.transform = '';
+      bars[1].style.opacity  = '';
+      bars[2].style.transform = '';
+    }
+  });
+
+  function closeMobile() {
+    open = false;
+    menuBtn.setAttribute('aria-expanded', false);
+    mobileMenu.classList.add('hidden');
+    bars[0].style.transform = '';
+    bars[1].style.opacity  = '';
+    bars[2].style.transform = '';
+  }
+
+  // Smooth entrance on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card, .member-card, .portrait-card, .sponsor-card, .league-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.2,0.64,1)';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
