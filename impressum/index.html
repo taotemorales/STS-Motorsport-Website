@@ -9,129 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              red:      '#D01200',
-              redHot:   '#FF1A05',
-              navy:     '#1A2460',
-              navyDark: '#101840',
-              navyDeep: '#080D24',
-              ink:      '#06091A',
-              white:    '#F0F2FF',
-              silver:   '#9BA3C0',
-              dim:      '#5A6080',
-            }
-          },
-          fontFamily: {
-            display: ['Barlow Condensed', 'sans-serif'],
-            body:    ['Barlow', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
+  <script src="../shared/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../shared/styles.css" />
   <style>
-    * { box-sizing: border-box; }
-    html { font-family: 'Barlow', sans-serif; }
-
-    .nav-blur {
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-    }
-    .nav-scrolled {
-      box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px -4px rgba(0,0,0,0.5);
-    }
-    .nav-link {
-      position: relative;
-      transition: color 0.2s ease;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 2px;
-      background: #D01200;
-      transition: width 0.25s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    .nav-link:hover::after,
-    .nav-link:focus-visible::after { width: 100%; }
-    .nav-link:hover { color: #F0F2FF; }
-    .nav-link:focus-visible { outline: 2px solid #D01200; outline-offset: 4px; border-radius: 2px; }
-
-    /* Dropdown */
-    [data-dropdown]:hover .dropdown-panel,
-    [data-dropdown]:focus-within .dropdown-panel {
-      opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
-    }
-    [data-dropdown] .dropdown-panel { transform: translateX(-50%) translateY(4px); }
-    [data-dropdown]:hover .dropdown-chevron,
-    [data-dropdown]:focus-within .dropdown-chevron { transform: rotate(180deg); }
-    .dropdown-item:hover, .dropdown-item:focus-visible {
-      background: rgba(255,255,255,0.06); color: #F0F2FF;
-    }
-    [data-mobile-dropdown] .dropdown-chevron.open { transform: rotate(180deg); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #D01200, #FF2A10);
-      color: #fff;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border: none;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
-      box-shadow: 0 4px 20px -4px rgba(208,18,0,0.5);
-    }
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px -4px rgba(208,18,0,0.65); }
-    .btn-primary:hover::before { opacity: 1; }
-    .btn-primary:active { transform: translateY(0); }
-    .btn-primary:focus-visible { outline: 2px solid #FF4422; outline-offset: 3px; }
-
-    .section-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      color: #D01200;
-    }
-
-    .red-line {
-      display: inline-block;
-      width: 40px; height: 3px;
-      background: linear-gradient(90deg, #D01200, #FF4422);
-      vertical-align: middle;
-      margin-right: 12px;
-      border-radius: 2px;
-    }
-
-    /* Grain */
-    .grain::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    #mobile-menu { transition: opacity 0.2s ease, transform 0.2s ease; }
-    #mobile-menu.hidden { opacity: 0; transform: translateY(-8px); pointer-events: none; }
-    #mobile-menu:not(.hidden) { opacity: 1; transform: translateY(0); }
+    /* ── Impressum-specific (shared styles from ../shared/styles.css) ── */
 
     /* Legal content styling */
     .legal-content h2 {
@@ -357,42 +238,6 @@
   </div>
 </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Nav scroll
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('nav-scrolled', window.scrollY > 10);
-  }, { passive: true });
-
-  // Mobile menu
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const bars = menuBtn.querySelectorAll('.menu-bar');
-  let open = false;
-  menuBtn.addEventListener('click', () => {
-    open = !open;
-    menuBtn.setAttribute('aria-expanded', open);
-    mobileMenu.classList.toggle('hidden', !open);
-    bars[0].style.transform = open ? 'rotate(45deg) translate(4px, 4px)' : '';
-    bars[1].style.opacity   = open ? '0' : '';
-    bars[2].style.transform = open ? 'rotate(-45deg) translate(4px, -4px)' : '';
-  });
-  function closeMobile() {
-    open = false;
-    menuBtn.setAttribute('aria-expanded', false);
-    mobileMenu.classList.add('hidden');
-    bars[0].style.transform = bars[2].style.transform = '';
-    bars[1].style.opacity = '';
-  }
-
-  function toggleMobileDropdown(btn) {
-    const sub = btn.nextElementSibling;
-    const chevron = btn.querySelector('.dropdown-chevron');
-    sub.classList.toggle('hidden');
-    chevron.classList.toggle('open');
-  }
-</script>
+<script src="../shared/main.js"></script>
 </body>
 </html>

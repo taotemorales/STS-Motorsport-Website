@@ -6,140 +6,21 @@
   <title>Cup Series — SEA 2 SUMMIT Motorsport</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              red:      '#D01200',
-              redHot:   '#FF1A05',
-              navy:     '#1A2460',
-              navyDark: '#101840',
-              navyDeep: '#080D24',
-              ink:      '#06091A',
-              white:    '#F0F2FF',
-              silver:   '#9BA3C0',
-              dim:      '#5A6080',
-              cup:      '#2EAD6B',
-              cupLight: '#5CE0A0',
-            }
-          },
-          fontFamily: {
-            display: ['Barlow Condensed', 'sans-serif'],
-            body:    ['Barlow', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
+  <script>window.pageColors = { cup: '#2EAD6B', cupLight: '#5CE0A0' };</script>
+  <script src="../shared/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../shared/styles.css" />
+  <style>:root { --accent: #2EAD6B; --accent-light: #5CE0A0; --accent-rgb: 46, 173, 107; }</style>
   <style>
-    * { box-sizing: border-box; }
-    html { font-family: 'Barlow', sans-serif; }
-
-    /* ── Shared with index ── */
-    .nav-blur {
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-    }
-    .nav-scrolled {
-      box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px -4px rgba(0,0,0,0.5);
-    }
-    .nav-link {
-      position: relative;
-      transition: color 0.2s ease;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 2px;
-      background: #2EAD6B;
-      transition: width 0.25s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    .nav-link:hover::after,
-    .nav-link:focus-visible::after { width: 100%; }
-    .nav-link:hover { color: #F0F2FF; }
-    .nav-link:focus-visible { outline: 2px solid #2EAD6B; outline-offset: 4px; border-radius: 2px; }
-
-    /* Dropdown */
-    [data-dropdown]:hover .dropdown-panel,
-    [data-dropdown]:focus-within .dropdown-panel {
-      opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
-    }
-    [data-dropdown] .dropdown-panel { transform: translateX(-50%) translateY(4px); }
-    [data-dropdown]:hover .dropdown-chevron,
-    [data-dropdown]:focus-within .dropdown-chevron { transform: rotate(180deg); }
-    .dropdown-item:hover, .dropdown-item:focus-visible {
-      background: rgba(255,255,255,0.06); color: #F0F2FF;
-    }
-    [data-mobile-dropdown] .dropdown-chevron.open { transform: rotate(180deg); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #2EAD6B, #5CE0A0);
-      color: #fff;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
-      box-shadow: 0 4px 20px -4px rgba(46,173,107,0.5);
-    }
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px -4px rgba(46,173,107,0.65); }
-    .btn-primary:hover::before { opacity: 1; }
-    .btn-primary:active { transform: translateY(0); }
-    .btn-primary:focus-visible { outline: 2px solid #5CE0A0; outline-offset: 3px; }
-
-    .btn-outline {
-      background: transparent;
-      color: #F0F2FF;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border: 1px solid rgba(240,242,255,0.25);
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    .btn-outline:hover { border-color: rgba(240,242,255,0.6); background: rgba(240,242,255,0.06); transform: translateY(-2px); }
-    .btn-outline:active { transform: translateY(0); }
-
-    .section-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      color: #2EAD6B;
-    }
-    .card {
-      background: linear-gradient(135deg, #10152E 0%, #0D1228 100%);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .red-line {
-      display: inline-block;
-      width: 40px; height: 3px;
-      background: linear-gradient(90deg, #2EAD6B, #5CE0A0);
-      vertical-align: middle;
-      margin-right: 12px;
-      border-radius: 2px;
-    }
-    #mobile-menu { transition: opacity 0.2s ease, transform 0.2s ease; }
-    #mobile-menu.hidden { opacity: 0; transform: translateY(-8px); pointer-events: none; }
-    #mobile-menu:not(.hidden) { opacity: 1; transform: translateY(0); }
-
     /* ── Cup-specific ── */
+
+    /* Series heading font */
+    .series-title { font-family: 'Outfit', 'Barlow Condensed', sans-serif; }
+
+    /* Tabular numbers for standings */
+    .standings-table td,
+    .pos-badge { font-variant-numeric: tabular-nums; }
 
     /* Race calendar card */
     .race-card {
@@ -405,7 +286,7 @@
 
       <div class="section-label mb-3">Cup Series · Monatlich · Dienstag</div>
 
-      <h1 class="font-display font-black leading-none mb-4"
+      <h1 class="font-display font-black leading-none mb-4 series-title"
           style="font-size: clamp(2.8rem, 6vw, 5.5rem); letter-spacing: -0.03em; line-height: 0.9;">
         <span class="block text-brand-white">Cup</span>
         <span class="block" style="
@@ -1043,53 +924,6 @@
   </div>
 </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Nav scroll
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('nav-scrolled', window.scrollY > 10);
-  }, { passive: true });
-
-  // Mobile menu
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const bars = menuBtn.querySelectorAll('.menu-bar');
-  let open = false;
-  menuBtn.addEventListener('click', () => {
-    open = !open;
-    menuBtn.setAttribute('aria-expanded', open);
-    mobileMenu.classList.toggle('hidden', !open);
-    bars[0].style.transform = open ? 'rotate(45deg) translate(4px, 4px)' : '';
-    bars[1].style.opacity   = open ? '0' : '';
-    bars[2].style.transform = open ? 'rotate(-45deg) translate(4px, -4px)' : '';
-  });
-  function closeMobile() {
-    open = false;
-    menuBtn.setAttribute('aria-expanded', false);
-    mobileMenu.classList.add('hidden');
-    bars[0].style.transform = bars[2].style.transform = '';
-    bars[1].style.opacity = '';
-  }
-
-  function toggleMobileDropdown(btn) {
-    const sub = btn.nextElementSibling;
-    const chevron = btn.querySelector('.dropdown-chevron');
-    sub.classList.toggle('hidden');
-    chevron.classList.toggle('open');
-  }
-
-  // Fade-in on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 60);
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
-</script>
+<script src="../shared/main.js"></script>
 </body>
 </html>
