@@ -300,18 +300,18 @@
       <!-- Key facts grid -->
       <div class="grid grid-cols-3 gap-4 text-center">
         <div>
-          <div class="font-display font-900 leading-none"
-               style="font-size:1.4rem; letter-spacing:-0.03em; color:#D01200;">20</div>
+          <div class="font-display font-900 text-brand-red leading-none"
+               style="font-size:2.2rem; letter-spacing:-0.03em;">20</div>
           <div class="text-brand-dim text-xs font-medium mt-1 tracking-wide uppercase">Fahrer</div>
         </div>
         <div>
-          <div class="font-display font-900 leading-none"
-               style="font-size:1.4rem; letter-spacing:-0.03em; color:#D01200;">5</div>
+          <div class="font-display font-900 text-brand-red leading-none"
+               style="font-size:2.2rem; letter-spacing:-0.03em;">5</div>
           <div class="text-brand-dim text-xs font-medium mt-1 tracking-wide uppercase">Podien</div>
         </div>
         <div>
-          <div class="font-display font-900 leading-none"
-               style="font-size:1.4rem; letter-spacing:-0.03em; color:#D01200;">3</div>
+          <div class="font-display font-900 text-brand-red leading-none"
+               style="font-size:2.2rem; letter-spacing:-0.03em;">3</div>
           <div class="text-brand-dim text-xs font-medium mt-1 tracking-wide uppercase">Simulationen</div>
         </div>
       </div>
@@ -406,37 +406,19 @@
         </p>
       </div>
 
-      <!-- Right: Info cards -->
-      <div class="grid grid-cols-2 gap-4 fade-in">
-        <div class="info-card rounded-xl p-5">
-          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-2">Plattformen</div>
-          <div class="flex flex-wrap gap-2">
-            <span class="sim-tag sim-iracing">iRacing</span>
-            <span class="sim-tag sim-gt7">GT7</span>
-            <span class="sim-tag sim-acc">ACC</span>
-          </div>
-        </div>
-        <div class="info-card rounded-xl p-5">
-          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-2">Typ</div>
-          <div class="font-display font-700 text-brand-white text-lg leading-tight" style="letter-spacing:-0.01em;">
-            Externe Events<br>&amp; Serien
-          </div>
-        </div>
-        <div class="info-card rounded-xl p-5">
-          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-2">Fahrer</div>
-          <div class="font-display font-700 text-brand-white text-lg leading-tight" style="letter-spacing:-0.01em;">
-            Stammfahrer<br>+ Gastfahrer
-          </div>
-        </div>
-        <div class="info-card rounded-xl p-5">
-          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-2">Maskottchen</div>
-          <div class="flex items-center gap-3">
-            <img src="../img/Gustl-Gabelbock-Endu-Division-Logo-L.svg" alt="Gustl" class="h-10 w-auto" />
-            <div class="font-display font-700 text-brand-white text-sm leading-tight" style="letter-spacing:-0.01em;">
-              Gustl, der<br>Gabelbock
-            </div>
-          </div>
-        </div>
+      <!-- Right: Car image with left-fade blend -->
+      <div class="relative fade-in rounded-xl overflow-hidden" style="min-height: 340px;">
+        <img src="../img/endu-playstation.png"
+             alt="Lamborghini Huracán GT3 — Gran Turismo 7"
+             class="w-full h-full object-cover absolute inset-0" />
+        <!-- Top-to-bottom fade (hides rounded corner artifact) -->
+        <div class="absolute inset-0" style="background: linear-gradient(to bottom, #06091A 0%, transparent 30%);"></div>
+        <!-- Bottom-to-top dark fade -->
+        <div class="absolute inset-0" style="background: linear-gradient(to top, #06091A 0%, transparent 35%);"></div>
+        <!-- Left-to-right fade (blends into text column) -->
+        <div class="absolute inset-0" style="background: linear-gradient(to right, #06091A 0%, transparent 55%);"></div>
+        <!-- Subtle color tint -->
+        <div class="absolute inset-0" style="background: rgba(208,18,0,0.06); mix-blend-mode: multiply;"></div>
       </div>
 
     </div>
