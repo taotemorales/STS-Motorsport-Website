@@ -280,6 +280,7 @@
         </div>
       </div>
       <a href="#team"     class="nav-link text-brand-silver text-sm font-body font-medium">Team</a>
+      <a href="endurance/" class="nav-link text-brand-silver text-sm font-body font-medium">Endurance</a>
       <a href="#hof"      class="nav-link text-brand-silver text-sm font-body font-medium">Hall of Fame</a>
       <a href="#sponsoren" class="nav-link text-brand-silver text-sm font-body font-medium">Sponsoren</a>
     </div>
@@ -317,6 +318,7 @@
         </div>
       </div>
       <a href="#team"      class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Team</a>
+      <a href="endurance/" class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Endurance</a>
       <a href="#hof"       class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Hall of Fame</a>
       <a href="#sponsoren" class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Sponsoren</a>
       <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener" class="btn-primary px-5 py-3 rounded text-sm text-center mt-2" onclick="closeMobile()">
@@ -661,25 +663,28 @@
     </div><!-- /grid -->
 
     <!-- Endurance Division banner -->
-    <div class="mt-8 rounded-xl overflow-hidden relative"
-         style="background: linear-gradient(135deg, #0F1530 0%, #0A0D22 100%);
-                border: 1px solid rgba(208,18,0,0.2);">
+    <a href="endurance/" class="mt-8 rounded-xl overflow-hidden relative block group"
+       style="background: linear-gradient(135deg, #0F1530 0%, #0A0D22 100%);
+              border: 1px solid rgba(208,18,0,0.2);
+              transition: border-color 0.25s ease, box-shadow 0.25s ease;"
+       onmouseenter="this.style.borderColor='rgba(208,18,0,0.4)'; this.style.boxShadow='0 12px 40px -8px rgba(208,18,0,0.15)';"
+       onmouseleave="this.style.borderColor='rgba(208,18,0,0.2)'; this.style.boxShadow='none';">
       <div class="absolute inset-0 stripe"></div>
       <div class="relative flex flex-col sm:flex-row items-center gap-6 p-6 sm:p-8">
         <img src="brand_assets/STS-Endu-Gustl-Groß-Print.png"
              alt="Endurance Division" class="h-16 sm:h-20 w-auto object-contain drop-shadow-lg" />
         <div class="flex-1 text-center sm:text-left">
-          <div class="section-label mb-1">Coming Soon</div>
+          <div class="section-label mb-1">Division</div>
           <h3 class="font-display font-800 text-brand-white text-2xl" style="letter-spacing:-0.02em;">
             Endurance Division
           </h3>
           <p class="text-brand-silver text-sm mt-1" style="line-height:1.6;">
-            Als Team gehen wir bei externen Langstrecken-Events an den Start — Gastfahrer, die die Herausforderung suchen, sind herzlich willkommen!
+            Als Team gehen wir bei externen Langstrecken-Events an den Start — plattformübergreifend, mit Gastfahrern.
           </p>
         </div>
-        <!-- <a href="#team" class="btn-primary px-6 py-3 rounded-md text-sm flex-shrink-0">Mehr erfahren</a> -->
+        <span class="btn-primary px-6 py-3 rounded-md text-sm flex-shrink-0">Mehr erfahren &rarr;</span>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>

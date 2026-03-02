@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Endurance Division — SEA 2 SUMMIT Motorsport</title>
+  <meta name="description" content="Die Endurance Division von SEA 2 SUMMIT Motorsport — plattformübergreifend bei externen Langstrecken-Events am Start. Gastfahrer willkommen." />
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../shared/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../shared/styles.css" />
+  <style>:root { --accent: #D01200; --accent-light: #FF4422; --accent-rgb: 208, 18, 0; }</style>
+  <style>
+    /* ── Endurance-specific ── */
+
+    .series-title { font-family: 'Outfit', 'Barlow Condensed', sans-serif; }
+
+    /* Results table */
+    .results-table thead tr th {
+      background: rgba(26,36,96,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      color: #5A6080;
+      padding: 12px 16px;
+    }
+    .results-table tbody tr td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.9rem;
+      color: #9BA3C0;
+      transition: background 0.15s ease;
+    }
+    .results-table tbody tr:hover td { background: rgba(255,255,255,0.03); }
+    .results-table td,
+    .pos-badge { font-variant-numeric: tabular-nums; }
+
+    /* POS badge */
+    .pos-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      min-width: 28px;
+      text-align: center;
+    }
+    .pos-1 { color: #E8B420; }
+    .pos-2 { color: #9BA3C0; }
+    .pos-3 { color: #C0824A; }
+
+    /* Platform sim tags */
+    .sim-tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+    .sim-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 4px;
+    }
+    .sim-iracing { background: rgba(0,90,210,0.18); color: #6AABF7; border: 1px solid rgba(0,90,210,0.28); }
+    .sim-gt7     { background: rgba(212,160,23,0.15); color: #E0B830; border: 1px solid rgba(212,160,23,0.28); }
+    .sim-acc     { background: rgba(46,173,107,0.15); color: #3DC882; border: 1px solid rgba(46,173,107,0.28); }
+    .sim-lmu     { background: rgba(210,80,30,0.15);  color: #E07840; border: 1px solid rgba(210,80,30,0.28); }
+
+    /* Grain */
+    .grain::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Info card */
+    .info-card {
+      background: linear-gradient(160deg, #0F1530 0%, #0A0D22 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease,
+                  border-color 0.25s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(208,18,0,0.15);
+      border-color: rgba(208,18,0,0.15);
+    }
+
+    /* Series card */
+    .series-card {
+      background: linear-gradient(160deg, #0F1530 0%, #0A0D22 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease,
+                  border-color 0.25s ease;
+    }
+    .series-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #D01200, #FF4422);
+      border-radius: 0 2px 2px 0;
+    }
+    .series-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(208,18,0,0.2);
+      border-color: rgba(208,18,0,0.2);
+    }
+
+    /* Gallery card */
+    .gallery-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease,
+                  border-color 0.3s ease;
+    }
+    .gallery-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(208,18,0,0.2);
+      border-color: rgba(208,18,0,0.2);
+    }
+    .gallery-card:hover .gallery-img {
+      transform: scale(1.05);
+    }
+    .gallery-img {
+      transition: transform 0.4s cubic-bezier(0.34,1.2,0.64,1);
+    }
+
+    /* Fade-in on scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.34,1.2,0.64,1);
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* Points */
+    .pts { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.05rem; color: #F0F2FF; }
+
+    /* Gustl float animation */
+    @keyframes gustl-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .gustl-float { animation: gustl-float 4s ease-in-out infinite; }
+  </style>
+</head>
+<body class="bg-brand-ink text-brand-white" style="font-family:'Barlow',sans-serif;">
+
+<!-- ══════════════════════════════════ NAV ══════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 nav-blur"
+     style="background: rgba(6,9,26,0.82); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <a href="../index.html" class="flex items-center gap-3 group" aria-label="SEA 2 SUMMIT Motorsport Home">
+      <img src="../brand_assets/logo-cropped.png" alt="S2S Logo"
+           class="h-10 w-auto drop-shadow-lg transition-transform duration-200 group-hover:scale-105" />
+    </a>
+
+    <div class="hidden md:flex items-center gap-8">
+      <a href="../index.html"              class="nav-link text-brand-silver text-sm font-medium">Home</a>
+      <div class="relative" data-dropdown>
+        <button class="nav-link text-brand-silver text-sm font-medium inline-flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+          Ligen
+          <svg class="w-3.5 h-3.5 transition-transform duration-200 dropdown-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="dropdown-panel absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible transition-all duration-200" style="min-width:160px;">
+          <div class="rounded-lg overflow-hidden py-2 px-1" style="background:rgba(6,9,26,0.96); border:1px solid rgba(255,255,255,0.08); box-shadow:0 8px 32px rgba(0,0,0,0.5);">
+            <a href="../monday-night-trophy/" class="dropdown-item block px-4 py-2 text-sm text-brand-silver rounded-md transition-colors duration-150">MNT</a>
+            <a href="../tcr-series/"          class="dropdown-item block px-4 py-2 text-sm text-brand-silver rounded-md transition-colors duration-150">TCR</a>
+            <a href="../cup-series/"          class="dropdown-item block px-4 py-2 text-sm text-brand-silver rounded-md transition-colors duration-150">CUP</a>
+          </div>
+        </div>
+      </div>
+      <a href="../index.html#team"       class="nav-link text-brand-silver text-sm font-medium">Team</a>
+      <a href="../endurance/"            class="nav-link text-brand-white text-sm font-medium">Endurance</a>
+      <a href="../index.html#hof"        class="nav-link text-brand-silver text-sm font-medium">Hall of Fame</a>
+      <a href="../index.html#sponsoren"  class="nav-link text-brand-silver text-sm font-medium">Sponsoren</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener"
+         class="hidden md:inline-flex items-center gap-2 btn-primary px-5 py-2 rounded text-sm">
+        Discord
+      </a>
+      <button id="menu-btn" aria-label="Menü öffnen" aria-expanded="false"
+              class="md:hidden flex flex-col gap-1.5 p-2 rounded
+                     focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-red">
+        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-transform duration-200 origin-center"></span>
+        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-opacity duration-200"></span>
+        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-transform duration-200 origin-center"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden"
+       style="background: rgba(6,9,26,0.96); border-top: 1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+      <a href="../index.html"              class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Home</a>
+      <div data-mobile-dropdown>
+        <button class="nav-link text-brand-silver font-medium py-2 w-full text-left inline-flex items-center gap-1" onclick="toggleMobileDropdown(this)">
+          Ligen
+          <svg class="w-3.5 h-3.5 transition-transform duration-200 dropdown-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="mobile-sub hidden pl-4 flex flex-col gap-2 mt-1">
+          <a href="../monday-night-trophy/" class="nav-link text-brand-silver font-medium py-1.5 text-sm" onclick="closeMobile()">MNT</a>
+          <a href="../tcr-series/"          class="nav-link text-brand-silver font-medium py-1.5 text-sm" onclick="closeMobile()">TCR</a>
+          <a href="../cup-series/"          class="nav-link text-brand-silver font-medium py-1.5 text-sm" onclick="closeMobile()">CUP</a>
+        </div>
+      </div>
+      <a href="../index.html#team"       class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Team</a>
+      <a href="../endurance/"            class="nav-link text-brand-white font-medium py-2" onclick="closeMobile()">Endurance</a>
+      <a href="../index.html#hof"        class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Hall of Fame</a>
+      <a href="../index.html#sponsoren"  class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Sponsoren</a>
+      <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener" class="btn-primary px-5 py-3 rounded text-sm text-center mt-2" onclick="closeMobile()">Discord</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════ HERO ══════════════════════════════════════ -->
+<header class="relative overflow-hidden grain"
+  style="min-height: 480px; background:
+    radial-gradient(ellipse 80% 70% at 55% 60%, rgba(208,18,0,0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 10% 30%, rgba(26,36,96,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, #06091A 40%, #0A0D22 100%);">
+
+  <!-- Accent strip top -->
+  <div class="absolute top-0 left-0 right-0 h-1.5" style="background: linear-gradient(90deg, #D01200, #FF4422);"></div>
+
+  <!-- Diagonal lines texture -->
+  <div class="absolute inset-0 pointer-events-none" style="
+    background: repeating-linear-gradient(-60deg, transparent, transparent 100px,
+      rgba(208,18,0,0.04) 100px, rgba(208,18,0,0.04) 101px);"></div>
+
+  <!-- Large watermark -->
+  <div class="absolute right-0 bottom-0 pointer-events-none select-none overflow-hidden"
+       style="font-family:'Barlow Condensed',sans-serif; font-weight:900;
+              font-size: clamp(5rem,18vw,16rem);
+              color:rgba(208,18,0,0.06); letter-spacing:-0.04em; line-height:0.85;
+              transform: translateX(5%) translateY(10%);">
+    ENDU
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-16 flex flex-col md:flex-row items-center gap-10">
+
+    <!-- Left: Text -->
+    <div class="flex-1">
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 mb-5 text-brand-dim text-sm hero-enter hero-delay-1">
+        <a href="../index.html" class="hover:text-brand-silver transition-colors duration-150">Home</a>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="#5A6080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="text-brand-silver font-medium">Endurance Division</span>
+      </div>
+
+      <div class="section-label mb-3 hero-enter hero-delay-2">Endurance Division · Alle Plattformen</div>
+
+      <h1 class="font-display font-black leading-none mb-4 series-title hero-enter hero-delay-3"
+          style="font-size: clamp(2.8rem, 6vw, 5.5rem); letter-spacing: -0.03em; line-height: 0.9;">
+        <span class="block text-brand-white">Endurance</span>
+        <span class="block" style="
+          background: linear-gradient(90deg, #D01200 0%, #FF4422 60%, #D01200 100%);
+          -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          Division
+        </span>
+      </h1>
+
+      <p class="text-brand-silver mb-8 max-w-lg hero-enter hero-delay-4" style="font-size:1.05rem; line-height:1.75; font-weight:300;">
+        Als Team gehen wir bei externen Langstrecken-Events an den Start — plattformübergreifend auf PC und PlayStation.
+        Gastfahrer, die die Herausforderung suchen, sind herzlich willkommen!
+      </p>
+
+      <div class="flex flex-wrap gap-3 hero-enter hero-delay-5">
+        <a href="#results" class="btn-primary px-7 py-3 rounded-md text-sm">Zu den Ergebnissen</a>
+        <a href="#gallery" class="btn-outline px-7 py-3 rounded-md text-sm">Galerie</a>
+      </div>
+    </div>
+
+    <!-- Right: Gustl + key facts -->
+    <div class="flex-shrink-0 flex flex-col items-center gap-8 hero-enter-scale hero-delay-6">
+      <!-- Gustl Endurance Division Logo -->
+      <div class="relative">
+        <div class="absolute inset-0"
+             style="background: radial-gradient(circle, rgba(208,18,0,0.25) 0%, transparent 70%); filter: blur(30px);"></div>
+        <img src="../img/Gustl-Gabelbock-Endu-Division-Logo-L.svg"
+             alt="Gustl, der Gabelbock — Endurance Division"
+             class="gustl-float relative"
+             style="height: 350px; width: auto; display: block;" />
+      </div>
+
+      <!-- Key facts grid -->
+      <div class="grid grid-cols-3 gap-4 text-center">
+        <div>
+          <div class="font-display font-900 leading-none"
+               style="font-size:1.4rem; letter-spacing:-0.03em; color:#D01200;">20</div>
+          <div class="text-brand-dim text-xs font-medium mt-1 tracking-wide uppercase">Fahrer</div>
+        </div>
+        <div>
+          <div class="font-display font-900 leading-none"
+               style="font-size:1.4rem; letter-spacing:-0.03em; color:#D01200;">5</div>
+          <div class="text-brand-dim text-xs font-medium mt-1 tracking-wide uppercase">Podien</div>
+        </div>
+        <div>
+          <div class="font-display font-900 leading-none"
+               style="font-size:1.4rem; letter-spacing:-0.03em; color:#D01200;">3</div>
+          <div class="text-brand-dim text-xs font-medium mt-1 tracking-wide uppercase">Simulationen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════ FORMAT BAR ════════════════════════════════════ -->
+<div style="background: linear-gradient(135deg, #0D1228 0%, #0F1530 100%);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-7xl mx-auto px-6 py-5">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+      <div class="flex items-start gap-3 hero-enter hero-delay-7">
+        <div class="w-8 h-8 rounded flex-shrink-0 flex items-center justify-center mt-0.5"
+             style="background:rgba(208,18,0,0.12); border:1px solid rgba(208,18,0,0.25);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 2h12v12H2z" stroke="#D01200" stroke-width="1.2"/><path d="M2 6h12M6 2v12" stroke="#D01200" stroke-width="1.2"/></svg>
+        </div>
+        <div>
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-0.5">Plattformen</div>
+          <div class="font-display font-700 text-brand-white text-base leading-tight">PC &amp; PlayStation</div>
+        </div>
+      </div>
+      <div class="flex items-start gap-3 hero-enter hero-delay-8">
+        <div class="w-8 h-8 rounded flex-shrink-0 flex items-center justify-center mt-0.5"
+             style="background:rgba(208,18,0,0.12); border:1px solid rgba(208,18,0,0.25);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#D01200" stroke-width="1.2"/><path d="M8 4.5V8l2.5 2" stroke="#D01200" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-0.5">Format</div>
+          <div class="font-display font-700 text-brand-white text-base leading-tight">Langstrecke</div>
+        </div>
+      </div>
+      <div class="flex items-start gap-3 hero-enter hero-delay-9">
+        <div class="w-8 h-8 rounded flex-shrink-0 flex items-center justify-center mt-0.5"
+             style="background:rgba(208,18,0,0.12); border:1px solid rgba(208,18,0,0.25);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="12" rx="1.5" stroke="#D01200" stroke-width="1.2"/><path d="M1 7h14" stroke="#D01200" stroke-width="1.2"/><path d="M5 1v3M11 1v3" stroke="#D01200" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-0.5">Typ</div>
+          <div class="font-display font-700 text-brand-white text-base leading-tight">Externe Events</div>
+        </div>
+      </div>
+      <div class="flex items-start gap-3 hero-enter hero-delay-10">
+        <div class="w-8 h-8 rounded flex-shrink-0 flex items-center justify-center mt-0.5"
+             style="background:rgba(208,18,0,0.12); border:1px solid rgba(208,18,0,0.25);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="#D01200" stroke-width="1.2"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#D01200" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-0.5">Gastfahrer</div>
+          <div class="font-display font-700 text-brand-white text-base leading-tight">Willkommen!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ ABOUT ════════════════════════════════════════ -->
+<section class="relative py-24"
+  style="background: radial-gradient(ellipse 70% 50% at 75% 30%, rgba(26,36,96,0.2) 0%, transparent 60%),
+                      #06091A;">
+
+  <div class="absolute top-0 left-0 right-0 h-px"
+       style="background: linear-gradient(90deg, transparent, rgba(208,18,0,0.4), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid gap-12 lg:grid-cols-2 items-center">
+
+      <!-- Left: Text -->
+      <div class="fade-in">
+        <div class="section-label mb-3">Was ist die Endurance Division?</div>
+        <h2 class="font-display font-black text-brand-white mb-5"
+            style="font-size: clamp(2.2rem,4.5vw,3.5rem); letter-spacing:-0.03em; line-height:0.95;">
+          Gemeinsam auf der<br>
+          <span style="background: linear-gradient(90deg, #D01200, #FF4422);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Langstrecke</span>
+        </h2>
+        <p class="text-brand-silver max-w-lg mb-6" style="line-height:1.7;">
+          Anders als unsere wöchentlichen und monatlichen Ligen nehmen wir als Team an
+          <strong class="text-brand-white font-medium">externen Langstrecken-Events und Meisterschaften</strong>
+          teil — plattformübergreifend auf PC und PlayStation.
+        </p>
+        <p class="text-brand-silver max-w-lg mb-6" style="line-height:1.7;">
+          Ob Gran Turismo 7, Assetto Corsa Competizione oder iRacing — die Endurance Division ist überall dort,
+          wo es um Ausdauer, Strategie und Teamarbeit geht. Auch
+          <strong class="text-brand-white font-medium">Gastfahrer</strong>, die nicht Mitglied im Team sind,
+          können bei uns mitfahren und die Langstrecke erleben.
+        </p>
+        <p class="text-brand-silver max-w-lg" style="line-height:1.7;">
+          Unser Maskottchen <strong class="text-brand-white font-medium">Gustl, der Gabelbock</strong>,
+          begleitet uns dabei auf jeder Strecke.
+        </p>
+      </div>
+
+      <!-- Right: Info cards -->
+      <div class="grid grid-cols-2 gap-4 fade-in">
+        <div class="info-card rounded-xl p-5">
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-2">Plattformen</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="sim-tag sim-iracing">iRacing</span>
+            <span class="sim-tag sim-gt7">GT7</span>
+            <span class="sim-tag sim-acc">ACC</span>
+          </div>
+        </div>
+        <div class="info-card rounded-xl p-5">
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-2">Typ</div>
+          <div class="font-display font-700 text-brand-white text-lg leading-tight" style="letter-spacing:-0.01em;">
+            Externe Events<br>&amp; Serien
+          </div>
+        </div>
+        <div class="info-card rounded-xl p-5">
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-2">Fahrer</div>
+          <div class="font-display font-700 text-brand-white text-lg leading-tight" style="letter-spacing:-0.01em;">
+            Stammfahrer<br>+ Gastfahrer
+          </div>
+        </div>
+        <div class="info-card rounded-xl p-5">
+          <div class="text-brand-dim text-xs font-medium tracking-wide uppercase mb-2">Maskottchen</div>
+          <div class="flex items-center gap-3">
+            <img src="../img/Gustl-Gabelbock-Endu-Division-Logo-L.svg" alt="Gustl" class="h-10 w-auto" />
+            <div class="font-display font-700 text-brand-white text-sm leading-tight" style="letter-spacing:-0.01em;">
+              Gustl, der<br>Gabelbock
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ EXTERNE SERIEN ══════════════════════════════ -->
+<section class="relative py-24"
+  style="background: radial-gradient(ellipse 60% 40% at 20% 50%, rgba(208,18,0,0.06) 0%, transparent 60%),
+                      radial-gradient(ellipse 60% 40% at 80% 40%, rgba(26,36,96,0.2) 0%, transparent 60%),
+                      #06091A;">
+
+  <div class="absolute top-0 left-0 right-0 h-px"
+       style="background: linear-gradient(90deg, transparent, rgba(208,18,0,0.4), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-12">
+      <div class="section-label mb-3">Externe Serien</div>
+      <h2 class="font-display font-black text-brand-white mb-3"
+          style="font-size: clamp(2.2rem,4.5vw,3.5rem); letter-spacing:-0.03em; line-height:0.95;">
+        Serien &amp; Meisterschaften
+      </h2>
+      <p class="text-brand-silver max-w-xl" style="line-height:1.7;">
+        Wir nehmen an verschiedenen externen Langstrecken-Serien teil — hier eine Übersicht unserer regelmäßigen Engagements.
+      </p>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+      <!-- Series card 1 — NF2.0 Team-Meisterschaft -->
+      <div class="series-card rounded-xl pl-6 pr-5 py-5 fade-in">
+        <div class="mb-3">
+          <div class="font-display font-800 text-brand-white text-lg leading-tight" style="letter-spacing:-0.01em;">
+            NF2.0 Team Championship
+          </div>
+          <div class="text-brand-dim text-xs mt-0.5">by Nürburgring Fascination 2.0</div>
+        </div>
+        <p class="text-brand-silver text-sm mb-3" style="line-height:1.6;">
+          Langstrecken-Teamwertung auf Gran Turismo 7 — mehrere Fahrer, ein gemeinsames Ziel. Punkte werden über die gesamte Saison gesammelt.
+        </p>
+        <div class="flex items-center justify-between">
+          <div class="flex flex-wrap gap-2">
+            <span class="sim-tag sim-gt7">GT7</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="https://nf20.de/" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="NF2.0 Website">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/nuerburgring_fascination2.0/" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="NF2.0 Instagram">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Series card 2 — NF2.0 Einzelfahrer-Meisterschaft -->
+      <div class="series-card rounded-xl pl-6 pr-5 py-5 fade-in">
+        <div class="mb-3">
+          <div class="font-display font-800 text-brand-white text-lg leading-tight" style="letter-spacing:-0.01em;">
+            NF2.0 Driver Championship
+          </div>
+          <div class="text-brand-dim text-xs mt-0.5">by Nürburgring Fascination 2.0</div>
+        </div>
+        <p class="text-brand-silver text-sm mb-3" style="line-height:1.6;">
+          Die Einzelwertung der NF2.0-Saison auf Gran Turismo 7 — jeder Fahrer sammelt seine eigenen Punkte über alle Läufe der Meisterschaft.
+        </p>
+        <div class="flex items-center justify-between">
+          <div class="flex flex-wrap gap-2">
+            <span class="sim-tag sim-gt7">GT7</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="https://nf20.de/" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="NF2.0 Website">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/nuerburgring_fascination2.0/" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="NF2.0 Instagram">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Series card 3 — Landesmeisterschaft Grüne Hölle -->
+      <div class="series-card rounded-xl pl-6 pr-5 py-5 fade-in">
+        <div class="mb-3">
+          <div class="font-display font-800 text-brand-white text-lg leading-tight" style="letter-spacing:-0.01em;">
+            Landesmeisterschaft Grüne Hölle
+          </div>
+          <div class="text-brand-dim text-xs mt-0.5">by GHD Patrick Jarczynski</div>
+        </div>
+        <p class="text-brand-silver text-sm mb-3" style="line-height:1.6;">
+          Langstrecken-Meisterschaft auf der Nürburgring Nordschleife in iRacing — VLN-Format mit Fahrerwechsel und Strategietiefe.
+        </p>
+        <div class="flex items-center justify-between">
+          <div class="flex flex-wrap gap-2">
+            <span class="sim-tag sim-iracing">iRacing</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="https://www.youtube.com/@LMGH_Official/streams" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="LMGH YouTube">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/lmgh_official" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="LMGH Instagram">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ RESULTS ════════════════════════════════════ -->
+<section id="results" class="relative py-24"
+  style="background: radial-gradient(ellipse 70% 50% at 75% 30%, rgba(26,36,96,0.2) 0%, transparent 60%),
+                      #06091A;">
+
+  <div class="absolute top-0 left-0 right-0 h-px"
+       style="background: linear-gradient(90deg, transparent, rgba(208,18,0,0.4), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-12">
+      <div class="section-label mb-3">Ergebnisse · Plattformübergreifend</div>
+      <h2 class="font-display font-black text-brand-white mb-3"
+          style="font-size: clamp(2.2rem,4.5vw,3.5rem); letter-spacing:-0.03em; line-height:0.95;">
+        Renn-Ergebnisse
+      </h2>
+      <p class="text-brand-silver max-w-xl" style="line-height:1.7;">
+        Übersicht aller Endurance-Events, an denen die SEA 2 SUMMIT Endurance Division teilgenommen hat — quer über alle Plattformen.
+      </p>
+    </div>
+
+    <div class="card rounded-xl overflow-hidden fade-in">
+      <div class="h-1" style="background: linear-gradient(90deg, #D01200, #FF4422);"></div>
+      <div class="px-6 py-5 border-b flex items-center justify-between"
+           style="border-color:rgba(255,255,255,0.06);">
+        <div>
+          <h3 class="font-display font-900 text-brand-white"
+              style="font-size:1.6rem; letter-spacing:-0.02em;">Endurance Events</h3>
+          <div class="text-brand-dim text-xs mt-0.5 font-medium tracking-wide uppercase">Alle Plattformen · Langstrecke</div>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="sim-tag sim-iracing">iRacing</span>
+          <span class="sim-tag sim-gt7">GT7</span>
+          <span class="sim-tag sim-acc">ACC</span>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full results-table" style="min-width: 640px;">
+          <thead>
+            <tr>
+              <th class="text-left" style="width:52px;">Pos</th>
+              <th class="text-left">Event</th>
+              <th class="text-left">Plattform</th>
+              <th class="text-left hidden sm:table-cell">Datum</th>
+              <th class="text-left hidden md:table-cell">Fahrzeug</th>
+              <th class="text-left">Fahrer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="pos-badge pos-2">2</span></td>
+              <td><span class="font-medium text-brand-white">Driver Championship - Daytona by NF2.0 - Lobby A</span></td>
+              <td><span class="sim-tag sim-gt7">GT7</span></td>
+              <td class="hidden sm:table-cell text-brand-dim">22.02.2026</td>
+              <td class="hidden md:table-cell text-brand-dim">Mazda 787B '91</td>
+              <td class="text-brand-silver">Bertz</td>
+            </tr>
+            <tr>
+              <td><span class="pos-badge pos-3">3</span></td>
+              <td><span class="font-medium text-brand-white">Landesmeisterschaft Grüne Hölle - VLN - Lauf 1</span></td>
+              <td><span class="sim-tag sim-iracing">iRacing</span></td>
+              <td class="hidden sm:table-cell text-brand-dim">14.02.2026</td>
+              <td class="hidden md:table-cell text-brand-dim">Audi RS 3 LMS TCR</td>
+              <td class="text-brand-silver">Søren, Maik</td>
+            </tr>
+            <tr>
+              <td><span class="pos-badge" style="color:#5A6080;">10</span></td>
+              <td><span class="font-medium text-brand-white">12 Std. auf Mount Panorama by NF2.0 - Lobby A</span></td>
+              <td><span class="sim-tag sim-gt7">GT7</span></td>
+              <td class="hidden sm:table-cell text-brand-dim">31.01.2026</td>
+              <td class="hidden md:table-cell text-brand-dim">Renault Sport R.S.01 GT3 '16</td>
+              <td class="text-brand-silver">Bertz, AsHes, TaxiDriver, Russell, Gringo</td>
+            </tr>
+            <tr>
+              <td><span class="pos-badge pos-2">2</span></td>
+              <td><span class="font-medium text-brand-white">ACC RL &amp; SIM2REAL Charity Race auf Silverstone</span></td>
+              <td><span class="sim-tag sim-acc">ACC</span></td>
+              <td class="hidden sm:table-cell text-brand-dim">22.11.2025</td>
+              <td class="hidden md:table-cell text-brand-dim">Porsche 718 Cayman GT4 Clubsport</td>
+              <td class="text-brand-silver">Søren, Sadoko</td>
+            </tr>
+            <tr>
+              <td><span class="pos-badge pos-3">3</span></td>
+              <td><span class="font-medium text-brand-white">ACC RL &amp; SIM2REAL Charity Race auf Silverstone</span></td>
+              <td><span class="sim-tag sim-acc">ACC</span></td>
+              <td class="hidden sm:table-cell text-brand-dim">22.11.2025</td>
+              <td class="hidden md:table-cell text-brand-dim">Porsche 718 Cayman GT4 Clubsport</td>
+              <td class="text-brand-silver">Fussi, Maik</td>
+            </tr>
+            <tr>
+              <td><span class="pos-badge pos-1">1</span></td>
+              <td><span class="font-medium text-brand-white">24 Stunden von Barcelona by NF2.0 - Lobby A</span></td>
+              <td><span class="sim-tag sim-gt7">GT7</span></td>
+              <td class="hidden sm:table-cell text-brand-dim">05.07.2025</td>
+              <td class="hidden md:table-cell text-brand-dim">Lamborghini Huracán GT3 '15</td>
+              <td class="text-brand-silver">Tao, Bertz, Gringo, RoadrunnerJr, Hasmann, AsHes</td>
+            </tr>
+            <tr>
+              <td><span class="pos-badge" style="color:#5A6080;">10</span></td>
+              <td><span class="font-medium text-brand-white">24 Stunden von Barcelona by NF2.0 - Lobby B</span></td>
+              <td><span class="sim-tag sim-gt7">GT7</span></td>
+              <td class="hidden sm:table-cell text-brand-dim">05.07.2025</td>
+              <td class="hidden md:table-cell text-brand-dim">McLaren 650S GT3 '15</td>
+              <td class="text-brand-silver">TaxiDriver, Marco Z., Roadrunner, PapaPaule, Omicron</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="px-6 py-3 border-t"
+           style="border-color:rgba(255,255,255,0.04); background:rgba(26,36,96,0.1);">
+        <span class="text-brand-dim text-xs">Platzhalterdaten — wird mit echten Ergebnissen aktualisiert</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ GALLERY ════════════════════════════════════ -->
+<section id="gallery" class="relative py-24"
+  style="background: radial-gradient(ellipse 60% 40% at 20% 50%, rgba(208,18,0,0.06) 0%, transparent 60%),
+                      radial-gradient(ellipse 60% 40% at 80% 40%, rgba(26,36,96,0.2) 0%, transparent 60%),
+                      #06091A;">
+
+  <div class="absolute top-0 left-0 right-0 h-px"
+       style="background: linear-gradient(90deg, transparent, rgba(208,18,0,0.4), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-12">
+      <div class="section-label mb-3">Unsere Fahrzeuge</div>
+      <h2 class="font-display font-black text-brand-white mb-3"
+          style="font-size: clamp(2.2rem,4.5vw,3.5rem); letter-spacing:-0.03em; line-height:0.95;">
+        Fahrzeug-Galerie
+      </h2>
+      <p class="text-brand-silver max-w-xl" style="line-height:1.7;">
+        Die Boliden der Endurance Division — von TCR bis GT3
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Gallery card 1 — PlayStation / GT7 -->
+      <div class="gallery-card fade-in">
+        <div class="relative aspect-[3/2]">
+          <img src="../img/endu-playstation.png"
+               alt="Lamborghini Huracán GT3 '15 — Gran Turismo 7" class="gallery-img w-full h-full object-cover" />
+          <!-- Gradient overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <!-- Color treatment -->
+          <div class="absolute inset-0" style="background: rgba(208,18,0,0.08); mix-blend-mode: multiply;"></div>
+          <!-- Caption -->
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <div class="font-display font-700 text-brand-white text-sm mb-1">Lamborghini Huracán GT3 '15</div>
+            <div class="flex items-center gap-2">
+              <span class="sim-tag sim-gt7">GT7</span>
+              <span class="text-brand-dim text-xs">24 Stunden von Barcelona by NF2.0 Events (2025)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery card 2 — iRacing -->
+      <div class="gallery-card fade-in">
+        <div class="relative aspect-[3/2]">
+          <img src="../img/endu-iracing.png"
+               alt="Audi RS3 LMS — iRacing Nürburgring" class="gallery-img w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute inset-0" style="background: rgba(208,18,0,0.08); mix-blend-mode: multiply;"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <div class="font-display font-700 text-brand-white text-sm mb-1">Audi RS 3 LMS TCR</div>
+            <div class="flex items-center gap-2">
+              <span class="sim-tag sim-iracing">iRacing</span>
+              <span class="text-brand-dim text-xs">Langstreckenmeisterschaft Grüne Hölle (2026)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery card 3 — Placeholder -->
+      <div class="gallery-card fade-in">
+        <div class="relative aspect-[3/2]">
+          <img src="../img/acc-silverstone.jpg"
+               alt="Fahrzeug" class="gallery-img w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute inset-0" style="background: rgba(208,18,0,0.08); mix-blend-mode: multiply;"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <div class="font-display font-700 text-brand-white text-sm mb-1">Porsche 718 Cayman GT4 Clubsport</div>
+            <div class="flex items-center gap-2">
+              <span class="sim-tag sim-acc">ACC</span>
+              <span class="text-brand-dim text-xs">ACC RL & SIM2REAL Charity Race auf Silverstone (2025)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery card 4 — Placeholder -->
+      <div class="gallery-card fade-in">
+        <div class="relative aspect-[3/2]">
+          <img src="../img/renault-nfs202026.jpg"
+               alt="Fahrzeug" class="gallery-img w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute inset-0" style="background: rgba(208,18,0,0.08); mix-blend-mode: multiply;"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <div class="font-display font-700 text-brand-white text-sm mb-1">Renault Sport R.S.01 GT3 '16</div>
+            <div class="flex items-center gap-2">
+              <span class="sim-tag sim-gt7">GT7</span>
+              <span class="text-brand-dim text-xs">NF2.0 Team Championship auf Mount Panorama (2026)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery card 5 — Placeholder
+      <div class="gallery-card fade-in">
+        <div class="relative aspect-[3/2]">
+          <img src="https://placehold.co/600x400/0A0D22/1A2460?text=Car+5"
+               alt="Fahrzeug" class="gallery-img w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute inset-0" style="background: rgba(208,18,0,0.08); mix-blend-mode: multiply;"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <div class="font-display font-700 text-brand-white text-sm mb-1">Fahrzeugname</div>
+            <div class="flex items-center gap-2">
+              <span class="sim-tag sim-gt7">GT7</span>
+              <span class="text-brand-dim text-xs">Event Name</span>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Gallery card 6 — Placeholder
+      <div class="gallery-card fade-in">
+        <div class="relative aspect-[3/2]">
+          <img src="https://placehold.co/600x400/0A0D22/1A2460?text=Car+6"
+               alt="Fahrzeug" class="gallery-img w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute inset-0" style="background: rgba(208,18,0,0.08); mix-blend-mode: multiply;"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <div class="font-display font-700 text-brand-white text-sm mb-1">Fahrzeugname</div>
+            <div class="flex items-center gap-2">
+              <span class="sim-tag sim-iracing">iRacing</span>
+              <span class="text-brand-dim text-xs">Event Name</span>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ FOOTER ════════════════════════════════════ -->
+<footer class="relative py-12"
+  style="background: #040614; border-top: 1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 mb-10">
+      <div class="text-center md:text-left">
+        <a href="../index.html">
+          <img src="../brand_assets/STS-Schriftzug-25-Small.png" alt="S2S" class="h-10 w-auto mb-3 mx-auto md:mx-0" />
+        </a>
+        <p class="text-brand-dim text-sm max-w-xs" style="line-height:1.6;">
+          Einmal mit Profis arbeiten.
+        </p>
+      </div>
+      <!-- Social Links -->
+      <div class="flex items-center gap-5">
+        <a href="https://www.instagram.com/sea2summitmotorsport/" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-brand-red transition-colors duration-200" aria-label="Instagram" style="transition-property: color, transform; transition-duration: 200ms; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);" onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.twitch.tv/sts_motorsport_tv" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-[#9146FF] transition-colors duration-200" aria-label="Twitch" style="transition-property: color, transform; transition-duration: 200ms; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);" onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@STSMotorsportTV/featured" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-[#FF0000] transition-colors duration-200" aria-label="YouTube" style="transition-property: color, transform; transition-duration: 200ms; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);" onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100090446014674" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-[#1877F2] transition-colors duration-200" aria-label="Facebook" style="transition-property: color, transform; transition-duration: 200ms; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);" onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3"
+         style="border-color:rgba(255,255,255,0.06);">
+      <div class="text-brand-dim text-xs">&copy; <span id="year"></span> SEA 2 SUMMIT Motorsport.</div>
+      <div class="flex items-center gap-4">
+        <a href="../impressum/" class="text-brand-dim text-xs hover:text-brand-silver transition-colors duration-200">Impressum</a>
+        <span class="text-brand-dim text-xs">|</span>
+        <a href="../datenschutzerklaerung/" class="text-brand-dim text-xs hover:text-brand-silver transition-colors duration-200">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../shared/main.js"></script>
+<script>
+// Fade-in on scroll for elements not covered by shared/main.js
+(function() {
+  const els = document.querySelectorAll('.fade-in');
+  if (!els.length) return;
+  const obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+</body>
+</html>
