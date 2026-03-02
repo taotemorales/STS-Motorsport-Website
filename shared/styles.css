@@ -12,7 +12,7 @@
 
 * { box-sizing: border-box; }
 html { font-family: 'Barlow', sans-serif; }
-@media (min-width: 1024px) { html { font-size: 115%; } }
+@media (min-width: 1024px) { html { font-size: 150%; } }
 
 /* ── Grain overlay ── */
 .grain::after {
