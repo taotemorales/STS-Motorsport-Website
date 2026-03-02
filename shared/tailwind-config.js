@@ -33,6 +33,9 @@
           'card':      '0 4px 24px -4px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3)',
           'card-hover':'0 12px 40px -8px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.4)',
         },
+        maxWidth: {
+          'site': '100rem', // 1600px — main layout container
+        },
         backgroundImage: {
           'noise': "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E\")",
         }
