@@ -164,6 +164,10 @@
     /* Points */
     .pts { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.05rem; color: #F0F2FF; }
 
+    /* NF2.0 watermark responsive */
+    .nf20-wm { height: 36px; width: auto; }
+    @media (min-width: 768px) { .nf20-wm { height: 72px; } }
+
     /* Gustl float animation */
     @keyframes gustl-float {
       0%, 100% { transform: translateY(0); }
@@ -492,9 +496,9 @@
             <div class="flex items-center gap-4">
               <div class="flex items-center gap-2">
                 <div class="w-6 h-6 rounded flex items-center justify-center" style="background:rgba(40,160,50,0.15); border:1px solid rgba(40,160,50,0.25);">
-                  <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="#4aaf5a" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="12" rx="1.5" stroke="#4aaf5a" stroke-width="1.5"/><path d="M1 7h14" stroke="#4aaf5a" stroke-width="1.5"/><path d="M5 1v3M11 1v3" stroke="#4aaf5a" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </div>
-                <span class="text-brand-silver text-xs font-medium">Nordschleife</span>
+                <span class="text-brand-silver text-xs font-medium">10 Läufe</span>
               </div>
               <div class="flex items-center gap-2">
                 <div class="w-6 h-6 rounded flex items-center justify-center" style="background:rgba(40,160,50,0.15); border:1px solid rgba(40,160,50,0.25);">
@@ -542,8 +546,8 @@
         <!-- Accent bar left (GT7 gold) -->
         <div class="absolute left-0 top-0 bottom-0 w-1 rounded-r" style="background: linear-gradient(180deg, #c8a020, #E0B830);"></div>
         <!-- NF2.0 watermark -->
-        <div class="absolute right-0 bottom-0 pointer-events-none" style="opacity: 0.4;">
-          <img src="../img/nf20.png" alt="" style="height: 72px; width: auto;" />
+        <div class="absolute pointer-events-none" style="opacity: 0.4; right: 10px; bottom: 10px;">
+          <img src="../img/nf20.png" alt="" class="nf20-wm" />
         </div>
         <!-- Subtle gold glow -->
         <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 60% at 80% 80%, rgba(212,160,23,0.04) 0%, transparent 70%);"></div>
@@ -556,7 +560,7 @@
               </div>
               <span class="sim-tag sim-gt7 flex-shrink-0">GT7</span>
             </div>
-            <div class="text-brand-dim text-xs font-medium tracking-wide uppercase">by Nürburgring Fascination 2.0</div>
+            <div class="text-brand-dim text-xs font-medium tracking-wide uppercase">by Nürburgring Fascination 2.0 · Season 2026</div>
           </div>
           <p class="text-brand-silver text-sm mb-5" style="line-height:1.7;">
             Langstrecken-Teamwertung auf Gran Turismo 7 — mehrere Fahrer, ein gemeinsames Ziel. Punkte werden über die gesamte Saison gesammelt.
@@ -568,7 +572,7 @@
               </div>
               <span class="text-brand-dim text-xs">Teamwertung</span>
             </div>
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3" style="margin-top: 10px;">
               <a href="https://nf20.de/" target="_blank" rel="noopener noreferrer"
                  class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="NF2.0 Website"
                  style="transition-property: color, transform; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);"
@@ -596,8 +600,8 @@
         <!-- Accent bar left (GT7 gold) -->
         <div class="absolute left-0 top-0 bottom-0 w-1 rounded-r" style="background: linear-gradient(180deg, #c8a020, #E0B830);"></div>
         <!-- NF2.0 watermark -->
-        <div class="absolute right-0 bottom-0 pointer-events-none" style="opacity: 0.4;">
-          <img src="../img/nf20.png" alt="" style="height: 72px; width: auto;" />
+        <div class="absolute pointer-events-none" style="opacity: 0.4; right: 10px; bottom: 10px;">
+          <img src="../img/nf20.png" alt="" class="nf20-wm" />
         </div>
         <!-- Subtle gold glow -->
         <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 60% at 80% 80%, rgba(212,160,23,0.04) 0%, transparent 70%);"></div>
@@ -610,7 +614,7 @@
               </div>
               <span class="sim-tag sim-gt7 flex-shrink-0">GT7</span>
             </div>
-            <div class="text-brand-dim text-xs font-medium tracking-wide uppercase">by Nürburgring Fascination 2.0</div>
+            <div class="text-brand-dim text-xs font-medium tracking-wide uppercase">by Nürburgring Fascination 2.0 · Season 2026</div>
           </div>
           <p class="text-brand-silver text-sm mb-5" style="line-height:1.7;">
             Die Einzelwertung der NF2.0-Saison auf Gran Turismo 7 — jeder Fahrer sammelt seine eigenen Punkte über alle Läufe der Meisterschaft.
@@ -622,7 +626,7 @@
               </div>
               <span class="text-brand-dim text-xs">Einzelwertung</span>
             </div>
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3" style="margin-top: 10px;">
               <a href="https://nf20.de/" target="_blank" rel="noopener noreferrer"
                  class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="NF2.0 Website"
                  style="transition-property: color, transform; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);"
