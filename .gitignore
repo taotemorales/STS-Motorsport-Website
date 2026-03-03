@@ -1,6 +1,7 @@
 # Dev tooling
 .claude/
 CLAUDE.md
+active-drivers.md
 serve.mjs
 screenshot.mjs
 temporary screenshots/
