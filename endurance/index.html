@@ -177,6 +177,7 @@
   </style>
 </head>
 <body class="bg-brand-ink text-brand-white" style="font-family:'Barlow',sans-serif;">
+<a href="#main-content" class="skip-link">Zum Inhalt springen</a>
 
 <!-- ══════════════════════════════════ NAV ══════════════════════════════════════ -->
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 nav-blur"
@@ -226,28 +227,28 @@
   <div id="mobile-menu" class="hidden md:hidden"
        style="background: rgba(6,9,26,0.96); border-top: 1px solid rgba(255,255,255,0.06);">
     <div class="max-w-site mx-auto px-6 py-4 flex flex-col gap-4">
-      <a href="../index.html"              class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Home</a>
+      <a href="../index.html"              class="nav-link text-brand-silver font-medium py-2">Home</a>
       <div data-mobile-dropdown>
-        <button class="nav-link text-brand-silver font-medium py-2 w-full text-left inline-flex items-center gap-1" onclick="toggleMobileDropdown(this)">
+        <button class="nav-link text-brand-silver font-medium py-2 w-full text-left inline-flex items-center gap-1" aria-expanded="false">
           Ligen
           <svg class="w-3.5 h-3.5 transition-transform duration-200 dropdown-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
         </button>
         <div class="mobile-sub hidden pl-4 flex flex-col gap-2 mt-1">
-          <a href="../monday-night-trophy/" class="nav-link text-brand-silver font-medium py-1.5 text-sm" onclick="closeMobile()">MNT</a>
-          <a href="../tcr-series/"          class="nav-link text-brand-silver font-medium py-1.5 text-sm" onclick="closeMobile()">TCR</a>
-          <a href="../cup-series/"          class="nav-link text-brand-silver font-medium py-1.5 text-sm" onclick="closeMobile()">CUP</a>
+          <a href="../monday-night-trophy/" class="nav-link text-brand-silver font-medium py-1.5 text-sm">MNT</a>
+          <a href="../tcr-series/"          class="nav-link text-brand-silver font-medium py-1.5 text-sm">TCR</a>
+          <a href="../cup-series/"          class="nav-link text-brand-silver font-medium py-1.5 text-sm">CUP</a>
         </div>
       </div>
-      <a href="../index.html#team"       class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Team</a>
-      <a href="../endurance/"            class="nav-link text-brand-white font-medium py-2" onclick="closeMobile()">Endurance</a>
-      <a href="../index.html#hof"        class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Hall of Fame</a>
-      <a href="../index.html#sponsoren"  class="nav-link text-brand-silver font-medium py-2" onclick="closeMobile()">Sponsoren</a>
-      <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener" class="btn-primary px-5 py-3 rounded text-sm text-center mt-2" onclick="closeMobile()">Discord</a>
+      <a href="../index.html#team"       class="nav-link text-brand-silver font-medium py-2">Team</a>
+      <a href="../endurance/"            class="nav-link text-brand-white font-medium py-2">Endurance</a>
+      <a href="../index.html#hof"        class="nav-link text-brand-silver font-medium py-2">Hall of Fame</a>
+      <a href="../index.html#sponsoren"  class="nav-link text-brand-silver font-medium py-2">Sponsoren</a>
+      <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener" class="btn-primary px-5 py-3 rounded text-sm text-center mt-2">Discord</a>
     </div>
   </div>
 </nav>
 
-<main>
+<main id="main-content">
 
 <!-- ══════════════════════════════════ HERO ══════════════════════════════════════ -->
 <header class="relative overflow-hidden grain"
@@ -706,12 +707,12 @@
         <table class="w-full results-table" style="min-width: 640px;">
           <thead>
             <tr>
-              <th class="text-left" style="width:52px;">Pos</th>
-              <th class="text-left">Event</th>
-              <th class="text-left">Plattform</th>
-              <th class="text-left hidden sm:table-cell">Datum</th>
-              <th class="text-left hidden md:table-cell">Fahrzeug</th>
-              <th class="text-left">Fahrer</th>
+              <th scope="col" class="text-left" style="width:52px;">Pos</th>
+              <th scope="col" class="text-left">Event</th>
+              <th scope="col" class="text-left">Plattform</th>
+              <th scope="col" class="text-left hidden sm:table-cell">Datum</th>
+              <th scope="col" class="text-left hidden md:table-cell">Fahrzeug</th>
+              <th scope="col" class="text-left">Fahrer</th>
             </tr>
           </thead>
           <tbody>

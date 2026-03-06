@@ -48,9 +48,33 @@ if (menuBtn && mobileMenu) {
 window.toggleMobileDropdown = function(btn) {
   const sub = btn.nextElementSibling;
   const chevron = btn.querySelector('.dropdown-chevron');
-  sub.classList.toggle('hidden');
+  const isOpen = !sub.classList.toggle('hidden');
   chevron.classList.toggle('open');
+  btn.setAttribute('aria-expanded', isOpen);
 };
+
+// Desktop dropdown aria-expanded (CSS-driven hover/focus)
+document.querySelectorAll('[data-dropdown]').forEach(wrapper => {
+  const btn = wrapper.querySelector('button[aria-haspopup]');
+  if (!btn) return;
+  wrapper.addEventListener('mouseenter', () => btn.setAttribute('aria-expanded', 'true'));
+  wrapper.addEventListener('mouseleave', () => btn.setAttribute('aria-expanded', 'false'));
+  wrapper.addEventListener('focusin',    () => btn.setAttribute('aria-expanded', 'true'));
+  wrapper.addEventListener('focusout', e => {
+    if (!wrapper.contains(e.relatedTarget)) btn.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// Close mobile menu on nav link click (replaces inline onclick="closeMobile()")
+if (mobileMenu) {
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => { if (window.closeMobile) window.closeMobile(); });
+  });
+  // Mobile dropdown toggle (replaces inline onclick="toggleMobileDropdown(this)")
+  mobileMenu.querySelectorAll('[data-mobile-dropdown] > button').forEach(btn => {
+    btn.addEventListener('click', () => window.toggleMobileDropdown(btn));
+  });
+}
 
 // Scroll-reveal
 const revealObserver = new IntersectionObserver((entries) => {

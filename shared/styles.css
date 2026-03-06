@@ -14,6 +14,28 @@
 html { font-family: 'Barlow', sans-serif; }
 @media (min-width: 1024px) { html { font-size: 150%; } }
 
+/* ── Skip-to-content link ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--accent, #D01200);
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 0 0 6px 6px;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #F0F2FF;
+  outline-offset: 2px;
+}
+
 /* ── Grain overlay ── */
 .grain::after {
   content: '';
@@ -197,6 +219,38 @@ html { font-family: 'Barlow', sans-serif; }
 .hero-delay-8  { animation-delay: 1.05s; }
 .hero-delay-9  { animation-delay: 1.15s; }
 .hero-delay-10 { animation-delay: 1.25s; }
+
+/* ── Twitch button ── */
+.twitch-btn {
+  background: rgba(100,65,165,0.2);
+  border: 1px solid rgba(100,65,165,0.4);
+  color: #C4A8F5;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.twitch-btn:hover {
+  background: rgba(100,65,165,0.4);
+  border-color: rgba(100,65,165,0.7);
+  transform: translateY(-1px);
+}
+.twitch-btn:focus-visible { outline: 2px solid #6441A5; outline-offset: 3px; }
+
+/* ── Utility classes (extracted from repeated inline styles) ── */
+.text-body { font-size: 1.05rem; letter-spacing: -0.01em; }
+.lh-15 { line-height: 1.5; }
+.lh-16 { line-height: 1.6; }
+.lh-17 { line-height: 1.7; }
+.ls-wide { letter-spacing: 0.03em; }
+.border-subtle { border-color: rgba(255,255,255,0.06); }
+.bg-surface { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
+.icon-inline { display: inline-block; vertical-align: middle; }
 
 /* ── Checkered flag pattern ── */
 .checkered {

@@ -15,7 +15,7 @@
             ink:      '#06091A',
             white:    '#F0F2FF',
             silver:   '#9BA3C0',
-            dim:      '#707898',
+            dim:      '#7D85A8',
           }
         },
         fontFamily: {
