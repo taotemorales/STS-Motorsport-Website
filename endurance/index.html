@@ -15,7 +15,10 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sea2summit-motorsport.com/endurance/" />
   <meta property="og:image" content="https://sea2summit-motorsport.com/web-app-manifest-512x512.png" />
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
   <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="SEA 2 SUMMIT Motorsport">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Endurance Division — SEA 2 SUMMIT Motorsport" />
@@ -28,7 +31,7 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../shared/tailwind-output.css" />
   <link rel="stylesheet" href="../shared/styles.css" />
   <style>:root { --accent: #D01200; --accent-light: #FF4422; --accent-rgb: 208, 18, 0; }</style>
@@ -296,7 +299,9 @@
 
       <!-- Right: Car image with left-fade blend -->
       <div class="relative fade-in rounded-xl overflow-hidden" style="min-height: 340px;">
-        <img src="../img/endu-playstation.png"
+        <img src="../img/endu-playstation.webp"
+             srcset="../img/endu-playstation-480w.webp 480w, ../img/endu-playstation-960w.webp 960w, ../img/endu-playstation.webp 1536w"
+             sizes="(max-width: 768px) 100vw, 50vw"
              alt="Lamborghini Huracán GT3 — Gran Turismo 7"
              class="w-full h-full object-cover absolute inset-0" loading="lazy" />
         <!-- Top-to-bottom fade (hides rounded corner artifact) -->
@@ -335,12 +340,11 @@
     </div>
 
     <!-- ── LMGH Featured Card (full width) ── -->
-    <div class="rounded-xl overflow-hidden fade-in mb-4 relative"
+    <div class="rounded-xl overflow-hidden fade-in mb-4 relative card-lift"
          style="background: linear-gradient(135deg, #0a1a0f 0%, #0F1530 40%, #0A0D22 100%);
                 border: 1px solid rgba(255,255,255,0.06);
-                transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease, border-color 0.25s ease;"
-         onmouseenter="this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 48px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(40,160,50,0.2)';this.style.borderColor='rgba(40,160,50,0.2)';"
-         onmouseleave="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(255,255,255,0.06)';">
+                --hover-shadow: 0 16px 48px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(40,160,50,0.2);
+                --hover-border: rgba(40,160,50,0.2);">
       <!-- Green accent bar left -->
       <div class="absolute left-0 top-0 bottom-0 w-1 rounded-r" style="background: linear-gradient(180deg, #2d8a3e, #4aaf5a);"></div>
       <!-- Subtle green radial glow -->
@@ -351,7 +355,7 @@
       <div class="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-10 p-6 md:p-8">
         <!-- Logo -->
         <div class="flex-shrink-0">
-          <img src="../img/LMGH_2026.png" alt="LMGH 2026 — Landesmeisterschaft Grüne Hölle"
+          <img src="../img/LMGH_2026.webp" alt="LMGH 2026 — Landesmeisterschaft Grüne Hölle"
                style="height: 140px; width: auto; filter: drop-shadow(0 4px 24px rgba(40,160,50,0.2));" loading="lazy" />
         </div>
 
@@ -396,13 +400,13 @@
               <a href="https://www.youtube.com/@LMGH_Official/streams" target="_blank" rel="noopener noreferrer"
                  class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="LMGH YouTube"
                  style="transition-property: color, transform; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);"
-                 onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+                >
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               </a>
               <a href="https://www.instagram.com/lmgh_official" target="_blank" rel="noopener noreferrer"
                  class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="LMGH Instagram"
                  style="transition-property: color, transform; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);"
-                 onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+                >
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
               </a>
             </div>
@@ -415,17 +419,16 @@
     <div class="grid gap-4 sm:grid-cols-2">
 
       <!-- NF2.0 Team Championship -->
-      <div class="rounded-xl overflow-hidden fade-in relative"
+      <div class="rounded-xl overflow-hidden fade-in relative card-lift"
            style="background: linear-gradient(160deg, #0F1530 0%, #0A0D22 100%);
                   border: 1px solid rgba(255,255,255,0.06);
-                  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease, border-color 0.25s ease;"
-           onmouseenter="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,160,23,0.2)';this.style.borderColor='rgba(212,160,23,0.2)';"
-           onmouseleave="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(255,255,255,0.06)';">
+                  --hover-shadow: 0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,160,23,0.2);
+                  --hover-border: rgba(212,160,23,0.2);">
         <!-- Accent bar left (GT7 gold) -->
         <div class="absolute left-0 top-0 bottom-0 w-1 rounded-r" style="background: linear-gradient(180deg, #c8a020, #E0B830);"></div>
         <!-- NF2.0 watermark -->
         <div class="absolute pointer-events-none" style="opacity: 0.4; right: 10px; bottom: 10px;">
-          <img src="../img/nf20.png" alt="" class="nf20-wm" loading="lazy" />
+          <img src="../img/nf20.webp" alt="" class="nf20-wm" loading="lazy" />
         </div>
         <!-- Subtle gold glow -->
         <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 60% at 80% 80%, rgba(212,160,23,0.04) 0%, transparent 70%);"></div>
@@ -462,13 +465,13 @@
               <a href="https://nf20.de/" target="_blank" rel="noopener noreferrer"
                  class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="NF2.0 Website"
                  style="transition-property: color, transform; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);"
-                 onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+                >
                 <svg style="width:18px;height:18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
               </a>
               <a href="https://www.instagram.com/nuerburgring_fascination2.0/" target="_blank" rel="noopener noreferrer"
                  class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="NF2.0 Instagram"
                  style="transition-property: color, transform; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);"
-                 onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+                >
                 <svg style="width:18px;height:18px;" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
               </a>
             </div>
@@ -477,17 +480,16 @@
       </div>
 
       <!-- NF2.0 Driver Championship -->
-      <div class="rounded-xl overflow-hidden fade-in relative"
+      <div class="rounded-xl overflow-hidden fade-in relative card-lift"
            style="background: linear-gradient(160deg, #0F1530 0%, #0A0D22 100%);
                   border: 1px solid rgba(255,255,255,0.06);
-                  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease, border-color 0.25s ease;"
-           onmouseenter="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,160,23,0.2)';this.style.borderColor='rgba(212,160,23,0.2)';"
-           onmouseleave="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(255,255,255,0.06)';">
+                  --hover-shadow: 0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,160,23,0.2);
+                  --hover-border: rgba(212,160,23,0.2);">
         <!-- Accent bar left (GT7 gold) -->
         <div class="absolute left-0 top-0 bottom-0 w-1 rounded-r" style="background: linear-gradient(180deg, #c8a020, #E0B830);"></div>
         <!-- NF2.0 watermark -->
         <div class="absolute pointer-events-none" style="opacity: 0.4; right: 10px; bottom: 10px;">
-          <img src="../img/nf20.png" alt="" class="nf20-wm" loading="lazy" />
+          <img src="../img/nf20.webp" alt="" class="nf20-wm" loading="lazy" />
         </div>
         <!-- Subtle gold glow -->
         <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 60% at 80% 80%, rgba(212,160,23,0.04) 0%, transparent 70%);"></div>
@@ -524,13 +526,13 @@
               <a href="https://nf20.de/" target="_blank" rel="noopener noreferrer"
                  class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="NF2.0 Website"
                  style="transition-property: color, transform; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);"
-                 onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+                >
                 <svg style="width:18px;height:18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
               </a>
               <a href="https://www.instagram.com/nuerburgring_fascination2.0/" target="_blank" rel="noopener noreferrer"
                  class="text-brand-dim hover:text-brand-silver transition-colors duration-200" aria-label="NF2.0 Instagram"
                  style="transition-property: color, transform; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);"
-                 onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+                >
                 <svg style="width:18px;height:18px;" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
               </a>
             </div>
@@ -628,7 +630,9 @@
       <!-- Gallery card 1 — PlayStation / GT7 -->
       <div class="gallery-card fade-in">
         <div class="relative aspect-[3/2]">
-          <img src="../img/endu-playstation.png"
+          <img src="../img/endu-playstation.webp"
+               srcset="../img/endu-playstation-480w.webp 480w, ../img/endu-playstation-960w.webp 960w, ../img/endu-playstation.webp 1536w"
+               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                alt="Lamborghini Huracán GT3 '15 — Gran Turismo 7" class="gallery-img w-full h-full object-cover" loading="lazy" />
           <!-- Gradient overlay -->
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
@@ -648,7 +652,9 @@
       <!-- Gallery card 2 — iRacing -->
       <div class="gallery-card fade-in">
         <div class="relative aspect-[3/2]">
-          <img src="../img/endu-iracing.png"
+          <img src="../img/endu-iracing.webp"
+               srcset="../img/endu-iracing-480w.webp 480w, ../img/endu-iracing-960w.webp 960w, ../img/endu-iracing.webp 1920w"
+               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                alt="Audi RS3 LMS — iRacing Nürburgring" class="gallery-img w-full h-full object-cover" loading="lazy" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
           <div class="absolute inset-0" style="background: rgba(208,18,0,0.08); mix-blend-mode: multiply;"></div>
@@ -665,7 +671,9 @@
       <!-- Gallery card 3 — Placeholder -->
       <div class="gallery-card fade-in">
         <div class="relative aspect-[3/2]">
-          <img src="../img/acc-silverstone.jpg"
+          <img src="../img/acc-silverstone.webp"
+               srcset="../img/acc-silverstone-480w.webp 480w, ../img/acc-silverstone-960w.webp 960w, ../img/acc-silverstone.webp 2852w"
+               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                alt="Fahrzeug" class="gallery-img w-full h-full object-cover" loading="lazy" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
           <div class="absolute inset-0" style="background: rgba(208,18,0,0.08); mix-blend-mode: multiply;"></div>
@@ -682,7 +690,9 @@
       <!-- Gallery card 4 — Placeholder -->
       <div class="gallery-card fade-in">
         <div class="relative aspect-[3/2]">
-          <img src="../img/renault-nfs202026.jpg"
+          <img src="../img/renault-nfs202026.webp"
+               srcset="../img/renault-nfs202026-480w.webp 480w, ../img/renault-nfs202026-960w.webp 960w, ../img/renault-nfs202026.webp 3840w"
+               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                alt="Fahrzeug" class="gallery-img w-full h-full object-cover" loading="lazy" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
           <div class="absolute inset-0" style="background: rgba(208,18,0,0.08); mix-blend-mode: multiply;"></div>
@@ -751,16 +761,16 @@
       </div>
       <!-- Social Links -->
       <div class="flex items-center gap-5">
-        <a href="https://www.instagram.com/sea2summitmotorsport/" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-brand-red transition-colors duration-200" aria-label="Instagram" style="transition-property: color, transform; transition-duration: 200ms; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);" onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+        <a href="https://www.instagram.com/sea2summitmotorsport/" target="_blank" rel="noopener noreferrer" class="social-icon text-brand-dim hover:text-brand-red" aria-label="Instagram">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
         </a>
-        <a href="https://www.twitch.tv/sts_motorsport_tv" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-[#9146FF] transition-colors duration-200" aria-label="Twitch" style="transition-property: color, transform; transition-duration: 200ms; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);" onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+        <a href="https://www.twitch.tv/sts_motorsport_tv" target="_blank" rel="noopener noreferrer" class="social-icon text-brand-dim hover:text-[#9146FF]" aria-label="Twitch">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
         </a>
-        <a href="https://www.youtube.com/@STSMotorsportTV/featured" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-[#FF0000] transition-colors duration-200" aria-label="YouTube" style="transition-property: color, transform; transition-duration: 200ms; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);" onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+        <a href="https://www.youtube.com/@STSMotorsportTV/featured" target="_blank" rel="noopener noreferrer" class="social-icon text-brand-dim hover:text-[#FF0000]" aria-label="YouTube">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         </a>
-        <a href="https://www.facebook.com/profile.php?id=100090446014674" target="_blank" rel="noopener noreferrer" class="text-brand-dim hover:text-[#1877F2] transition-colors duration-200" aria-label="Facebook" style="transition-property: color, transform; transition-duration: 200ms; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);" onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform='scale(1)'">
+        <a href="https://www.facebook.com/profile.php?id=100090446014674" target="_blank" rel="noopener noreferrer" class="social-icon text-brand-dim hover:text-[#1877F2]" aria-label="Facebook">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
       </div>
@@ -779,18 +789,5 @@
 
 <script src="../shared/standings.js"></script>
 <script src="../shared/main.js"></script>
-<script>
-// Fade-in on scroll for elements not covered by shared/main.js
-(function() {
-  const els = document.querySelectorAll('.fade-in');
-  if (!els.length) return;
-  const obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.15 });
-  els.forEach(function(el) { obs.observe(el); });
-})();
-</script>
 </body>
 </html>

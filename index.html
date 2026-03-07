@@ -14,7 +14,10 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sea2summit-motorsport.com/">
   <meta property="og:image" content="https://sea2summit-motorsport.com/web-app-manifest-512x512.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
   <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="SEA 2 SUMMIT Motorsport">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SEA 2 SUMMIT Motorsport">
@@ -196,6 +199,24 @@
       padding-top: 8px;
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsTeam",
+    "name": "SEA 2 SUMMIT Motorsport",
+    "alternateName": "S2S Motorsport",
+    "url": "https://sea2summit-motorsport.com",
+    "logo": "https://sea2summit-motorsport.com/brand_assets/STS-Schriftzug-25-Small.png",
+    "description": "Sim-Racing-Team aus Deutschland, Österreich und der Schweiz. Unterwegs in Gran Turismo 7, ACC und iRacing.",
+    "sport": "Sim Racing",
+    "sameAs": [
+      "https://www.instagram.com/sea2summitmotorsport/",
+      "https://www.twitch.tv/sts_motorsport_tv",
+      "https://www.youtube.com/@STSMotorsportTV/featured",
+      "https://www.facebook.com/profile.php?id=100090446014674"
+    ]
+  }
+  </script>
 </head>
 <body class="bg-brand-ink text-brand-white" style="font-family:'Barlow',sans-serif;">
 <!-- ═══════════════════════════════════ NAV ═══════════════════════════════════ -->
@@ -396,12 +417,9 @@
 
           <div class="mt-auto pt-4">
             <a href="monday-night-trophy/"
-               class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-display font-700 tracking-wide uppercase
-                      transition-colors duration-200"
+               class="series-link-btn flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-display font-700 tracking-wide uppercase"
                style="background:rgba(208,18,0,0.1); border:1px solid rgba(208,18,0,0.25); color:#FF6B55;
-                      letter-spacing:0.06em;"
-               onmouseover="this.style.background='rgba(208,18,0,0.2)'; this.style.borderColor='rgba(208,18,0,0.45)';"
-               onmouseout="this.style.background='rgba(208,18,0,0.1)'; this.style.borderColor='rgba(208,18,0,0.25)';">
+                      letter-spacing:0.06em; --btn-bg-hover:rgba(208,18,0,0.2); --btn-border-hover:rgba(208,18,0,0.45);">
               Zur Liga &rarr;
             </a>
           </div>
@@ -458,12 +476,9 @@
 
           <div class="mt-auto pt-4">
             <a href="tcr-series/"
-               class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-display font-700 tracking-wide uppercase
-                      transition-colors duration-200"
+               class="series-link-btn flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-display font-700 tracking-wide uppercase"
                style="background:rgba(42,143,189,0.1); border:1px solid rgba(42,143,189,0.25); color:#5BC0EB;
-                      letter-spacing:0.06em;"
-               onmouseover="this.style.background='rgba(42,143,189,0.2)'; this.style.borderColor='rgba(42,143,189,0.45)';"
-               onmouseout="this.style.background='rgba(42,143,189,0.1)'; this.style.borderColor='rgba(42,143,189,0.25)';">
+                      letter-spacing:0.06em; --btn-bg-hover:rgba(42,143,189,0.2); --btn-border-hover:rgba(42,143,189,0.45);">
               Zur Liga &rarr;
             </a>
           </div>
@@ -521,12 +536,9 @@
 
           <div class="mt-auto pt-4">
             <a href="cup-series/"
-               class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-display font-700 tracking-wide uppercase
-                      transition-colors duration-200"
+               class="series-link-btn flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-display font-700 tracking-wide uppercase"
                style="background:rgba(46,173,107,0.1); border:1px solid rgba(46,173,107,0.25); color:#5CE0A0;
-                      letter-spacing:0.06em;"
-               onmouseover="this.style.background='rgba(46,173,107,0.2)'; this.style.borderColor='rgba(46,173,107,0.45)';"
-               onmouseout="this.style.background='rgba(46,173,107,0.1)'; this.style.borderColor='rgba(46,173,107,0.25)';">
+                      letter-spacing:0.06em; --btn-bg-hover:rgba(46,173,107,0.2); --btn-border-hover:rgba(46,173,107,0.45);">
               Zur Liga &rarr;
             </a>
           </div>
@@ -537,12 +549,9 @@
     </div><!-- /grid -->
 
     <!-- Endurance Division banner -->
-    <a href="endurance/" class="mt-8 rounded-xl overflow-hidden relative block group"
+    <a href="endurance/" class="mt-8 rounded-xl overflow-hidden relative block group endu-banner-hover"
        style="background: linear-gradient(135deg, #0F1530 0%, #0A0D22 100%);
-              border: 1px solid rgba(208,18,0,0.2);
-              transition: border-color 0.25s ease, box-shadow 0.25s ease;"
-       onmouseenter="this.style.borderColor='rgba(208,18,0,0.4)'; this.style.boxShadow='0 12px 40px -8px rgba(208,18,0,0.15)';"
-       onmouseleave="this.style.borderColor='rgba(208,18,0,0.2)'; this.style.boxShadow='none';">
+              border: 1px solid rgba(208,18,0,0.2);">
       <div class="absolute inset-0 stripe"></div>
       <div class="relative flex flex-col sm:flex-row items-center gap-6 p-6 sm:p-8">
         <img src="brand_assets/STS-Endu-Gustl-Groß-Print.png"
@@ -603,7 +612,7 @@
           <div class="p-5">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-lg" style="letter-spacing:-0.01em;">Søren Witt</h4>
-              <span class="text-brand-dim text-xs">🇦🇹</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/at.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
               <span class="text-brand-dim text-xs italic ls-wide">« Tao »</span>
             </div>
             <div class="flex flex-wrap gap-1.5 mb-3">
@@ -638,7 +647,7 @@
           <div class="p-5">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-lg" style="letter-spacing:-0.01em;">David Lindemann</h4>
-              <span class="text-brand-dim text-xs">🇩🇪</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/de.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
               <span class="text-brand-dim text-xs italic ls-wide">« TaxiDriver »</span>
             </div>
             <div class="flex flex-wrap gap-1.5 mb-3">
@@ -680,7 +689,7 @@
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">Marco Z. (Boomax_Brubaker)</h4>
-              <span class="text-brand-dim text-xs">🇩🇪</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/de.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
               <span class="role-tag px-1.5 py-0.5 rounded">TCR Ligaleitung</span>
@@ -711,7 +720,7 @@
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">bertz</h4>
-              <span class="text-brand-dim text-xs">🇩🇪</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/de.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
               <span class="role-tag px-1.5 py-0.5 rounded">MNT Ligaleitung</span>
@@ -743,7 +752,7 @@
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">AsHes</h4>
-              <span class="text-brand-dim text-xs">🇩🇪</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/de.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
               <span class="role-tag px-1.5 py-0.5 rounded">MNT Ligaleitung</span>
@@ -766,14 +775,14 @@
         <!-- Russell -->
         <div class="portrait-card rounded-xl overflow-hidden">
           <div class="relative overflow-hidden">
-            <img src="img/russell.png" alt="Russell"
+            <img src="img/russell.webp" alt="Russell"
                  class="portrait-img w-full h-full object-cover" loading="lazy" />
             <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D22] via-[#0A0D22]/30 to-transparent"></div>
           </div>
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">Horst Pramhas</h4>
-              <span class="text-brand-dim text-xs">🇦🇹</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/at.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
               <span class="text-brand-dim text-xs italic ls-wide">« Russell »</span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
@@ -803,7 +812,7 @@
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">Philipp Spielbusch</h4>
-              <span class="text-brand-dim text-xs">🇩🇪</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/de.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
               <span class="text-brand-dim text-xs italic ls-wide">« Pille »</span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
@@ -835,7 +844,7 @@
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">Maik Schmitz</h4>
-              <span class="text-brand-dim text-xs">🇩🇪</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/de.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
               <span class="text-brand-dim text-xs italic ls-wide">« DearUnkwn »</span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
@@ -867,7 +876,7 @@
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">Fussi</h4>
-              <span class="text-brand-dim text-xs">🇨🇭</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/ch.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
               <span class="role-tag px-1.5 py-0.5 rounded">ACC Lead</span>
@@ -906,7 +915,7 @@
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">Sadoko</h4>
-              <span class="text-brand-dim text-xs">🇩🇪</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/de.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
               <span class="role-tag px-1.5 py-0.5 rounded">Fahrer</span>
@@ -937,7 +946,7 @@
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">Matrikas</h4>
-              <span class="text-brand-dim text-xs">🇨🇭</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/ch.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
               <span class="role-tag px-1.5 py-0.5 rounded">Fahrer</span>
@@ -967,7 +976,7 @@
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">Omicron</h4>
-              <span class="text-brand-dim text-xs">🇩🇪</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/de.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
               <span class="role-tag px-1.5 py-0.5 rounded">Fahrer</span>
@@ -996,7 +1005,7 @@
           <div class="p-4">
             <div class="flex items-center gap-2 mb-1">
               <h4 class="font-display font-800 text-brand-white text-body">AnderTheker</h4>
-              <span class="text-brand-dim text-xs">🇩🇪</span>
+              <span class="text-brand-dim text-xs"><img src="https://flagcdn.com/20x15/de.webp" width="20" height="15" alt="" class="inline-block align-middle" style="border-radius:2px;"></span>
             </div>
             <div class="flex flex-wrap gap-1 mb-2">
               <span class="role-tag px-1.5 py-0.5 rounded">Fahrer</span>

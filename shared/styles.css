@@ -242,6 +242,38 @@ html { font-family: 'Barlow', sans-serif; }
 }
 .twitch-btn:focus-visible { outline: 2px solid #6441A5; outline-offset: 3px; }
 
+/* ── Card lift hover (uses CSS vars --hover-shadow, --hover-border) ── */
+.card-lift {
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--hover-shadow);
+  border-color: var(--hover-border);
+}
+
+/* ── Series link button hover (uses CSS vars --btn-bg-hover, --btn-border-hover) ── */
+.series-link-btn {
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.series-link-btn:hover {
+  background: var(--btn-bg-hover) !important;
+  border-color: var(--btn-border-hover) !important;
+}
+.series-link-btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ── Endurance banner hover ── */
+.endu-banner-hover {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.endu-banner-hover:hover {
+  border-color: rgba(208,18,0,0.4) !important;
+  box-shadow: 0 12px 40px -8px rgba(208,18,0,0.15);
+}
+
 /* ── Utility classes (extracted from repeated inline styles) ── */
 .text-body { font-size: 1.05rem; letter-spacing: -0.01em; }
 .lh-15 { line-height: 1.5; }

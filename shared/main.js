@@ -94,3 +94,17 @@ document.querySelectorAll('.card, .member-card, .portrait-card, .sponsor-card, .
 document.querySelectorAll('.reveal-stagger-container').forEach(container => {
   container.classList.add('reveal-stagger');
 });
+
+// Fade-in on scroll (series pages)
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      fadeObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-in').forEach(el => {
+  fadeObserver.observe(el);
+});
