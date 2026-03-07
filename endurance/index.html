@@ -29,49 +29,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="../shared/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../shared/tailwind-output.css" />
   <link rel="stylesheet" href="../shared/styles.css" />
   <style>:root { --accent: #D01200; --accent-light: #FF4422; --accent-rgb: 208, 18, 0; }</style>
   <style>
-    /* ── Endurance-specific ── */
-
-    .series-title { font-family: 'Outfit', 'Barlow Condensed', sans-serif; }
-
-    /* Results table */
-    .results-table thead tr th {
-      background: rgba(26,36,96,0.3);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      color: #5A6080;
-      padding: 12px 16px;
-    }
-    .results-table tbody tr td {
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      font-size: 0.9rem;
-      color: #9BA3C0;
-      transition: background 0.15s ease;
-    }
-    .results-table tbody tr:hover td { background: rgba(255,255,255,0.03); }
-    .results-table td,
-    .pos-badge { font-variant-numeric: tabular-nums; }
-
-    /* POS badge */
-    .pos-badge {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 1rem;
-      min-width: 28px;
-      text-align: center;
-    }
-    .pos-1 { color: #E8B420; }
-    .pos-2 { color: #9BA3C0; }
-    .pos-3 { color: #C0824A; }
+    /* ── Endurance-specific (shared series styles in shared/styles.css) ── */
 
     /* Platform sim tags */
     .sim-tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
@@ -86,16 +48,6 @@
     .sim-acc     { background: rgba(46,173,107,0.15); color: #3DC882; border: 1px solid rgba(46,173,107,0.28); }
     .sim-lmu     { background: rgba(210,80,30,0.15);  color: #E07840; border: 1px solid rgba(210,80,30,0.28); }
 
-    /* Grain */
-    .grain::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1;
-    }
-
     /* Info card */
     .info-card {
       background: linear-gradient(160deg, #0F1530 0%, #0A0D22 100%);
@@ -105,8 +57,8 @@
     }
     .info-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(208,18,0,0.15);
-      border-color: rgba(208,18,0,0.15);
+      box-shadow: 0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(var(--accent-rgb),0.15);
+      border-color: rgba(var(--accent-rgb),0.15);
     }
 
     /* Series card */
@@ -123,13 +75,13 @@
       position: absolute;
       left: 0; top: 0; bottom: 0;
       width: 3px;
-      background: linear-gradient(180deg, #D01200, #FF4422);
+      background: linear-gradient(180deg, var(--accent), var(--accent-light));
       border-radius: 0 2px 2px 0;
     }
     .series-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(208,18,0,0.2);
-      border-color: rgba(208,18,0,0.2);
+      box-shadow: 0 12px 40px -8px rgba(0,0,0,0.7), 0 0 0 1px rgba(var(--accent-rgb),0.2);
+      border-color: rgba(var(--accent-rgb),0.2);
     }
 
     /* Gallery card */
@@ -143,8 +95,8 @@
     }
     .gallery-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 48px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(208,18,0,0.2);
-      border-color: rgba(208,18,0,0.2);
+      box-shadow: 0 16px 48px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(var(--accent-rgb),0.2);
+      border-color: rgba(var(--accent-rgb),0.2);
     }
     .gallery-card:hover .gallery-img {
       transform: scale(1.05);
@@ -152,17 +104,6 @@
     .gallery-img {
       transition: transform 0.4s cubic-bezier(0.34,1.2,0.64,1);
     }
-
-    /* Fade-in on scroll */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.34,1.2,0.64,1);
-    }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    /* Points */
-    .pts { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.05rem; color: #F0F2FF; }
 
     /* NF2.0 watermark responsive */
     .nf20-wm { height: 36px; width: auto; }
@@ -177,76 +118,10 @@
   </style>
 </head>
 <body class="bg-brand-ink text-brand-white" style="font-family:'Barlow',sans-serif;">
-<a href="#main-content" class="skip-link">Zum Inhalt springen</a>
-
 <!-- ══════════════════════════════════ NAV ══════════════════════════════════════ -->
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 nav-blur"
-     style="background: rgba(6,9,26,0.82); border-bottom: 1px solid rgba(255,255,255,0.06);">
-  <div class="max-w-site mx-auto px-6 flex items-center justify-between h-16">
-    <a href="../index.html" class="flex items-center gap-3 group" aria-label="SEA 2 SUMMIT Motorsport Home">
-      <img src="../brand_assets/logo-cropped.png" alt="S2S Logo"
-           class="h-10 w-auto drop-shadow-lg transition-transform duration-200 group-hover:scale-105" />
-    </a>
-
-    <div class="hidden md:flex items-center gap-8">
-      <a href="../index.html"              class="nav-link text-brand-silver text-sm font-medium">Home</a>
-      <div class="relative" data-dropdown>
-        <button class="nav-link text-brand-silver text-sm font-medium inline-flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
-          Ligen
-          <svg class="w-3.5 h-3.5 transition-transform duration-200 dropdown-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div class="dropdown-panel absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible transition-all duration-200" style="min-width:160px;">
-          <div class="rounded-lg overflow-hidden py-2 px-1" style="background:rgba(6,9,26,0.96); border:1px solid rgba(255,255,255,0.08); box-shadow:0 8px 32px rgba(0,0,0,0.5);">
-            <a href="../monday-night-trophy/" class="dropdown-item block px-4 py-2 text-sm text-brand-silver rounded-md transition-colors duration-150">MNT</a>
-            <a href="../tcr-series/"          class="dropdown-item block px-4 py-2 text-sm text-brand-silver rounded-md transition-colors duration-150">TCR</a>
-            <a href="../cup-series/"          class="dropdown-item block px-4 py-2 text-sm text-brand-silver rounded-md transition-colors duration-150">CUP</a>
-          </div>
-        </div>
-      </div>
-      <a href="../index.html#team"       class="nav-link text-brand-silver text-sm font-medium">Team</a>
-      <a href="../endurance/"            class="nav-link text-brand-white text-sm font-medium">Endurance</a>
-      <a href="../index.html#hof"        class="nav-link text-brand-silver text-sm font-medium">Hall of Fame</a>
-      <a href="../index.html#sponsoren"  class="nav-link text-brand-silver text-sm font-medium">Sponsoren</a>
-    </div>
-
-    <div class="flex items-center gap-4">
-      <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener"
-         class="hidden md:inline-flex items-center gap-2 btn-primary px-5 py-2 rounded text-sm">
-        Discord
-      </a>
-      <button id="menu-btn" aria-label="Menü öffnen" aria-expanded="false"
-              class="md:hidden flex flex-col gap-1.5 p-2 rounded
-                     focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-red">
-        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-transform duration-200 origin-center"></span>
-        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-opacity duration-200"></span>
-        <span class="menu-bar block w-5 h-0.5 bg-brand-white transition-transform duration-200 origin-center"></span>
-      </button>
-    </div>
-  </div>
-
-  <div id="mobile-menu" class="hidden md:hidden"
-       style="background: rgba(6,9,26,0.96); border-top: 1px solid rgba(255,255,255,0.06);">
-    <div class="max-w-site mx-auto px-6 py-4 flex flex-col gap-4">
-      <a href="../index.html"              class="nav-link text-brand-silver font-medium py-2">Home</a>
-      <div data-mobile-dropdown>
-        <button class="nav-link text-brand-silver font-medium py-2 w-full text-left inline-flex items-center gap-1" aria-expanded="false">
-          Ligen
-          <svg class="w-3.5 h-3.5 transition-transform duration-200 dropdown-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div class="mobile-sub hidden pl-4 flex flex-col gap-2 mt-1">
-          <a href="../monday-night-trophy/" class="nav-link text-brand-silver font-medium py-1.5 text-sm">MNT</a>
-          <a href="../tcr-series/"          class="nav-link text-brand-silver font-medium py-1.5 text-sm">TCR</a>
-          <a href="../cup-series/"          class="nav-link text-brand-silver font-medium py-1.5 text-sm">CUP</a>
-        </div>
-      </div>
-      <a href="../index.html#team"       class="nav-link text-brand-silver font-medium py-2">Team</a>
-      <a href="../endurance/"            class="nav-link text-brand-white font-medium py-2">Endurance</a>
-      <a href="../index.html#hof"        class="nav-link text-brand-silver font-medium py-2">Hall of Fame</a>
-      <a href="../index.html#sponsoren"  class="nav-link text-brand-silver font-medium py-2">Sponsoren</a>
-      <a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener" class="btn-primary px-5 py-3 rounded text-sm text-center mt-2">Discord</a>
-    </div>
-  </div>
-</nav>
+<div id="nav-root"></div>
+<script>window.navDepth=1;</script>
+<script src="../shared/nav.js"></script>
 
 <main id="main-content">
 
@@ -287,7 +162,7 @@
 
       <div class="section-label mb-3 hero-enter hero-delay-2">Endurance Division · Alle Plattformen</div>
 
-      <h1 class="font-display font-black leading-none mb-4 series-title hero-enter hero-delay-3"
+      <h1 class="font-display font-black leading-none mb-4 hero-enter hero-delay-3"
           style="font-size: clamp(2.8rem, 6vw, 5.5rem); letter-spacing: -0.03em; line-height: 0.9;">
         <span class="block text-brand-white">Endurance</span>
         <span class="block" style="
@@ -715,70 +590,13 @@
               <th scope="col" class="text-left">Fahrer</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><span class="pos-badge pos-2">2</span></td>
-              <td><div class="text-brand-dim" style="font-size:0.72rem; margin-bottom:2px;">NF2.0 Driver Championship</div><div class="text-brand-silver">2H Daytona · Lobby A</div></td>
-              <td><span class="sim-tag sim-gt7">GT7</span></td>
-              <td class="hidden sm:table-cell text-brand-dim">22.02.2026</td>
-              <td class="hidden md:table-cell text-brand-dim">Mazda 787B '91</td>
-              <td class="text-brand-silver">Bertz</td>
-            </tr>
-            <tr>
-              <td><span class="pos-badge pos-3">3</span></td>
-              <td><div class="text-brand-dim" style="font-size:0.72rem; margin-bottom:2px;">LMGH</div><div class="text-brand-silver">4H Nordschleife VLN · Lauf 1</div></td>
-              <td><span class="sim-tag sim-iracing">iRacing</span></td>
-              <td class="hidden sm:table-cell text-brand-dim">14.02.2026</td>
-              <td class="hidden md:table-cell text-brand-dim">Audi RS 3 LMS TCR</td>
-              <td class="text-brand-silver">Søren, Maik</td>
-            </tr>
-            <tr>
-              <td><span class="pos-badge" style="color:#5A6080;">10</span></td>
-              <td><div class="text-brand-dim" style="font-size:0.72rem; margin-bottom:2px;">NF2.0 Team Championship</div><div class="text-brand-silver">12H Bathurst · Lobby A</div></td>
-              <td><span class="sim-tag sim-gt7">GT7</span></td>
-              <td class="hidden sm:table-cell text-brand-dim">31.01.2026</td>
-              <td class="hidden md:table-cell text-brand-dim">Renault Sport R.S.01 GT3 '16</td>
-              <td class="text-brand-silver">Bertz, AsHes, TaxiDriver, Russell, Gringo</td>
-            </tr>
-            <tr>
-              <td><span class="pos-badge pos-2">2</span></td>
-              <td><div class="text-brand-dim" style="font-size:0.72rem; margin-bottom:2px;">ACC RL & SIM2REAL</div><div class="text-brand-silver">6H Silverstone Charity Race</div></td>
-              <td><span class="sim-tag sim-acc">ACC</span></td>
-              <td class="hidden sm:table-cell text-brand-dim">22.11.2025</td>
-              <td class="hidden md:table-cell text-brand-dim">Porsche 718 Cayman GT4 Clubsport</td>
-              <td class="text-brand-silver">Søren, Sadoko</td>
-            </tr>
-            <tr>
-              <td><span class="pos-badge pos-3">3</span></td>
-              <td><div class="text-brand-dim" style="font-size:0.72rem; margin-bottom:2px;">ACC RL & SIM2REAL</div><div class="text-brand-silver">6H Silverstone Charity Race</div></td>
-              <td><span class="sim-tag sim-acc">ACC</span></td>
-              <td class="hidden sm:table-cell text-brand-dim">22.11.2025</td>
-              <td class="hidden md:table-cell text-brand-dim">Porsche 718 Cayman GT4 Clubsport</td>
-              <td class="text-brand-silver">Fussi, Maik</td>
-            </tr>
-            <tr>
-              <td><span class="pos-badge pos-1">1</span></td>
-              <td><div class="text-brand-dim" style="font-size:0.72rem; margin-bottom:2px;">NF2.0</div><div class="text-brand-silver">24 Stunden von Barcelona · Lobby A</div></td>
-              <td><span class="sim-tag sim-gt7">GT7</span></td>
-              <td class="hidden sm:table-cell text-brand-dim">05.07.2025</td>
-              <td class="hidden md:table-cell text-brand-dim">Lamborghini Huracán GT3 '15</td>
-              <td class="text-brand-silver">Tao, Bertz, Gringo, RoadrunnerJr, Hasmann, AsHes</td>
-            </tr>
-            <tr>
-              <td><span class="pos-badge" style="color:#5A6080;">8</span></td>
-              <td><div class="text-brand-dim" style="font-size:0.72rem; margin-bottom:2px;">NF2.0</div><div class="text-brand-silver">24 Stunden von Barcelona · Lobby B</div></td>
-              <td><span class="sim-tag sim-gt7">GT7</span></td>
-              <td class="hidden sm:table-cell text-brand-dim">05.07.2025</td>
-              <td class="hidden md:table-cell text-brand-dim">McLaren 650S GT3 '15</td>
-              <td class="text-brand-silver">TaxiDriver, Marco Z., Roadrunner, PapaPaule, Omicron, Fussi</td>
-            </tr>
-          </tbody>
+          <tbody data-results="endurance" data-src="../data/endurance-results.json"></tbody>
         </table>
       </div>
 
       <div class="px-6 py-3 border-t"
            style="border-color:rgba(255,255,255,0.04); background:rgba(26,36,96,0.1);">
-        <span class="text-brand-dim text-xs">7 abgeschlossene Endurance Veranstaltungen · 5 Podiumsplätze</span>
+        <span class="text-brand-dim text-xs" data-standings-status="endurance" data-src="../data/endurance-results.json"></span>
       </div>
     </div>
   </div>
@@ -959,6 +777,7 @@
   </div>
 </footer>
 
+<script src="../shared/standings.js"></script>
 <script src="../shared/main.js"></script>
 <script>
 // Fade-in on scroll for elements not covered by shared/main.js

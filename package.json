@@ -1,0 +1,29 @@
+{
+  "name": "claude-s2s-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i shared/tailwind-input.css -o shared/tailwind-output.css --minify",
+    "watch:css": "tailwindcss -i shared/tailwind-input.css -o shared/tailwind-output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taotemorales/STS-Motorsport-Website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/taotemorales/STS-Motorsport-Website/issues"
+  },
+  "homepage": "https://github.com/taotemorales/STS-Motorsport-Website#readme",
+  "dependencies": {
+    "puppeteer": "^24.38.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "3"
+  }
+}

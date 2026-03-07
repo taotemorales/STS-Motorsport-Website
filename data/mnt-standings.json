@@ -1,0 +1,47 @@
+{
+  "groups": [
+    {
+      "name": "PRO",
+      "status": "Stand nach Rennen 0 von 8",
+      "columns": ["POS", "Fahrer", "Team", "Punkte"],
+      "standings": [
+        { "pos": 1, "driver": "MIKI2714", "team": "Ferri Racing Team", "points": 0, "movement": null },
+        { "pos": 2, "driver": "ASHES1308", "team": "SEA 2 SUMMIT Motorsport", "points": 0, "movement": null },
+        { "pos": 3, "driver": "STS_RUSSELL_82", "team": "SEA 2 SUMMIT Motorsport", "points": 0, "movement": null },
+        { "pos": 4, "driver": "FLOYDROW", "team": "Skunkworks", "points": 0, "movement": null },
+        { "pos": 5, "driver": "ANDERTHEKER7", "team": "SEA 2 SUMMIT Motorsport", "points": 0, "movement": null },
+        { "pos": 6, "driver": "B3N0XST0N3", "team": "Sim Racing Social Club", "points": 0, "movement": null },
+        { "pos": 7, "driver": "ROCKETLAUNCHERKK", "team": "—", "points": 0, "movement": null },
+        { "pos": 8, "driver": "KLEMPNER18", "team": "Sim Racing Social Club", "points": 0, "movement": null },
+        { "pos": 9, "driver": "INEVERFELTSO", "team": "ifm e-sports", "points": 0, "movement": null },
+        { "pos": 10, "driver": "GT_ROWE_98", "team": "—", "points": 0, "movement": null },
+        { "pos": 11, "driver": "CHRIS_DOINK_81", "team": "—", "points": 0, "movement": null },
+        { "pos": 12, "driver": "THE-FLOW", "team": "ifm e-sports", "points": 0, "movement": null },
+        { "pos": 13, "driver": "KAISER_KLAUS69", "team": "Speed Racing Team", "points": 0, "movement": null },
+        { "pos": 14, "driver": "ASE_WANE73", "team": "DBRCA", "points": 0, "movement": null },
+        { "pos": 15, "driver": "PENG-UIN", "team": "Juracing Park Motorsport", "points": 0, "movement": null }
+      ]
+    },
+    {
+      "name": "AM",
+      "status": "Stand nach Rennen 0 von 8",
+      "columns": ["POS", "Fahrer", "Team", "Punkte"],
+      "standings": [
+        { "pos": 1, "driver": "IFM_TSS", "team": "ifm e-sports", "points": 0, "movement": null },
+        { "pos": 2, "driver": "REALBERTI", "team": "Juracing Park Motorsport", "points": 0, "movement": null },
+        { "pos": 3, "driver": "DE_MOURISE", "team": "Schneider Racing Team", "points": 0, "movement": null },
+        { "pos": 4, "driver": "TEITI81", "team": "891 Racing Team", "points": 0, "movement": null },
+        { "pos": 5, "driver": "TCR_LANDY1264", "team": "Tidgney Community Racing", "points": 0, "movement": null },
+        { "pos": 6, "driver": "RONNY795", "team": "DBRCA", "points": 0, "movement": null },
+        { "pos": 7, "driver": "ZIMMER_101", "team": "ifm e-sports", "points": 0, "movement": null },
+        { "pos": 8, "driver": "QUAZGAA73", "team": "MST-BTR", "points": 0, "movement": null },
+        { "pos": 9, "driver": "LUCYDERTYP", "team": "—", "points": 0, "movement": null },
+        { "pos": 10, "driver": "TOTTISB", "team": "Babuu-Racing", "points": 0, "movement": null },
+        { "pos": 11, "driver": "REDFLEX93", "team": "DBRCA", "points": 0, "movement": null },
+        { "pos": 12, "driver": "TOMGULP", "team": "DBRCA", "points": 0, "movement": null },
+        { "pos": 13, "driver": "CPT A BARBOSA", "team": "ifm e-sports", "points": 0, "movement": null },
+        { "pos": 14, "driver": "ERHITZT-ACTION7", "team": "nürburgring-fascination2.0", "points": 0, "movement": null }
+      ]
+    }
+  ]
+}
