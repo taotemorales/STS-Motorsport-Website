@@ -1,7 +1,16 @@
 {
-  "status": "7 abgeschlossene Endurance Veranstaltungen · 5 Podiumsplätze",
+  "status": "8 abgeschlossene Endurance Veranstaltungen · 5 Podiumsplätze",
   "columns": ["Pos", "Event", "Plattform", "Datum", "Fahrzeug", "Fahrer"],
   "results": [
+    {
+      "pos": 11,
+      "series": "NF2.0 Team Championship",
+      "event": "10H Red Bull Ring · Lobby A",
+      "platform": "GT7",
+      "date": "07.03.2026",
+      "car": "Renault Sport R.S.01 GT3 '16",
+      "drivers": "AsHes, Gringo, Omicron, RocketlauncherKK, Russell"
+    },
     {
       "pos": 2,
       "series": "NF2.0 Driver Championship",
