@@ -1,5 +1,5 @@
 # Active Drivers — SEA 2 SUMMIT Motorsport
-**Total: 65** (updated 2026-03-15)
+**Total: 65** (updated 2026-03-16)
 
 Each entry is the canonical name. Aliases/variants are noted inline.
 Sources: MNT, Cup, TCR, Endurance results, team roster.
