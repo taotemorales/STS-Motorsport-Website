@@ -1,7 +1,25 @@
 {
-  "status": "9 abgeschlossene Endurance Veranstaltungen · 5 Podiumsplätze",
+  "status": "11 abgeschlossene Endurance Veranstaltungen · 5 Podiumsplätze",
   "columns": ["Pos", "Event", "Plattform", "Datum", "Fahrzeug", "Fahrer"],
   "results": [
+    {
+      "pos": 5,
+      "series": "Nürburgring Endurance Championship",
+      "event": "4H Nordschleife VLN Week 2 · Split 4",
+      "platform": "iRacing",
+      "date": "04.04.2026",
+      "car": "Audi RS3 LMS Gen2 TCR",
+      "drivers": "Søren, Maik"
+    },
+    {
+      "pos": 5,
+      "series": "Nürburgring Endurance Championship",
+      "event": "4H Nordschleife VLN Week 2 · Split 8",
+      "platform": "iRacing",
+      "date": "04.04.2026",
+      "car": "Audi RS3 LMS Gen2 TCR",
+      "drivers": "Fussi, Pille"
+    },
     {
       "pos": 4,
       "series": "Nürburgring Endurance Championship",
