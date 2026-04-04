@@ -1,7 +1,16 @@
 {
-  "status": "11 abgeschlossene Endurance Veranstaltungen · 5 Podiumsplätze",
+  "status": "12 abgeschlossene Endurance Veranstaltungen · 5 Podiumsplätze",
   "columns": ["Pos", "Event", "Plattform", "Datum", "Fahrzeug", "Fahrer"],
   "results": [
+    {
+      "pos": 5,
+      "series": "LMGH",
+      "event": "4H Nordschleife VLN · Lauf 2",
+      "platform": "iRacing",
+      "date": "04.04.2026",
+      "car": "Audi RS3 LMS Gen2 TCR",
+      "drivers": "Søren, Maik"
+    },
     {
       "pos": 5,
       "series": "Nürburgring Endurance Championship",
