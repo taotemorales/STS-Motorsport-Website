@@ -573,10 +573,13 @@
               style="font-size:1.6rem; letter-spacing:-0.02em;">Endurance Events</h3>
           <div class="text-brand-dim text-xs mt-0.5 font-medium tracking-wide uppercase">Alle Plattformen · Langstrecke</div>
         </div>
-        <div class="flex flex-wrap gap-1.5">
-          <span class="sim-tag sim-iracing">iRacing</span>
-          <span class="sim-tag sim-gt7">GT7</span>
-          <span class="sim-tag sim-acc">ACC</span>
+        <div class="flex items-center gap-4">
+          <div class="flex flex-wrap gap-1.5">
+            <span class="sim-tag sim-iracing">iRacing</span>
+            <span class="sim-tag sim-gt7">GT7</span>
+            <span class="sim-tag sim-acc">ACC</span>
+          </div>
+          <nav class="pagination-nav" aria-label="Ergebnisse Seitennavigation" data-pagination-for="endurance"></nav>
         </div>
       </div>
 
@@ -592,13 +595,14 @@
               <th scope="col" class="text-left">Fahrer</th>
             </tr>
           </thead>
-          <tbody data-results="endurance" data-src="../data/endurance-results.json"></tbody>
+          <tbody data-results="endurance" data-src="../data/endurance-results.json" data-page-size="8"></tbody>
         </table>
       </div>
 
-      <div class="px-6 py-3 border-t"
+      <div class="px-6 py-3 border-t flex items-center justify-between"
            style="border-color:rgba(255,255,255,0.04); background:rgba(26,36,96,0.1);">
         <span class="text-brand-dim text-xs" data-standings-status="endurance" data-src="../data/endurance-results.json"></span>
+        <nav class="pagination-nav" aria-label="Ergebnisse Seitennavigation" data-pagination-for="endurance"></nav>
       </div>
     </div>
   </div>

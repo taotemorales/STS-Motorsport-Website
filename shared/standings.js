@@ -93,6 +93,9 @@
   // Cache fetched JSON to avoid duplicate requests
   var cache = {};
 
+  // Pagination state per results table (keyed by data-results value)
+  var paginationState = {};
+
   function fetchJSON(url) {
     if (cache[url]) return cache[url];
     cache[url] = fetch(url).then(function (r) { return r.json(); });
@@ -126,19 +129,111 @@
     });
   }
 
-  // Render all endurance results tbodies
+  // Render a single page of paginated results
+  function renderPage(key) {
+    var state = paginationState[key];
+    if (!state) return;
+
+    var start = state.page * state.pageSize;
+    var pageData = state.data.slice(start, start + state.pageSize);
+
+    var html = '';
+    pageData.forEach(function (entry) {
+      html += resultsRow(entry);
+    });
+    state.tbody.innerHTML = html;
+
+    updatePaginationControls(key);
+  }
+
+  // Build prev/next buttons + page indicator inside all nav elements for this key
+  function updatePaginationControls(key) {
+    var state = paginationState[key];
+    var navs = document.querySelectorAll('nav[data-pagination-for="' + key + '"]');
+    if (!navs.length || !state) return;
+
+    var totalPages = Math.ceil(state.data.length / state.pageSize);
+    if (totalPages <= 1) {
+      navs.forEach(function (nav) { nav.innerHTML = ''; });
+      return;
+    }
+
+    var isFirst = state.page === 0;
+    var isLast = state.page >= totalPages - 1;
+    var html = '';
+
+    // Previous
+    html += '<button class="pagination-btn' + (isFirst ? ' pagination-btn-disabled' : '') + '"';
+    html += ' data-pagination-key="' + key + '" data-pagination-dir="prev"';
+    html += isFirst ? ' disabled aria-disabled="true"' : '';
+    html += ' aria-label="Vorherige Seite">';
+    html += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>';
+    html += '</button>';
+
+    // Indicator
+    html += '<span class="pagination-indicator">' + (state.page + 1) + ' / ' + totalPages + '</span>';
+
+    // Next
+    html += '<button class="pagination-btn' + (isLast ? ' pagination-btn-disabled' : '') + '"';
+    html += ' data-pagination-key="' + key + '" data-pagination-dir="next"';
+    html += isLast ? ' disabled aria-disabled="true"' : '';
+    html += ' aria-label="Nächste Seite">';
+    html += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
+    html += '</button>';
+
+    navs.forEach(function (nav) { nav.innerHTML = html; });
+  }
+
+  // Delegated click handler for pagination buttons
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-pagination-key]');
+    if (!btn || btn.disabled) return;
+
+    var key = btn.getAttribute('data-pagination-key');
+    var dir = btn.getAttribute('data-pagination-dir');
+    var state = paginationState[key];
+    if (!state) return;
+
+    var totalPages = Math.ceil(state.data.length / state.pageSize);
+
+    if (dir === 'prev' && state.page > 0) {
+      state.page--;
+    } else if (dir === 'next' && state.page < totalPages - 1) {
+      state.page++;
+    }
+
+    renderPage(key);
+  });
+
+  // Render all endurance results tbodies (with optional pagination)
   function renderResults() {
     var tbodies = document.querySelectorAll('tbody[data-results]');
     tbodies.forEach(function (tbody) {
       var src = tbody.getAttribute('data-src');
       if (!src) return;
 
+      var key = tbody.getAttribute('data-results');
+      var pageSizeAttr = tbody.getAttribute('data-page-size');
+      var pageSize = pageSizeAttr ? parseInt(pageSizeAttr, 10) : 0;
+
       fetchJSON(src).then(function (data) {
-        var html = '';
-        data.results.forEach(function (entry) {
-          html += resultsRow(entry);
-        });
-        tbody.innerHTML = html;
+        if (!pageSize || data.results.length <= pageSize) {
+          var html = '';
+          data.results.forEach(function (entry) {
+            html += resultsRow(entry);
+          });
+          tbody.innerHTML = html;
+          return;
+        }
+
+        paginationState[key] = {
+          data: data.results,
+          page: 0,
+          pageSize: pageSize,
+          tbody: tbody
+        };
+
+        renderPage(key);
       });
     });
   }

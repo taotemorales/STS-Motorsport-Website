@@ -444,3 +444,51 @@ html { font-family: 'Barlow', sans-serif; }
 }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+/* ── Pagination controls ── */
+.pagination-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pagination-indicator {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: #5A6080;
+  min-width: 36px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: #9BA3C0;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+}
+.pagination-btn:hover {
+  border-color: rgba(var(--accent-rgb), 0.5);
+  background: rgba(var(--accent-rgb), 0.12);
+  color: #F0F2FF;
+  transform: translateY(-1px);
+}
+.pagination-btn:active {
+  transform: translateY(0);
+}
+.pagination-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.pagination-btn-disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
