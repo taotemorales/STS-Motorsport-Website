@@ -1,5 +1,5 @@
 # Active Drivers — SEA 2 SUMMIT Motorsport
-**Total: 70** (updated 2026-04-02)
+**Total: 69** (updated 2026-04-16)
 
 Each entry is the canonical name. Aliases/variants are noted inline.
 Sources: MNT, Cup, TCR, Endurance results, team roster.
@@ -18,9 +18,9 @@ Sources: MNT, Cup, TCR, Endurance results, team roster.
 9. ifm_ineverfeltso *(also: INEVERFELTSO, ifm_inverfeltso)*
 10. GT_ROWE_98
 11. THE-FLOW *(also: THE_FLOW)*
-12. Kaiser_Klaus69 *(also: KAISER_KLAUS69, SRT KaiserKlaus)*
-13. ase_wane73 *(also: ASE_WANE73, ASE_Wane73)*
-14. EvoGam3r Mk1
+12. ase_wane73 *(also: ASE_WANE73, ASE_Wane73)*
+13. EvoGam3r Mk1
+14. Sam_Rimu
 
 ## MNT AM
 15. IFM_TSS
@@ -35,8 +35,7 @@ Sources: MNT, Cup, TCR, Endurance results, team roster.
 24. TOTTISB
 25. REDFLEX93
 26. TomGulp *(also: TOMGULP, Tomgulp, Thomas)*
-27. CPT A BARBOSA
-28. ERHITZT-ACTION7
+27. ERHITZT-ACTION7
 29. Peng-uin *(also: PENG-UIN, Peng--uin)*
 
 ## Cup (unique to Cup)
