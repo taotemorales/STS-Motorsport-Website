@@ -1,5 +1,5 @@
 # Active Drivers — SEA 2 SUMMIT Motorsport
-**Total: 69** (updated 2026-04-16)
+**Total: 67** (updated 2026-05-05)
 
 Each entry is the canonical name. Aliases/variants are noted inline.
 Sources: MNT, Cup, TCR, Endurance results, team roster.
@@ -18,9 +18,7 @@ Sources: MNT, Cup, TCR, Endurance results, team roster.
 9. ifm_ineverfeltso *(also: INEVERFELTSO, ifm_inverfeltso)*
 10. GT_ROWE_98
 11. THE-FLOW *(also: THE_FLOW)*
-12. ase_wane73 *(also: ASE_WANE73, ASE_Wane73)*
-13. EvoGam3r Mk1
-14. Sam_Rimu
+12. EvoGam3r Mk1
 
 ## MNT AM
 15. IFM_TSS

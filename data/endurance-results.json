@@ -1,7 +1,25 @@
 {
-  "status": "12 abgeschlossene Endurance Veranstaltungen · 5 Podiumsplätze",
+  "status": "14 abgeschlossene Endurance Veranstaltungen · 6 Podiumsplätze",
   "columns": ["Pos", "Event", "Plattform", "Datum", "Fahrzeug", "Fahrer"],
   "results": [
+    {
+      "pos": 2,
+      "series": "iRacing Official Nürburgring 24h",
+      "event": "24H Nordschleife 24H Layout · Split 3",
+      "platform": "iRacing",
+      "date": "02.05.2026",
+      "car": "Audi RS3 LMS Gen2 TCR",
+      "drivers": "Søren, Maik, Fussi, Sadoko"
+    },
+    {
+      "pos": 5,
+      "series": "LMGH",
+      "event": "4H Nordschleife VLN · Lauf 3",
+      "platform": "iRacing",
+      "date": "25.04.2026",
+      "car": "Audi RS3 LMS Gen2 TCR",
+      "drivers": "Søren, Maik"
+    },
     {
       "pos": 5,
       "series": "LMGH",
