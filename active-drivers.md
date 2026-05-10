@@ -1,5 +1,5 @@
 # Active Drivers — SEA 2 SUMMIT Motorsport
-**Total: 67** (updated 2026-05-05)
+**Total: 68** (updated 2026-05-10)
 
 Each entry is the canonical name. Aliases/variants are noted inline.
 Sources: MNT, Cup, TCR, Endurance results, team roster.
@@ -86,3 +86,4 @@ Sources: MNT, Cup, TCR, Endurance results, team roster.
 
 ## Team only
 65. Pille *(also: Philipp Spielbusch)*
+71. Kevin Welsch
