@@ -1,5 +1,5 @@
 # Active Drivers — SEA 2 SUMMIT Motorsport
-**Total: 68** (updated 2026-05-10)
+**Total: 65** (updated 2026-05-14)
 
 Each entry is the canonical name. Aliases/variants are noted inline.
 Sources: MNT, Cup, TCR, Endurance results, team roster.
@@ -25,16 +25,14 @@ Sources: MNT, Cup, TCR, Endurance results, team roster.
 16. realberti *(also: REALBERTI)*
 17. DE_MOURISE
 18. Teiti81 *(also: TEITI81, Christian81/Teiti81)*
-19. TCR_LANDY1264
-20. RONNY795
-21. ZIMMER_101
-22. Quazgaa73 *(also: QUAZGAA73)*
-23. LUCYDERTYP
-24. TOTTISB
-25. REDFLEX93
-26. TomGulp *(also: TOMGULP, Tomgulp, Thomas)*
-27. ERHITZT-ACTION7
-29. Peng-uin *(also: PENG-UIN, Peng--uin)*
+19. RONNY795
+20. ZIMMER_101
+21. Quazgaa73 *(also: QUAZGAA73)*
+22. TOTTISB
+23. REDFLEX93
+24. TomGulp *(also: TOMGULP, Tomgulp, Thomas)*
+25. ERHITZT-ACTION7
+26. Peng-uin *(also: PENG-UIN, Peng--uin)*
 
 ## Cup (unique to Cup)
 30. TSR-Quicksilver
@@ -61,8 +59,7 @@ Sources: MNT, Cup, TCR, Endurance results, team roster.
 49. seppiwurschtler
 50. H+T_michi86
 51. Peddaperza
-52. H+T_LastKings
-53. Dominik Enge
+52. Dominik Enge
 
 ## Endurance (unique to Endurance)
 54. Tao *(also: Søren, Søren Witt)*
