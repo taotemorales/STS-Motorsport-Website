@@ -1,5 +1,5 @@
 # Active Drivers — SEA 2 SUMMIT Motorsport
-**Total: 65** (updated 2026-05-14)
+**Total: 67** (updated 2026-06-08)
 
 Each entry is the canonical name. Aliases/variants are noted inline.
 Sources: MNT, Cup, TCR, Endurance results, team roster.
@@ -65,7 +65,7 @@ Sources: MNT, Cup, TCR, Endurance results, team roster.
 54. Tao *(also: Søren, Søren Witt)*
 55. Bertz
 56. Maik *(also: Maik Schmitz, DearUnkwn)*
-57. Sadoko
+57. Sadoko *(also: Sascha, Sascha Kost)*
 58. Fussi
 59. Gringo
 60. RoadrunnerJr
@@ -84,3 +84,7 @@ Sources: MNT, Cup, TCR, Endurance results, team roster.
 ## Team only
 65. Pille *(also: Philipp Spielbusch)*
 71. Kevin Welsch
+
+## Guest Drivers (Endurance)
+72. Sven Winter *(Scherer Esports)*
+73. Max Hövels

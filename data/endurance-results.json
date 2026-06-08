@@ -1,7 +1,25 @@
 {
-  "status": "14 abgeschlossene Endurance Veranstaltungen · 6 Podiumsplätze",
+  "status": "16 abgeschlossene Endurance Veranstaltungen · 7 Podiumsplätze",
   "columns": ["Pos", "Event", "Plattform", "Datum", "Fahrzeug", "Fahrer"],
   "results": [
+    {
+      "pos": 2,
+      "series": "LMGH",
+      "event": "24H Nordschleife · Lauf 5",
+      "platform": "iRacing",
+      "date": "06.06.2026",
+      "car": "Audi RS3 LMS Gen2 TCR",
+      "drivers": "Søren, Maik, Sascha, Sven, Max"
+    },
+    {
+      "pos": "DSQ",
+      "series": "LMGH",
+      "event": "4H Nordschleife VLN · Lauf 4",
+      "platform": "iRacing",
+      "date": "30.05.2026",
+      "car": "Audi RS3 LMS Gen2 TCR",
+      "drivers": "Søren, Maik, Sven"
+    },
     {
       "pos": 2,
       "series": "iRacing Official Nürburgring 24h",
@@ -9,7 +27,7 @@
       "platform": "iRacing",
       "date": "02.05.2026",
       "car": "Audi RS3 LMS Gen2 TCR",
-      "drivers": "Søren, Maik, Fussi, Sadoko"
+      "drivers": "Søren, Maik, Fussi, Sascha"
     },
     {
       "pos": 5,
@@ -99,7 +117,7 @@
       "platform": "ACC",
       "date": "22.11.2025",
       "car": "Porsche 718 Cayman GT4 Clubsport",
-      "drivers": "Søren, Sadoko"
+      "drivers": "Søren, Sascha"
     },
     {
       "pos": 3,
