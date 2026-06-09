@@ -90,7 +90,8 @@
       "platform": "GT7",
       "date": "22.02.2026",
       "car": "Mazda 787B '91",
-      "drivers": "Bertz"
+      "drivers": "Bertz",
+      "showcase": false
     },
     {
       "pos": 3,
@@ -135,7 +136,7 @@
       "platform": "GT7",
       "date": "05.07.2025",
       "car": "Lamborghini Huracán GT3 '15",
-      "drivers": "Tao, Bertz, Gringo, RoadrunnerJr, Hasmann, AsHes"
+      "drivers": "Søren, Bertz, Gringo, RoadrunnerJr, Hasmann, AsHes"
     },
     {
       "pos": 8,

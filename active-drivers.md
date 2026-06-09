@@ -62,7 +62,7 @@ Sources: MNT, Cup, TCR, Endurance results, team roster.
 52. Dominik Enge
 
 ## Endurance (unique to Endurance)
-54. Tao *(also: Søren, Søren Witt)*
+54. Søren *(also: Tao, Søren Witt)*
 55. Bertz
 56. Maik *(also: Maik Schmitz, DearUnkwn)*
 57. Sadoko *(also: Sascha, Sascha Kost)*

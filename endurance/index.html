@@ -118,6 +118,123 @@
       50% { transform: translateY(-8px); }
     }
     .gustl-float { animation: gustl-float 4s ease-in-out infinite; }
+
+    /* ── Podium showcase cards ── */
+    .podium-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      background: linear-gradient(160deg, #0F1530 0%, #0A0D22 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    /* Metal accent bar (left) */
+    .podium-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--metal-bar);
+      border-radius: 0 2px 2px 0;
+      z-index: 2;
+    }
+    /* Metal glow + diagonal texture */
+    .podium-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 70% at 12% 0%, var(--metal-glow) 0%, transparent 60%),
+        repeating-linear-gradient(-60deg, transparent, transparent 70px, var(--metal-line) 70px, var(--metal-line) 71px);
+    }
+    .podium-card-inner { position: relative; z-index: 1; padding: 20px 20px 18px; }
+
+    .podium-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+
+    /* Circular medal badge */
+    .medal-badge {
+      position: relative;
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--metal-ring);
+      box-shadow: 0 2px 8px var(--metal-glow), inset 0 1px 1px rgba(255,255,255,0.45);
+    }
+    .medal-badge::before {
+      content: '';
+      position: absolute;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #161B36, #0B0E22);
+    }
+    .medal-num {
+      position: relative;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.05rem; line-height: 1;
+      color: var(--metal-text);
+      transform: translateY(-2px);
+    }
+
+    .podium-pos {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase;
+      font-size: 1.05rem;
+      color: var(--metal-text);
+    }
+    .podium-platform { margin-left: auto; }
+
+    .podium-series {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 0.68rem; color: #5A6080;
+      margin-bottom: 4px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .podium-event {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; letter-spacing: -0.01em; line-height: 1.1;
+      font-size: 1.18rem; color: #F0F2FF;
+      margin-bottom: 10px;
+    }
+    .podium-meta {
+      font-size: 0.78rem; color: #9BA3C0; line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .podium-drivers {
+      font-size: 0.82rem; color: #C2C8E0; line-height: 1.55;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Metal palettes */
+    .podium-gold {
+      --metal-bar: linear-gradient(180deg, #C8920E, #F4CE5E);
+      --metal-ring: linear-gradient(145deg, #F4CE5E 0%, #C8920E 55%, #8A6408 100%);
+      --metal-glow: rgba(232,180,32,0.16);
+      --metal-line: rgba(232,180,32,0.05);
+      --metal-text: #F4CE5E;
+      --hover-shadow: 0 16px 44px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(232,180,32,0.35), 0 6px 24px -10px rgba(232,180,32,0.35);
+      --hover-border: rgba(232,180,32,0.35);
+    }
+    .podium-silver {
+      --metal-bar: linear-gradient(180deg, #8A90AE, #D4D8F0);
+      --metal-ring: linear-gradient(145deg, #E4E8FA 0%, #AEB4D2 55%, #767C9C 100%);
+      --metal-glow: rgba(180,188,216,0.14);
+      --metal-line: rgba(180,188,216,0.05);
+      --metal-text: #D4D8F0;
+      --hover-shadow: 0 16px 44px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(180,188,216,0.3), 0 6px 24px -10px rgba(180,188,216,0.25);
+      --hover-border: rgba(180,188,216,0.3);
+    }
+    .podium-bronze {
+      --metal-bar: linear-gradient(180deg, #9A5A2A, #D89A60);
+      --metal-ring: linear-gradient(145deg, #E6A874 0%, #C0824A 55%, #7C4E26 100%);
+      --metal-glow: rgba(192,130,74,0.16);
+      --metal-line: rgba(192,130,74,0.05);
+      --metal-text: #D89A60;
+      --hover-shadow: 0 16px 44px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(192,130,74,0.32), 0 6px 24px -10px rgba(192,130,74,0.3);
+      --hover-border: rgba(192,130,74,0.32);
+    }
   </style>
 </head>
 <body class="bg-brand-ink text-brand-white" style="font-family:'Barlow',sans-serif;">
@@ -271,7 +388,7 @@
 </div>
 
 <!-- ══════════════════════════════ ABOUT ════════════════════════════════════════ -->
-<section class="relative py-24"
+<section class="relative py-16"
   style="background: radial-gradient(ellipse 70% 50% at 75% 30%, rgba(26,36,96,0.2) 0%, transparent 60%),
                       #06091A;">
 
@@ -319,7 +436,7 @@
 </section>
 
 <!-- ══════════════════════════════ EXTERNE SERIEN ══════════════════════════════ -->
-<section class="relative py-24"
+<section class="relative py-16"
   style="background: radial-gradient(ellipse 60% 40% at 20% 50%, rgba(208,18,0,0.06) 0%, transparent 60%),
                       radial-gradient(ellipse 60% 40% at 80% 40%, rgba(26,36,96,0.2) 0%, transparent 60%),
                       #06091A;">
@@ -545,7 +662,7 @@
 </section>
 
 <!-- ════════════════════════════════ RESULTS ════════════════════════════════════ -->
-<section id="results" class="relative py-24"
+<section id="results" class="relative py-16"
   style="background: radial-gradient(ellipse 70% 50% at 75% 30%, rgba(26,36,96,0.2) 0%, transparent 60%),
                       #06091A;">
 
@@ -561,7 +678,26 @@
       </h2>
       <p class="text-brand-silver max-w-xl" style="line-height:1.7;">
         Übersicht aller Endurance-Events, an denen die SEA 2 SUMMIT Endurance Division teilgenommen hat — quer über alle Plattformen.
+        Unsere <strong class="text-brand-white font-medium">Podestplätze</strong> stehen vorneweg.
       </p>
+    </div>
+
+    <!-- ── Podium showcase ── -->
+    <div>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="section-label" style="color:#E8B420;">
+          <span data-podium-count="endurance">7</span>× aufs Podest · Podestplätze
+        </span>
+        <span class="flex-1 h-px" style="background: linear-gradient(90deg, rgba(232,180,32,0.4), transparent);"></span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 fade-in"
+           data-podiums="endurance" data-src="../data/endurance-results.json"></div>
+    </div>
+
+    <!-- ── Full event history ── -->
+    <div class="flex items-center gap-3 mb-6" style="margin-top: 4.5rem;">
+      <span class="section-label">Komplette Event-Historie</span>
+      <span class="flex-1 h-px" style="background: linear-gradient(90deg, rgba(208,18,0,0.5), transparent);"></span>
     </div>
 
     <div class="card rounded-xl overflow-hidden fade-in">
@@ -609,7 +745,7 @@
 </section>
 
 <!-- ════════════════════════════════ GALLERY ════════════════════════════════════ -->
-<section id="gallery" class="relative py-24"
+<section id="gallery" class="relative py-16"
   style="background: radial-gradient(ellipse 60% 40% at 20% 50%, rgba(208,18,0,0.06) 0%, transparent 60%),
                       radial-gradient(ellipse 60% 40% at 80% 40%, rgba(26,36,96,0.2) 0%, transparent 60%),
                       #06091A;">

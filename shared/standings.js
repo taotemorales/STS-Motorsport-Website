@@ -36,6 +36,13 @@
     'ACC': 'sim-tag sim-acc'
   };
 
+  // Medal metal per podium position
+  var MEDAL = {
+    1: { label: 'Gold', cls: 'podium-gold' },
+    2: { label: 'Silber', cls: 'podium-silver' },
+    3: { label: 'Bronze', cls: 'podium-bronze' }
+  };
+
   // Points color per position
   function ptsStyle(pos) {
     if (pos === 1) return '';
@@ -88,6 +95,71 @@
     html += '<td class="text-brand-silver">' + entry.drivers + '</td>';
     html += '</tr>';
     return html;
+  }
+
+  // Parse "DD.MM.YYYY" into a sortable integer (YYYYMMDD)
+  function parseEnduDate(str) {
+    var p = String(str || '').split('.');
+    if (p.length !== 3) return 0;
+    return parseInt(p[2], 10) * 10000 + parseInt(p[1], 10) * 100 + parseInt(p[0], 10);
+  }
+
+  // Build a single podium showcase card
+  function podiumCard(entry) {
+    var medal = MEDAL[entry.pos];
+    if (!medal) return '';
+    var platformCls = PLATFORM_CLASSES[entry.platform] || 'sim-tag';
+
+    var html = '<article class="podium-card ' + medal.cls + ' card-lift">';
+    html += '<div class="podium-card-inner">';
+
+    // Header: medal badge + position label + platform tag
+    html += '<div class="podium-head">';
+    html += '<span class="medal-badge"><span class="medal-num">' + entry.pos + '</span></span>';
+    html += '<span class="podium-pos">' + medal.label + '</span>';
+    html += '<span class="' + platformCls + ' podium-platform">' + entry.platform + '</span>';
+    html += '</div>';
+
+    // Series + event
+    html += '<div class="podium-series">' + entry.series + '</div>';
+    html += '<h4 class="podium-event">' + entry.event + '</h4>';
+
+    // Meta: car + date
+    html += '<div class="podium-meta">' + entry.car + ' · ' + entry.date + '</div>';
+
+    // Drivers
+    html += '<div class="podium-drivers">' + entry.drivers + '</div>';
+
+    html += '</div></article>';
+    return html;
+  }
+
+  // Render all podium showcase containers from endurance results JSON
+  function renderPodiums() {
+    var hosts = document.querySelectorAll('[data-podiums]');
+    hosts.forEach(function (host) {
+      var src = host.getAttribute('data-src');
+      if (!src) return;
+
+      fetchJSON(src).then(function (data) {
+        var podiums = (data.results || []).filter(function (e) {
+          return typeof e.pos === 'number' && e.pos <= 3 && e.showcase !== false;
+        });
+        // Sort: best position first, then most recent within a position
+        podiums.sort(function (a, b) {
+          if (a.pos !== b.pos) return a.pos - b.pos;
+          return parseEnduDate(b.date) - parseEnduDate(a.date);
+        });
+
+        host.innerHTML = podiums.map(podiumCard).join('');
+
+        // Keep the "N×" label in sync with the data
+        var key = host.getAttribute('data-podiums');
+        document.querySelectorAll('[data-podium-count="' + key + '"]').forEach(function (el) {
+          el.textContent = podiums.length;
+        });
+      });
+    });
   }
 
   // Cache fetched JSON to avoid duplicate requests
@@ -263,11 +335,13 @@
     document.addEventListener('DOMContentLoaded', function () {
       renderStandings();
       renderResults();
+      renderPodiums();
       renderStatus();
     });
   } else {
     renderStandings();
     renderResults();
+    renderPodiums();
     renderStatus();
   }
 })();
