@@ -1,5 +1,5 @@
 # Active Drivers — SEA 2 SUMMIT Motorsport
-**Total: 67** (updated 2026-06-08)
+**Total: 64** (updated 2026-06-22)
 
 Each entry is the canonical name. Aliases/variants are noted inline.
 Sources: MNT, Cup, TCR, Endurance results, team roster.
@@ -55,10 +55,7 @@ Sources: MNT, Cup, TCR, Endurance results, team roster.
 45. FSR_Countraz
 46. T_auroz
 47. Matrikas *(also: Matrikas75)*
-48. Ron Schröder
 49. seppiwurschtler
-50. H+T_michi86
-51. Peddaperza
 52. Dominik Enge
 
 ## Endurance (unique to Endurance)

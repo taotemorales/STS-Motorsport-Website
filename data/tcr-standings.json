@@ -2,43 +2,39 @@
   "groups": [
     {
       "name": "SG1",
-      "status": "Stand nach Rennen 5 von 11",
+      "status": "Stand nach Rennen 6 von 11",
       "columns": ["POS", "Fahrer", "Fahrzeug", "Punkte"],
       "standings": [
-        { "pos": 1, "driver": "FGR_Unique", "team": "Honda Civic Type R (FL5) '22", "points": 383 },
-        { "pos": 2, "driver": "STS_Russell_82", "team": "Subaru WRX STI Type S '14", "points": 368 },
-        { "pos": 3, "driver": "G-Professional", "team": "Subaru WRX STI Type S '14", "points": 356 },
-        { "pos": 4, "driver": "ifm_inverfeltso", "team": "Subaru WRX STI Type S '14", "points": 348, "movement": "up" },
-        { "pos": 5, "driver": "RFF destroy1666|Marc", "team": "Subaru WRX STI Type S '14", "points": 346, "movement": "down" },
-        { "pos": 6, "driver": "Helmine Granger (Kölsch)", "team": "Subaru WRX STI Type S '14", "points": 344, "movement": "down" },
-        { "pos": 7, "driver": "STS_Ashes", "team": "Honda Civic Type R (FL5) '22", "points": 340, "movement": "up" },
-        { "pos": 8, "driver": "uultra-korregd", "team": "Subaru WRX STI Type S '14", "points": 324, "movement": "down" },
-        { "pos": 9, "driver": "Klaus DTM", "team": "Subaru WRX STI Type S '14", "points": 316 },
-        { "pos": 10, "driver": "RivetingBike 692", "team": "Subaru WRX STI Type S '14", "points": 316, "movement": "up" },
-        { "pos": 11, "driver": "Peng-uin", "team": "Mitsubishi Lancer Evo Final '15", "points": 315, "movement": "down" },
-        { "pos": 12, "driver": "FlyingSubmarine", "team": "Subaru WRX STI Type S '14", "points": 293 },
-        { "pos": 13, "driver": "Quazgaa73", "team": "Ford Focus RS '18", "points": 281 },
-        { "pos": 14, "driver": "Marco Z./Boomax_Brubaker", "team": "Ford Focus RS '18", "points": 269 },
-        { "pos": 15, "driver": "FSR_Countraz", "team": "Honda Civic Type R (FK8) '20", "points": 266 }
+        { "pos": 1, "driver": "FGR_Unique", "team": "Honda Civic Type R (FL5) '22", "points": 479 },
+        { "pos": 2, "driver": "STS_Russell_82", "team": "Subaru WRX STI Type S '14", "points": 456 },
+        { "pos": 3, "driver": "G-Professional", "team": "Subaru WRX STI Type S '14", "points": 447 },
+        { "pos": 4, "driver": "ifm_inverfeltso", "team": "Subaru WRX STI Type S '14", "points": 440 },
+        { "pos": 5, "driver": "Helmine Granger (Kölsch)", "team": "Subaru WRX STI Type S '14", "points": 435, "movement": "up" },
+        { "pos": 6, "driver": "RFF destroy1666|Marc", "team": "Subaru WRX STI Type S '14", "points": 425, "movement": "down" },
+        { "pos": 7, "driver": "STS_Ashes", "team": "Honda Civic Type R (FL5) '22", "points": 412 },
+        { "pos": 8, "driver": "Klaus DTM", "team": "Subaru WRX STI Type S '14", "points": 402, "movement": "up" },
+        { "pos": 9, "driver": "uultra-korregd", "team": "Honda Civic Type R (FL5) '22", "points": 401, "movement": "down" },
+        { "pos": 10, "driver": "Peng-uin", "team": "Mitsubishi Lancer Evo Final '15", "points": 387, "movement": "up" },
+        { "pos": 11, "driver": "FlyingSubmarine", "team": "Honda Civic Type R (FL5) '22", "points": 364, "movement": "up" },
+        { "pos": 12, "driver": "RivetingBike 692", "team": "Honda Civic Type R (FL5) '22", "points": "355,5", "movement": "down" }
       ]
     },
     {
       "name": "SG2",
-      "status": "Stand nach Rennen 5 von 11",
+      "status": "Stand nach Rennen 6 von 11",
       "columns": ["POS", "Fahrer", "Fahrzeug", "Punkte"],
       "standings": [
-        { "pos": 16, "driver": "STS_TaxiDriver", "team": "Renault Megane RS Trophy '11", "points": 263, "movement": "up" },
-        { "pos": 17, "driver": "realberti", "team": "Subaru WRX STI Type S '14", "points": 244, "movement": "up" },
-        { "pos": 18, "driver": "seppiwurschtler", "team": "AMG A45", "points": 240 },
-        { "pos": 19, "driver": "Tomgulp", "team": "Honda Civic Type R (FK8) '20", "points": 207, "movement": "up" },
-        { "pos": 20, "driver": "T_auroz", "team": "Ford Focus RS '18", "points": 197, "movement": "down" },
-        { "pos": 21, "driver": "Christian81/Teiti81", "team": "Volvo V40", "points": 192, "movement": "down" },
-        { "pos": 22, "driver": "Matrikas75", "team": "Honda Civic Type R (FL5) '22", "points": 182, "movement": "up" },
-        { "pos": 23, "driver": "Dominik Enge", "team": "VW Golf GTI '14", "points": 163, "movement": "up" },
-        { "pos": 24, "driver": "Ron Schröder", "team": "Toyota Corolla GR '22", "points": 159, "movement": "down" },
-        { "pos": 25, "driver": "SRT KaiserKlaus", "team": "Subaru WRX STI Type S '14", "points": 63, "movement": "up" },
-        { "pos": 26, "driver": "H+T_michi86", "team": "Subaru WRX STI Type S '14", "points": 56, "movement": "up" },
-        { "pos": 27, "driver": "Peddaperza", "team": "Subaru WRX STI Type S '14", "points": 56, "movement": "up" }
+        { "pos": 13, "driver": "Quazgaa73", "team": "Ford Focus RS '18", "points": 342 },
+        { "pos": 14, "driver": "Marco Z./Boomax_Brubaker", "team": "Ford Focus RS '18", "points": 334 },
+        { "pos": 15, "driver": "STS_TaxiDriver", "team": "Renault Megane RS Trophy '11", "points": 329, "movement": "up" },
+        { "pos": 16, "driver": "FSR_Countraz", "team": "Honda Civic Type R (FK8) '20", "points": 321, "movement": "down" },
+        { "pos": 17, "driver": "realberti", "team": "Subaru WRX STI Type S '14", "points": 312 },
+        { "pos": 18, "driver": "seppiwurschtler", "team": "AMG A45", "points": 304 },
+        { "pos": 19, "driver": "T_auroz", "team": "Ford Focus RS '18", "points": 271, "movement": "up" },
+        { "pos": 20, "driver": "Tomgulp", "team": "Honda Civic Type R (FK8) '20", "points": 268, "movement": "down" },
+        { "pos": 21, "driver": "Christian81/Teiti81", "team": "Volvo V40", "points": 249 },
+        { "pos": 22, "driver": "Matrikas75", "team": "Honda Civic Type R (FL5) '22", "points": 182 },
+        { "pos": 23, "driver": "Dominik Enge", "team": "VW Golf GTI '14", "points": 163 }
       ]
     }
   ]
