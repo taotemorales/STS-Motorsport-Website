@@ -1,5 +1,14 @@
 {
+  "redirects": [
+    { "source": "/discord", "destination": "https://discord.gg/64bzSk62kx", "permanent": false }
+  ],
   "headers": [
+    {
+      "source": "/discord",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex" }
+      ]
+    },
     {
       "source": "/fonts/(.*)",
       "headers": [

@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /discord
 Sitemap: https://sea2summit-motorsport.com/sitemap.xml

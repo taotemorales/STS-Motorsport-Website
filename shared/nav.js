@@ -39,7 +39,7 @@
     + '</div>'
     // CTA + hamburger
     + '<div class="flex items-center gap-4">'
-    + '<a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener" class="hidden md:inline-flex items-center gap-2 btn-primary px-5 py-2 rounded text-sm">Discord</a>'
+    + '<a href="/discord" target="_blank" rel="noopener" class="hidden md:inline-flex items-center gap-2 btn-primary px-5 py-2 rounded text-sm">Discord</a>'
     + '<button id="menu-btn" aria-label="Men\u00fc \u00f6ffnen" aria-expanded="false" class="md:hidden flex flex-col gap-1.5 p-2 rounded nav-hamburger">'
     + '<span class="menu-bar block w-5 h-0.5 bg-brand-white transition-transform duration-200 origin-center"></span>'
     + '<span class="menu-bar block w-5 h-0.5 bg-brand-white transition-opacity duration-200"></span>'
@@ -65,7 +65,7 @@
     + '<a href="' + p + 'endurance/" class="nav-link text-brand-silver font-medium py-2">Endurance</a>'
     + '<a href="' + hof + '" class="nav-link text-brand-silver font-medium py-2">Hall of Fame</a>'
     + '<a href="' + sponsoren + '" class="nav-link text-brand-silver font-medium py-2">Sponsoren</a>'
-    + '<a href="https://discord.gg/UyUq396BPZ" target="_blank" rel="noopener" class="btn-primary px-5 py-3 rounded text-sm text-center mt-2">Discord</a>'
+    + '<a href="/discord" target="_blank" rel="noopener" class="btn-primary px-5 py-3 rounded text-sm text-center mt-2">Discord</a>'
     + '</div></div>'
     + '</nav>';
 
