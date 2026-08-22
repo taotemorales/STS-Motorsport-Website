@@ -1,19 +1,18 @@
 {
-  "status": "Stand nach Rennen 6 von 11",
+  "status": "Stand nach Rennen 7 von 11",
   "columns": ["POS", "Fahrer", "Team", "Punkte"],
   "standings": [
-    { "pos": 1, "driver": "STS_Russel_82", "team": "SEA 2 SUMMIT Motorsport", "points": 448 },
-    { "pos": 2, "driver": "TSR-Quicksilver", "team": "Team Silverhawk Racing", "points": 404 },
-    { "pos": 3, "driver": "makkno", "team": "—", "points": 393 },
-    { "pos": 4, "driver": "AsHes1308", "team": "SEA 2 SUMMIT Motorsport", "points": 391, "movement": "up" },
-    { "pos": 5, "driver": "RocketlauncherKK", "team": "SEA 2 SUMMIT Motorsport", "points": 368, "movement": "down" },
-    { "pos": 6, "driver": "Peng--uin", "team": "Juracing Park Motorsport", "points": 336 },
-    { "pos": 7, "driver": "TSR-Netzer_81", "team": "Team Silverhawk Racing", "points": 211 },
-    { "pos": 8, "driver": "Boomax_Brubaker", "team": "SEA 2 SUMMIT Motorsport", "points": 207 },
-    { "pos": 9, "driver": "STS_TaxiDriver", "team": "SEA 2 SUMMIT Motorsport", "points": 202, "movement": "up" },
-    { "pos": 10, "driver": "ifm_ineverfeltso", "team": "ifm e-sports", "points": 190, "movement": "down" },
-    { "pos": 11, "driver": "TSR-Mario71", "team": "Team Silverhawk Racing", "points": 180 },
-    { "pos": 12, "driver": "realberti", "team": "Juracing Park Motorsport", "points": 153 },
-    { "pos": 13, "driver": "TomGulp", "team": "DBRCA", "points": 108 }
+    { "pos": 1, "driver": "STS_Russell_82", "team": "SEA 2 SUMMIT Motorsport", "points": 529 },
+    { "pos": 2, "driver": "TSR-Quicksilver", "team": "Team Silverhawk Racing", "points": 490 },
+    { "pos": 3, "driver": "makkno", "team": "—", "points": 458 },
+    { "pos": 4, "driver": "RocketlauncherKK", "team": "SEA 2 SUMMIT Motorsport", "points": 437, "movement": "up" },
+    { "pos": 5, "driver": "AsHes1308", "team": "SEA 2 SUMMIT Motorsport", "points": 409, "movement": "down" },
+    { "pos": 6, "driver": "Peng--uin", "team": "Juracing Park Motorsport", "points": 384 },
+    { "pos": 7, "driver": "TSR-Netzer_81", "team": "Team Silverhawk Racing", "points": 290 },
+    { "pos": 8, "driver": "STS_TaxiDriver", "team": "SEA 2 SUMMIT Motorsport", "points": 232, "movement": "up" },
+    { "pos": 9, "driver": "Boomax_Brubaker", "team": "SEA 2 SUMMIT Motorsport", "points": 223, "movement": "down" },
+    { "pos": 10, "driver": "realberti", "team": "Juracing Park Motorsport", "points": 203, "movement": "up" },
+    { "pos": 11, "driver": "TSR-Mario71", "team": "Team Silverhawk Racing", "points": 194 },
+    { "pos": 12, "driver": "TomGulp", "team": "DBRCA", "points": 120, "movement": "up" }
   ]
 }
